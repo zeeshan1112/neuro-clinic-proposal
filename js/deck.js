@@ -1,10 +1,10 @@
 /**
- * V5 Story-Driven Deck Engine
- * - Reveal.js 5.1.0 (1600x900 desktop / App-Shell bounded viewport on mobile <= 900px)
- * - GSAP 3.12.5 story animations on responsive HTML/CSS + SVG components
- * - Evolving Dr. Mira guide with pointer-tracking pupils + confetti bursts
+ * V6 Story-Driven Deck Engine (TripVan-Inspired Editorial Motion)
+ * - Reveal.js 5.1.0 (1600x900 desktop / airy single-column mobile <= 900px)
+ * - Driving Medical Care Van (#van on rail, #bigvan across stage, #roadvan on Slide 10 winding highway, #m-van on mobile rail)
+ * - Evolving Dr. Mira guide with walk cycle, pointer-tracking pupils, warm cream speech bubble & confetti
  */
-(function initDeckV5() {
+(function initDeckV6() {
   const isMobileViewport = () => window.innerWidth <= 900;
   let lastMobileState = isMobileViewport();
 
@@ -23,7 +23,7 @@
     disableLayout: isMobileViewport(),
     hash: true,
     controls: true,
-    progress: true,
+    progress: false,
     touch: true,
     center: false,
     transition: "fade",
@@ -33,124 +33,100 @@
   const SLIDE_STAGE = [
     {
       label: "01 Intro",
-      x: 1315, y: 472, flip: 1, bx: 1272, by: 298, tail: "64%",
-      state: "planning", warm: 0.10,
-      line: "Welcome Dr. Shiwangi! First, we build a free 48-hour demo of your clinic website.",
+      x: 1320, y: 476, flip: -1, bx: 1285, by: 306, tail: "62%",
+      state: "planning", warm: 0.25,
+      line: "Welcome! First, we build a free 48-hour demo of your clinic website at ₹0 cost.",
     },
     {
-      label: "02 Partner",
-      x: 52, y: 472, flip: -1, bx: 32, by: 298, tail: "32%",
-      state: "planning", warm: 0.08,
-      line: "You focus on neurology in-clinic; we run your entire digital patient discovery funnel.",
+      label: "02 Foundation",
+      x: 56, y: 476, flip: 1, bx: 36, by: 306, tail: "34%",
+      state: "planning", warm: 0.12,
+      line: "You focus on neurology & neurosurgery; we run your entire digital patient funnel.",
     },
     {
-      label: "03 Offerings",
-      x: 1315, y: 472, flip: 1, bx: 1272, by: 298, tail: "64%",
-      state: "planning", warm: 0.16,
-      line: "Stage 1 launches your digital clinic; Stage 2 maintains your site, adds 2 free blogs/mo & tracks data.",
+      label: "03 Search",
+      x: 1320, y: 476, flip: -1, bx: 1285, by: 306, tail: "62%",
+      state: "leading", warm: 0.85,
+      line: "82% of Ranchi patients check Google Maps, reviews & AI before visiting a new clinic.",
     },
     {
-      label: "04 Website",
-      x: 52, y: 472, flip: -1, bx: 32, by: 298, tail: "32%",
-      state: "connected", warm: 0.14,
-      line: "Your mobile-friendly website opens pre-filled WhatsApp chat AND emails booking alerts instantly.",
+      label: "04 Offerings",
+      x: 56, y: 476, flip: 1, bx: 36, by: 306, tail: "34%",
+      state: "planning", warm: 0.40,
+      line: "Three clear steps: Free 48h Website Demo → One-Time Clinic Setup → Monthly Care.",
     },
     {
-      label: "05 AI Search",
-      x: 1315, y: 472, flip: 1, bx: 1272, by: 298, tail: "64%",
-      state: "illuminated", warm: 0.22,
-      line: "Medical schema + verified hubs teach ChatGPT, Gemini & Google AI Mode to recommend you.",
+      label: "05 Website",
+      x: 1320, y: 476, flip: -1, bx: 1285, by: 306, tail: "62%",
+      state: "connected", warm: 0.20,
+      line: "1 mobile tap opens a pre-filled WhatsApp chat AND emails your clinic inbox instantly.",
     },
     {
-      label: "06 Google Maps",
-      x: 52, y: 472, flip: -1, bx: 32, by: 298, tail: "32%",
-      state: "leading", warm: 0.36,
-      line: "Google Business Profile puts you on Google Maps; optional Google Ads pay direct from your card.",
+      label: "06 AI Search",
+      x: 56, y: 476, flip: 1, bx: 36, by: 306, tail: "34%",
+      state: "illuminated", warm: 0.30,
+      line: "Ask ChatGPT or Gemini for the best neuro clinic in Ranchi—it should recommend you.",
     },
     {
-      label: "07 QR Reviews",
-      x: 1315, y: 472, flip: 1, bx: 1272, by: 298, tail: "64%",
-      state: "celebrating", warm: 0.62,
-      line: "Patients scan your reception QR: 5★ boosts Google Business Profile, 1–3★ comes privately to you!",
+      label: "07 Maps & QR",
+      x: 1320, y: 476, flip: -1, bx: 1285, by: 306, tail: "62%",
+      state: "celebrating", warm: 0.70,
+      line: "Google Business Profile puts you on Maps; our reception QR builds 5★ reviews safely!",
     },
     {
       label: "08 One-Time",
-      x: 52, y: 472, flip: -1, bx: 32, by: 298, tail: "32%",
+      x: 56, y: 476, flip: 1, bx: 36, by: 306, tail: "34%",
       state: "leading", warm: 0.28,
-      line: "Preview your mobile-friendly website demo first at ₹0 before starting the One-Time Launch Setup.",
+      line: "Preview your mobile-friendly website demo first at ₹0 before starting the full setup.",
     },
     {
       label: "09 Monthly",
-      x: 1315, y: 472, flip: 1, bx: 1272, by: 298, tail: "64%",
-      state: "illuminated", warm: 0.32,
-      line: "Monthly Care includes website maintenance, 2 free medical blogs/month & monthly improvement data.",
+      x: 1320, y: 476, flip: -1, bx: 1285, by: 306, tail: "62%",
+      state: "illuminated", warm: 0.55,
+      line: "Monthly Care includes 5 quick edits/mo, 2 free medical blogs/mo & GA4 growth data.",
     },
     {
-      label: "10 Start",
-      x: 52, y: 472, flip: -1, bx: 32, by: 298, tail: "32%",
-      state: "inviting", warm: 0.68,
-      line: "Send 5 quick details on WhatsApp and preview your custom clinic website demo at ₹0!",
+      label: "10 Roadmap",
+      x: 56, y: 476, flip: 1, bx: 36, by: 306, tail: "34%",
+      state: "inviting", warm: 0.90,
+      line: "Hop in! Message us on WhatsApp to start your free 48-hour clinic website demo.",
     },
   ];
 
   const BONUS_TIPS = [
-    "85%+ of Ranchi clinic searches happen on mobile phones—a mobile-friendly site doubles WhatsApp bookings.",
+    "85%+ of Ranchi clinic searches happen on phones—fast mobile websites double WhatsApp bookings.",
     "Google Business Profile is your official Google Maps clinic card showing OPD hours, directions & 5★ reviews.",
-    "Publishing 2 fresh neurology blogs every month steadily compounds both Google SEO and ChatGPT/Gemini citations.",
-    "Your monthly improvement report shows exact Google Analytics (GA4) visitors, phone calls, and WhatsApp taps.",
+    "Publishing 2 fresh neurology & neurosurgery blogs every month compounds Google SEO and AI citations.",
+    "Monthly care includes up to 5 quick website edits a month—just message us on WhatsApp anytime.",
   ];
   let bonusIdx = 0;
 
-  // ── Navigation Rails (Desktop + Mobile) ───────────────────────────────
+  // ── Route Rail (Desktop + Mobile Driving Medical Van) ─────────────────
   const railEl = document.getElementById("rail");
-  const railToken = document.getElementById("rail-token");
+  const railVan = document.getElementById("van");
+  const pageNoEl = document.getElementById("pageno");
   const railDots = [];
-  const railLbls = [];
 
   if (railEl) {
     SLIDE_STAGE.forEach((s, i) => {
       const pct = (i / (SLIDE_STAGE.length - 1)) * 100;
       const dot = document.createElement("button");
       dot.type = "button";
-      dot.className = "dot" + (i === 0 ? " active" : "");
+      dot.className = "dot" + (i === 0 ? " on" : "");
       dot.style.left = pct + "%";
       dot.title = s.label;
       dot.setAttribute("aria-label", s.label);
       dot.addEventListener("click", () => Reveal.slide(i));
       railEl.appendChild(dot);
       railDots.push(dot);
-
-      const lbl = document.createElement("span");
-      lbl.className = "lbl" + (i === 0 ? " active" : "");
-      lbl.style.left = pct + "%";
-      lbl.textContent = s.label;
-      railEl.appendChild(lbl);
-      railLbls.push(lbl);
     });
   }
 
   const mobileCountEl = document.getElementById("mobile-count");
-  const mobileBubbleEl = document.getElementById("mobile-bubble-text");
-  const mobileDotsWrap = document.getElementById("mobile-dots");
+  const mobileVanEl = document.getElementById("m-van");
   const mobilePrevBtn = document.getElementById("mobile-prev");
   const mobileNextBtn = document.getElementById("mobile-next");
-  const mobileNavStop = document.getElementById("mobile-nav-stop");
-  const mobileDocBtn = document.getElementById("mobile-doc-btn");
-  const mobileDotEls = [];
 
-  if (mobileDotsWrap) {
-    SLIDE_STAGE.forEach((s, i) => {
-      const btn = document.createElement("button");
-      btn.type = "button";
-      btn.className = i === 0 ? "active" : "";
-      btn.setAttribute("aria-label", s.label);
-      btn.addEventListener("click", () => Reveal.slide(i));
-      mobileDotsWrap.appendChild(btn);
-      mobileDotEls.push(btn);
-    });
-  }
-
-  if (mobileNavStop) mobileNavStop.addEventListener("click", (e) => e.stopPropagation());
   if (mobilePrevBtn) mobilePrevBtn.addEventListener("click", () => Reveal.prev());
   if (mobileNextBtn) mobileNextBtn.addEventListener("click", () => Reveal.next());
 
@@ -166,7 +142,7 @@
   }
   syncMotionButton();
 
-  // ── Evolving Dr. Mira Character Engine ────────────────────────────────
+  // ── Dr. Mira + Big Medical Van Transition Engine ──────────────────────
   const stageEl = document.getElementById("stage");
   const doctorWrap = document.getElementById("doctor-wrap");
   const doctorFlip = document.getElementById("doctor-flip");
@@ -174,18 +150,19 @@
   const docHead = document.getElementById("doc-head");
   const docPupils = document.getElementById("doc-pupils");
   const docArmWave = document.getElementById("doc-arm-wave");
+  const legL = document.getElementById("leg-l");
+  const legR = document.getElementById("leg-r");
   const bubble = document.getElementById("bubble");
   const bubbleText = document.getElementById("bubble-text");
+  const bigVan = document.getElementById("bigvan");
 
   const FACES = {
     calm: document.getElementById("doc-face-calm"),
-    concerned: document.getElementById("doc-face-concerned"),
     celebrating: document.getElementById("doc-face-celebrating"),
   };
 
   const PROPS = {
     clipboard: document.getElementById("prop-clipboard"),
-    lens: document.getElementById("prop-lens"),
     phone: document.getElementById("prop-phone"),
     halo: document.getElementById("prop-halo"),
     stars: document.getElementById("prop-stars"),
@@ -193,20 +170,12 @@
   };
 
   function setDoctorState(stateName) {
-    const faceKey =
-      stateName === "concerned"
-        ? "concerned"
-        : stateName === "celebrating" || stateName === "inviting"
-        ? "celebrating"
-        : "calm";
-
-    Object.entries(FACES).forEach(([k, el]) => {
-      if (el) el.setAttribute("opacity", k === faceKey ? "1" : "0");
-    });
+    const isCeleb = stateName === "celebrating" || stateName === "inviting";
+    if (FACES.calm) FACES.calm.setAttribute("opacity", isCeleb ? "0" : "1");
+    if (FACES.celebrating) FACES.celebrating.setAttribute("opacity", isCeleb ? "1" : "0");
 
     const activeProps = {
       planning: ["clipboard"],
-      concerned: ["lens"],
       connected: ["phone"],
       illuminated: ["halo"],
       celebrating: ["stars"],
@@ -221,9 +190,86 @@
     if (!motionPaused && typeof gsap !== "undefined" && docHead) {
       gsap.fromTo(
         docHead,
-        { rotation: stateName === "celebrating" ? -6 : 3, transformOrigin: "120px 110px" },
-        { rotation: 0, duration: 0.45, ease: "back.out(2)" }
+        { rotation: isCeleb ? -6 : 4, transformOrigin: "120px 110px" },
+        { rotation: 0, duration: 0.42, ease: "back.out(2)" }
       );
+    }
+  }
+
+  // Walk cycle + Big Van wheel spin & chassis bob
+  let walkTl = null;
+  let vanWheelsTl = null;
+  let vanBobTl = null;
+  let dustTimer = null;
+  let transitTl = null;
+  let currentDocX = 1320;
+
+  if (typeof gsap !== "undefined") {
+    if (legL && legR) {
+      walkTl = gsap
+        .timeline({ paused: true, repeat: -1 })
+        .to(legL, { rotation: 16, duration: 0.16, transformOrigin: "100px 232px", ease: "sine.inOut" }, 0)
+        .to(legR, { rotation: -16, duration: 0.16, transformOrigin: "140px 232px", ease: "sine.inOut" }, 0)
+        .to(legL, { rotation: -16, duration: 0.32, transformOrigin: "100px 232px", ease: "sine.inOut" }, 0.16)
+        .to(legR, { rotation: 16, duration: 0.32, transformOrigin: "140px 232px", ease: "sine.inOut" }, 0.16)
+        .to([legL, legR], { rotation: 0, duration: 0.16, ease: "sine.inOut" }, 0.48);
+    }
+    vanWheelsTl = gsap.to(["#bv-w1", "#bv-w2"], {
+      rotation: 360,
+      transformOrigin: "50% 50%",
+      duration: 0.28,
+      ease: "none",
+      repeat: -1,
+      paused: true,
+    });
+    vanBobTl = gsap.to("#bv-body", {
+      y: -3,
+      duration: 0.13,
+      yoyo: true,
+      repeat: -1,
+      ease: "sine.inOut",
+      paused: true,
+    });
+  }
+
+  function spawnExhaustPuff() {
+    if (!stageEl || !bigVan || motionPaused || typeof gsap === "undefined") return;
+    const vx = Number(gsap.getProperty(bigVan, "x")) || 0;
+    const vy = Number(gsap.getProperty(bigVan, "y")) || 500;
+    if (vx < -250 || vx > 1600) return;
+    const d = document.createElement("div");
+    const sz = 14 + Math.random() * 14;
+    d.className = "puff";
+    d.style.cssText = `width:${sz}px;height:${sz}px;left:${vx + 8}px;top:${vy + 150}px;opacity:0.55;`;
+    stageEl.insertBefore(d, bigVan);
+    gsap.to(d, {
+      x: -55 - Math.random() * 35,
+      y: -16 - Math.random() * 20,
+      scale: 2.3,
+      opacity: 0,
+      duration: 0.75,
+      ease: "power2.out",
+      onComplete: () => d.remove(),
+    });
+  }
+
+  function stopBigVan() {
+    if (dustTimer) {
+      clearInterval(dustTimer);
+      dustTimer = null;
+    }
+    if (vanWheelsTl) vanWheelsTl.pause();
+    if (vanBobTl) vanBobTl.pause();
+    if (bigVan && typeof gsap !== "undefined") {
+      gsap.killTweensOf(bigVan);
+      gsap.set(bigVan, { display: "none" });
+    }
+  }
+
+  function stopWalkCycle() {
+    if (walkTl) walkTl.pause();
+    if (legL && legR && typeof gsap !== "undefined") {
+      gsap.to([legL, legR], { rotation: 0, duration: 0.15 });
     }
   }
 
@@ -239,8 +285,8 @@
 
   function confettiBurst(cx, cy) {
     if (!stageEl || motionPaused || typeof gsap === "undefined" || isMobileViewport()) return;
-    const colors = ["#F5C45E", "#38E1C6", "#56B4FF", "#F4F8FF"];
-    for (let i = 0; i < 18; i++) {
+    const colors = ["#FFCC78", "#5FC4BC", "#E6F2F0", "#F7C062", "#1E5153"];
+    for (let i = 0; i < 32; i++) {
       const dot = document.createElement("div");
       dot.className = "confetti-dot";
       dot.style.background = colors[i % colors.length];
@@ -248,14 +294,14 @@
       dot.style.top = cy + "px";
       stageEl.appendChild(dot);
 
-      const angle = (Math.PI * 2 * i) / 18 + Math.random() * 0.35;
-      const dist = 55 + Math.random() * 90;
+      const angle = (Math.PI * 2 * i) / 32 + Math.random() * 0.3;
+      const dist = 60 + Math.random() * 120;
       gsap.to(dot, {
         x: Math.cos(angle) * dist,
-        y: Math.sin(angle) * dist - 40,
-        rotation: Math.random() * 360,
+        y: Math.sin(angle) * dist - 50,
+        rotation: Math.random() * 540,
         opacity: 0,
-        duration: 1.1 + Math.random() * 0.4,
+        duration: 1.15 + Math.random() * 0.4,
         ease: "power2.out",
         onComplete: () => dot.remove(),
       });
@@ -289,56 +335,31 @@
         })
       );
     }
-    const mPupils = document.getElementById("m-doc-pupils");
-    if (mPupils) {
-      ambientTls.push(
-        gsap.to(mPupils, {
-          scaleY: 0.15,
-          transformOrigin: "40px 35px",
-          duration: 0.1,
-          repeat: -1,
-          repeatDelay: 3.6,
-          yoyo: true,
-        })
-      );
-    }
   }
 
   function waveDoctor() {
-    if (motionPaused || typeof gsap === "undefined") return;
-    if (docArmWave) {
-      gsap.fromTo(
-        docArmWave,
-        { rotation: 0, transformOrigin: "24px 8px" },
-        { rotation: -22, duration: 0.22, yoyo: true, repeat: 3, ease: "power1.inOut" }
-      );
-    }
-    const mArm = document.getElementById("m-doc-arm");
-    if (mArm) {
-      gsap.fromTo(
-        mArm,
-        { rotation: 0, transformOrigin: "12px 10px" },
-        { rotation: -20, duration: 0.2, yoyo: true, repeat: 3, ease: "power1.inOut" }
-      );
-    }
+    if (motionPaused || typeof gsap === "undefined" || !docArmWave) return;
+    gsap.fromTo(
+      docArmWave,
+      { rotation: 0, transformOrigin: "24px 8px" },
+      { rotation: -24, duration: 0.2, yoyo: true, repeat: 3, ease: "power1.inOut" }
+    );
   }
 
   function cycleTip() {
     const tip = BONUS_TIPS[bonusIdx % BONUS_TIPS.length];
     bonusIdx++;
     if (bubbleText) bubbleText.textContent = tip;
-    if (mobileBubbleEl) mobileBubbleEl.textContent = tip;
     waveDoctor();
   }
 
   if (doctorWrap) doctorWrap.addEventListener("click", cycleTip);
   if (bubble) bubble.addEventListener("click", cycleTip);
-  if (mobileDocBtn) mobileDocBtn.addEventListener("click", cycleTip);
 
-  // ── Slide 5: Interactive SEO / AEO / GEO AI Theatre ───────────────────
+  // ── Slide 6: Interactive SEO / AEO / GEO AI Theatre ───────────────────
   const AI_SCENARIOS = [
     {
-      prompt: "“Who is the best neurologist for migraine and epilepsy in Ranchi?”",
+      prompt: "“Which is the best neurology and neurosurgery clinic in Ranchi?”",
       before: {
         score: 34,
         reply: "Lists 3 older hospitals; your new clinic is omitted from AI answers.",
@@ -352,7 +373,7 @@
       },
       after: {
         score: 94,
-        reply: "Recommended: Ranchi Neuro Care (Bariatu Rd) — Dedicated migraine & epilepsy OPD, verified timings, 4.9★ rating & direct booking.",
+        reply: "Recommended: Ranchi Neuro Care — Specialist neurology & neurosurgery OPD, EEG diagnostics, 4.9★ rating & direct booking.",
         signalNote: "Medical schema + Bing & OpenAI Hubs verified",
         engines: [
           { icon: "ico-chatgpt", name: "ChatGPT", val: "✓ Cited #1", state: "ok" },
@@ -363,11 +384,11 @@
       },
     },
     {
-      prompt: "“Which neurology clinic near Bariatu Ranchi offers EEG & stroke follow-up?”",
+      prompt: "“Best brain and spine neurosurgeon or EEG clinic near Bariatu Ranchi?”",
       before: {
         score: 31,
-        reply: "Only large hospital chains appear; AI cannot confirm your EEG or stroke care.",
-        signalNote: "No dedicated EEG or stroke condition pages indexed",
+        reply: "Only large hospital chains appear; AI cannot confirm your neurosurgery or EEG scope.",
+        signalNote: "No dedicated neurosurgery or EEG pages indexed",
         engines: [
           { icon: "ico-chatgpt", name: "ChatGPT", val: "✗ Hospitals", state: "miss" },
           { icon: "ico-gemini", name: "Gemini", val: "⚠ No page", state: "warn" },
@@ -377,8 +398,8 @@
       },
       after: {
         score: 95,
-        reply: "Ranchi Neuro Care near Bariatu provides outpatient EEG diagnostics, post-stroke neuro recovery & direct WhatsApp slot booking.",
-        signalNote: "Condition FAQs + MedicalClinic schema extracted cleanly",
+        reply: "Ranchi Neuro Care provides brain & spine neurosurgery consultations, EEG diagnostics, stroke care & 1-tap WhatsApp slot booking.",
+        signalNote: "Neurology & Neurosurgery condition FAQs + schema indexed",
         engines: [
           { icon: "ico-chatgpt", name: "ChatGPT", val: "✓ Services", state: "ok" },
           { icon: "ico-gemini", name: "Gemini", val: "✓ Top Local", state: "ok" },
@@ -388,7 +409,7 @@
       },
     },
     {
-      prompt: "“Ranchi Neuro Care OPD timings, doctor credentials & reviews”",
+      prompt: "“Ranchi Neuro Care OPD timings, specialist credentials & reviews”",
       before: {
         score: 40,
         reply: "Third-party directory snippet with incomplete clinic hours and missing booking links.",
@@ -402,7 +423,7 @@
       },
       after: {
         score: 96,
-        reply: "Ranchi Neuro Care · Verified Bariatu OPD hours, specialist credentials, 4.9★ Google Business Profile reviews & instant booking link.",
+        reply: "Ranchi Neuro Care · Verified OPD hours, neurology & neurosurgery credentials, 4.9★ Google Business Profile reviews & direct booking.",
         signalNote: "100% factual accuracy synced across Google, Bing & OpenAI",
         engines: [
           { icon: "ico-chatgpt", name: "ChatGPT", val: "✓ Exact OPD", state: "ok" },
@@ -457,7 +478,7 @@
     const circumference = 157.1;
     const offset = circumference - (data.score / 100) * circumference;
     if (aiRingArc && aiScoreValEl) {
-      aiRingArc.setAttribute("stroke", aiMode === "before" ? "#FF6B6B" : "#38E1C6");
+      aiRingArc.setAttribute("stroke", aiMode === "before" ? "#FF8A6B" : "#5FC4BC");
       if (animateRing && typeof gsap !== "undefined" && !motionPaused) {
         gsap.to(aiRingArc, { strokeDashoffset: offset, duration: 0.55, ease: "power2.out" });
         const obj = { val: Number(aiScoreValEl.textContent) || 0 };
@@ -491,71 +512,63 @@
     })
   );
 
-  // ── Slide 9: Monthly Retainer Improvement Data + 2 Free Blogs/Month ───
+  // ── Slide 9: Monthly Improvement Data Stepper ─────────────────────────
   const WATCH_PHASES = [
     {
       visitors: "180",
-      visDelta: "M0 Launch Baseline",
-      calls: "18",
-      callDelta: "Initial OPD taps",
-      maps: "35",
+      visW: "22%",
+      maps: "35 / mo",
+      mapsW: "20%",
+      calls: "18 / mo",
+      callsW: "18%",
       share: "14%",
-      delta: "M0 Baseline",
-      note: "✓ M0 Launch: GA4 analytics installed + baseline across 25 Ranchi prompts",
-      chatgpt: 12, gemini: 18, aio: 11, dash: 365, dotX: 36, dotY: 62,
+      aiW: "14%",
+      delta: "M0 Launch Baseline",
+      visDelta: "GA4 Installed",
       blogBadge: "BLOG QUEUE READY",
-      blog1Title: "Blog #1: 5 Early Stroke Warning Signs Every Family Should Know",
-      blog1Status: "Scheduled M1",
-      blog2Title: "Blog #2: When Recurring Migraines Need an EEG Consultation",
-      blog2Status: "Scheduled M1",
+      note: "M0 Launch: GA4 analytics installed + baseline across 25 Ranchi neurology & neurosurgery prompts.",
     },
     {
       visitors: "460",
-      visDelta: "▲ +155% vs M0",
-      calls: "52",
-      callDelta: "▲ 2.8× patient taps",
-      maps: "90",
+      visW: "45%",
+      maps: "90 / mo",
+      mapsW: "42%",
+      calls: "52 / mo",
+      callsW: "40%",
       share: "29%",
-      delta: "▲ +15% vs M0",
-      note: "✓ M1 Report: 460 GA4 visitors · 52 WhatsApp/Call taps · 2 free blogs published",
-      chatgpt: 28, gemini: 34, aio: 25, dash: 245, dotX: 152, dotY: 43,
+      aiW: "29%",
+      delta: "▲ +15% AI Share",
+      visDelta: "2.5× Visitors",
       blogBadge: "2 FREE BLOGS PUBLISHED · M1",
-      blog1Title: "Blog #1: 5 Early Stroke Warning Signs Every Family Should Know",
-      blog1Status: "Published ✓",
-      blog2Title: "Blog #2: When Recurring Migraines Need an EEG Consultation",
-      blog2Status: "Published ✓",
+      note: "M1 Report: 2 neurology blogs published + up to 5 quick website edits + full GA4 report.",
     },
     {
       visitors: "890",
-      visDelta: "▲ +394% vs M0",
-      calls: "104",
-      callDelta: "▲ 5.7× patient taps",
-      maps: "175",
+      visW: "68%",
+      maps: "175 / mo",
+      mapsW: "64%",
+      calls: "104 / mo",
+      callsW: "60%",
       share: "46%",
-      delta: "▲ +32% vs M0",
-      note: "✓ M2 Report: 890 GA4 visitors · 104 WhatsApp/Call taps · 4 free blogs live",
-      chatgpt: 44, gemini: 52, aio: 42, dash: 122, dotX: 268, dotY: 23,
+      aiW: "46%",
+      delta: "▲ +32% AI Share",
+      visDelta: "4.9× Visitors",
       blogBadge: "4 FREE BLOGS PUBLISHED · M2",
-      blog1Title: "Blog #3: Epilepsy & Seizure First-Aid Guide for Ranchi Families",
-      blog1Status: "Published ✓",
-      blog2Title: "Blog #4: Cervical Spondylosis & Nerve Pain Treatment Options",
-      blog2Status: "Published ✓",
+      note: "M2 Report: 4 blogs indexed on Google & AI + 104 direct WhatsApp & phone call taps.",
     },
     {
       visitors: "1,420",
-      visDelta: "▲ +688% vs M0",
-      calls: "165",
-      callDelta: "▲ 9.1× patient taps",
-      maps: "280",
+      visW: "92%",
+      maps: "280 / mo",
+      mapsW: "84%",
+      calls: "165 / mo",
+      callsW: "78%",
       share: "58%",
-      delta: "▲ +44% vs M0",
-      note: "✓ M3 Improvement Report: 1,420 GA4 visitors · 165 patient taps · 6 blogs live",
-      chatgpt: 56, gemini: 64, aio: 54, dash: 0, dotX: 386, dotY: 12,
-      blogBadge: "6 FREE BLOGS LIVE BY M3",
-      blog1Title: "Blog #5: Post-Stroke Neuro Rehabilitation & Follow-Up Timeline",
-      blog1Status: "SEO + AI Indexed ✓",
-      blog2Title: "Blog #6: Vertigo vs. Neurological Dizziness — When to Visit OPD",
-      blog2Status: "SEO + AI Indexed ✓",
+      aiW: "58%",
+      delta: "▲ +44% AI Share",
+      visDelta: "7.8× Visitors",
+      blogBadge: "6 BLOGS LIVE BY M3",
+      note: "2 new blogs/month + 5 quick edits/month + full GA4 & AI growth report. No annual lock-in.",
     },
   ];
 
@@ -567,62 +580,32 @@
     phaseBtns.forEach((b) => b.classList.toggle("is-active", Number(b.dataset.phase) === idx));
 
     const elVisitors = document.getElementById("watch-visitors");
-    const elVisDelta = document.getElementById("watch-vis-delta");
-    const elCalls = document.getElementById("watch-calls");
-    const elCallDelta = document.getElementById("watch-call-delta");
     const elMaps = document.getElementById("watch-maps");
+    const elCalls = document.getElementById("watch-calls");
     const elShare = document.getElementById("watch-share");
     const elDelta = document.getElementById("watch-delta");
+    const elVisDelta = document.getElementById("watch-vis-delta");
+    const elBlogBadge = document.getElementById("blog-month-badge");
     const elNote = document.getElementById("watch-cycle-note");
-    const curvePath = document.getElementById("watch-curve-path");
-    const liveDot = document.getElementById("watch-live-dot");
 
     if (elVisitors) elVisitors.textContent = p.visitors;
-    if (elVisDelta) elVisDelta.textContent = p.visDelta;
-    if (elCalls) elCalls.textContent = p.calls;
-    if (elCallDelta) elCallDelta.textContent = p.callDelta;
     if (elMaps) elMaps.textContent = p.maps;
+    if (elCalls) elCalls.textContent = p.calls;
     if (elShare) elShare.textContent = p.share;
     if (elDelta) elDelta.textContent = p.delta;
+    if (elVisDelta) elVisDelta.textContent = p.visDelta;
+    if (elBlogBadge) elBlogBadge.textContent = p.blogBadge;
     if (elNote) elNote.textContent = p.note;
 
-    const elBlogBadge = document.getElementById("blog-month-badge");
-    const elBlogTitle1 = document.getElementById("blog-title-1");
-    const elBlogStatus1 = document.getElementById("blog-status-1");
-    const elBlogTitle2 = document.getElementById("blog-title-2");
-    const elBlogStatus2 = document.getElementById("blog-status-2");
-    const elBlogItem1 = document.getElementById("blog-item-1");
-    const elBlogItem2 = document.getElementById("blog-item-2");
+    const barVis = document.getElementById("bar-visitors");
+    const barMaps = document.getElementById("bar-maps");
+    const barCalls = document.getElementById("bar-calls");
+    const barAi = document.getElementById("bar-ai");
 
-    if (elBlogBadge) elBlogBadge.textContent = p.blogBadge;
-    if (elBlogTitle1) elBlogTitle1.textContent = p.blog1Title;
-    if (elBlogStatus1) elBlogStatus1.textContent = p.blog1Status;
-    if (elBlogTitle2) elBlogTitle2.textContent = p.blog2Title;
-    if (elBlogStatus2) elBlogStatus2.textContent = p.blog2Status;
-    if (elBlogItem1) elBlogItem1.classList.toggle("is-live", idx > 0);
-    if (elBlogItem2) elBlogItem2.classList.toggle("is-live", idx > 0);
-
-    if (curvePath && liveDot) {
-      if (typeof gsap !== "undefined" && !motionPaused) {
-        gsap.to(curvePath, { strokeDashoffset: p.dash, duration: 0.55, ease: "power2.out" });
-        gsap.to(liveDot, { attr: { cx: p.dotX, cy: p.dotY }, duration: 0.55, ease: "power2.out" });
-      } else {
-        curvePath.style.strokeDashoffset = String(p.dash);
-        liveDot.setAttribute("cx", String(p.dotX));
-        liveDot.setAttribute("cy", String(p.dotY));
-      }
-    }
-
-    [
-      { id: "chatgpt", val: p.chatgpt },
-      { id: "gemini", val: p.gemini },
-      { id: "aio", val: p.aio },
-    ].forEach((b) => {
-      const pctEl = document.getElementById(`pct-${b.id}`);
-      const barEl = document.getElementById(`bar-${b.id}`);
-      if (pctEl) pctEl.textContent = `${b.val}%`;
-      if (barEl) barEl.style.setProperty("--fill", (b.val / 100).toFixed(2));
-    });
+    if (barVis) barVis.style.width = p.visW;
+    if (barMaps) barMaps.style.width = p.mapsW;
+    if (barCalls) barCalls.style.width = p.callsW;
+    if (barAi) barAi.style.width = p.aiW;
   }
 
   phaseBtns.forEach((btn) =>
@@ -652,7 +635,7 @@
   function forceSlideVisible(slide) {
     if (!slide || typeof gsap === "undefined") return;
     const all = slide.querySelectorAll(
-      ".eyebrow, .hero-title, .h2, .tagline, .quote-bar, .chip, .card, .p-step, .plat-card, .story-stage, .ai-theatre, .art-frame, .gate-card, .intake-chip, .commercial, .tile"
+      ".eyebrow, .wordmark, .x, .sub, .meta, .h2, .lede, .chip, .card, .photo, .deepen, .commercial, .cta-pill"
     );
     gsap.set(all, { opacity: 1, clearProps: "transform" });
   }
@@ -661,38 +644,65 @@
     killStoryAnimations();
     if (!slide || motionPaused || typeof gsap === "undefined") {
       if (index === 8) setWatchPhase(3);
-      if (index === 9) slide?.querySelectorAll(".gate-card").forEach((c) => c.classList.add("lit"));
       return;
     }
 
-    // Slide 1: Cover EEG Synaptic Pulse Draw
-    if (index === 0) {
-      const eeg = slide.querySelector("#cover-eeg-path");
-      if (eeg) {
-        activeLoopTl = gsap.timeline({ repeat: -1, repeatDelay: 0.7 });
-        activeLoopTl
-          .fromTo(eeg, { strokeDashoffset: 480 }, { strokeDashoffset: 0, duration: 1.8, ease: "power2.out" })
-          .to(eeg, { opacity: 0.35, duration: 0.5, delay: 0.6 });
-      }
-    }
+    // Animated Polaroid Photo Frames (.ph-in)
+    slide.querySelectorAll(".photo.ph-in").forEach((p, i) => {
+      const r = (p.style.transform.match(/-?[\d.]+deg/) || ["0deg"])[0];
+      gsap.fromTo(
+        p,
+        { opacity: 0, y: 40, scale: 0.9, rotate: parseFloat(r) * -2 + "deg" },
+        { opacity: 1, y: 0, scale: 1, rotate: r, duration: 0.75, delay: 0.15 + i * 0.12, ease: "back.out(1.4)" }
+      );
+    });
 
-    // Slide 2: Animated 4-Step Ranchi Patient Funnel
-    if (index === 1) {
-      const steps = slide.querySelectorAll(".p-step");
-      if (steps.length) {
-        activeLoopTl = gsap.timeline({ repeat: -1, repeatDelay: 0.35 });
-        steps.forEach((step, idx) => {
-          activeLoopTl
-            .call(() => {
-              steps.forEach((s, j) => s.classList.toggle("is-lit", j === idx));
-            })
-            .to({}, { duration: 1.0 });
-        });
-      }
-    }
+    // Animated Number Counters ([data-count])
+    slide.querySelectorAll("[data-count]").forEach((el) => {
+      const to = Number(el.dataset.count) || 0;
+      const obj = { v: 0 };
+      gsap.to(obj, {
+        v: to,
+        duration: 1.1,
+        ease: "power2.out",
+        onUpdate: () => {
+          el.textContent = String(Math.round(obj.v));
+        },
+      });
+    });
 
-    // Slide 4: Responsive Mobile-First Booking Cinema (Animated Cursor + Bridge + Toasts)
-    if (index === 3) {
+    // Slide 3: Animated SVG Percentage Rings (.ring .fg) + Capture Bar (.cut[data-w])
+    slide.querySelectorAll(".ring .fg").forEach((c, i) => {
+      const C = 2 * Math.PI * 40;
+      const pct = Number(c.dataset.pct) || 50;
+      c.style.strokeDasharray = `${C}`;
+      gsap.fromTo(
+        c,
+        { strokeDashoffset: C },
+        { strokeDashoffset: C * (1 - pct / 100), duration: 1.1, delay: 0.2 + i * 0.1, ease: "power3.out" }
+      );
+    });
+
+    slide.querySelectorAll(".cut[data-w]").forEach((el) => {
+      if (!isMobileViewport()) {
+        gsap.fromTo(el, { width: "0%" }, { width: el.dataset.w + "%", duration: 1.1, delay: 0.3, ease: "power3.out" });
+      }
+    });
+
+    // Slide 4 & Slide 10: SVG Path Draw (path.draw)
+    slide.querySelectorAll("path.draw").forEach((p) => {
+      try {
+        const len = p.getTotalLength();
+        gsap.fromTo(
+          p,
+          { strokeDashoffset: len, opacity: 0.2 },
+          { strokeDashoffset: 0, opacity: 1, duration: 1.4, delay: 0.2, ease: "power2.inOut" }
+        );
+      } catch (_) {}
+    });
+
+    // Slide 5: Mobile-Friendly Website Booking Cinema (Animated Cursor + Bridge + Toasts)
+    if (index === 4) {
       const cursor = slide.querySelector("#sim-cursor");
       const btn = slide.querySelector("#phone-submit-btn");
       const waPkt = slide.querySelector("#cinema-wa-pkt");
@@ -710,7 +720,7 @@
               badgeTxt.className = "verdict-pill is-warn";
             }
           })
-          .fromTo(cursor, { x: 40, y: -60, opacity: 0.4 }, { x: 0, y: 0, opacity: 1, duration: 0.55, ease: "power2.out" })
+          .fromTo(cursor, { x: 36, y: -55, opacity: 0.4 }, { x: 0, y: 0, opacity: 1, duration: 0.55, ease: "power2.out" })
           .to(btn, { scale: 0.96, duration: 0.14, yoyo: true, repeat: 1 })
           .fromTo([waPkt, mailPkt], { scale: 0.88, opacity: 0.5 }, { scale: 1.06, opacity: 1, duration: 0.35, yoyo: true, repeat: 1 })
           .fromTo([waCard, mailCard], { y: 4 }, { y: 0, duration: 0.35, ease: "back.out(2)" })
@@ -724,14 +734,14 @@
       }
     }
 
-    // Slide 5: Auto-flip Before -> After AI Recommendation
-    if (index === 4) {
+    // Slide 6: Auto-flip Before -> After AI Recommendation
+    if (index === 5) {
       if (!aiUserInteracted) {
         aiMode = "before";
         aiQueryIdx = 0;
         renderAiConsole(false);
         const tId = setTimeout(() => {
-          if (!aiUserInteracted && Reveal.getIndices().h === 4 && !motionPaused) {
+          if (!aiUserInteracted && Reveal.getIndices().h === 5 && !motionPaused) {
             aiMode = "after";
             renderAiConsole(true);
           }
@@ -740,35 +750,16 @@
       }
     }
 
-    // Slide 6: Google Business Profile Action Cycler + 3-Step Glass-Wallet Ads Pipeline
-    if (index === 5) {
-      const gbpPills = slide.querySelectorAll("#gbp-actions .gbp-act-pill");
-      const walletNodes = slide.querySelectorAll("#wallet-flow .wallet-node");
-      let step = 0;
-
-      if (gbpPills.length || walletNodes.length) {
-        activeLoopTl = gsap.timeline({ repeat: -1 });
-        activeLoopTl
-          .call(() => {
-            if (gbpPills.length) {
-              gbpPills.forEach((p, idx) => p.classList.toggle("is-pulsing", idx === step % gbpPills.length));
-            }
-            if (walletNodes.length) {
-              walletNodes.forEach((n, idx) => n.classList.toggle("is-active-node", idx === step % walletNodes.length));
-            }
-            step++;
-          })
-          .to({}, { duration: 1.05 });
-      }
-    }
-
-    // Slide 7: Real QR Code Laser Scan + 5-Star Pop-In + Route Alternator + Confetti Burst
+    // Slide 7: Google Business Profile Actions + Reception QR Laser Scan + 5 Stars + Confetti
     if (index === 6) {
+      const gbpPills = slide.querySelectorAll("#gbp-actions .gbp-act-pill");
       const laser = slide.querySelector("#qr-laser-line");
       const stars = slide.querySelectorAll(".qr-star");
       const pubCard = slide.querySelector("#qr-route-public");
       const privCard = slide.querySelector("#qr-route-private");
-      confettiBurst(1430, 500);
+      let pillStep = 0;
+
+      confettiBurst(1420, 480);
 
       if (stars.length) {
         gsap.fromTo(
@@ -779,22 +770,30 @@
       }
 
       if (laser && pubCard && privCard) {
-        activeLoopTl = gsap.timeline({ repeat: -1, repeatDelay: 0.3 });
+        activeLoopTl = gsap.timeline({ repeat: -1, repeatDelay: 0.25 });
         activeLoopTl
           .call(() => {
             pubCard.classList.add("is-active-route");
             privCard.classList.remove("is-active-route");
+            if (gbpPills.length) {
+              gbpPills.forEach((p, idx) => p.classList.toggle("is-pulsing", idx === pillStep % gbpPills.length));
+              pillStep++;
+            }
           })
-          .fromTo(laser, { y: 0 }, { y: 112, duration: 1.1, yoyo: true, repeat: 1, ease: "sine.inOut" })
+          .fromTo(laser, { y: 0 }, { y: 118, duration: 1.0, yoyo: true, repeat: 1, ease: "sine.inOut" })
           .call(() => {
             pubCard.classList.remove("is-active-route");
             privCard.classList.add("is-active-route");
+            if (gbpPills.length) {
+              gbpPills.forEach((p, idx) => p.classList.toggle("is-pulsing", idx === pillStep % gbpPills.length));
+              pillStep++;
+            }
           })
-          .fromTo(laser, { y: 0 }, { y: 112, duration: 1.1, yoyo: true, repeat: 1, ease: "sine.inOut" });
+          .fromTo(laser, { y: 0 }, { y: 118, duration: 1.0, yoyo: true, repeat: 1, ease: "sine.inOut" });
       }
     }
 
-    // Slide 9: Monthly Improvement Data + 2 Free Blogs/Month Stepper
+    // Slide 9: Monthly Improvement Data Stepper
     if (index === 8) {
       if (!watchUserInteracted) {
         setWatchPhase(0);
@@ -803,106 +802,164 @@
             if (!watchUserInteracted && Reveal.getIndices().h === 8 && !motionPaused) {
               setWatchPhase(phaseIdx);
             }
-          }, (step + 1) * 1100);
+          }, (step + 1) * 1050);
           activeTimers.push(tId);
         });
       }
     }
 
-    // Slide 10: 4-Gate Medical Pulse Beacon (Horizontal Desktop / Vertical Mobile) + Celebration Confetti
+    // Slide 10: Winding Highway Road — Medical Care Van (#roadvan) drives the curved route!
     if (index === 9) {
-      confettiBurst(170, 500);
-      const beacon = slide.querySelector("#launch-beacon");
-      const highway = slide.querySelector(".launch-highway");
-      const gates = slide.querySelectorAll(".gate-card");
-      if (beacon && highway && gates.length) {
-        const mobileMode = isMobileViewport();
-        const travelW = Math.max(200, highway.clientWidth - 34);
-        const travelH = Math.max(140, highway.clientHeight - 28);
-
-        activeLoopTl = gsap.timeline({ repeat: -1, repeatDelay: 0.8 });
-        activeLoopTl.call(() => gates.forEach((g) => g.classList.remove("lit")));
-
-        if (mobileMode) {
-          activeLoopTl.set(beacon, { x: 0, y: 0 });
-          gates.forEach((gate, gi) => {
-            const targetY = (gi / (gates.length - 1)) * travelH;
-            activeLoopTl
-              .to(beacon, { y: targetY, duration: 0.55, ease: "power2.inOut" })
-              .call(() => gate.classList.add("lit"))
-              .to({}, { duration: 0.35 });
-          });
-        } else {
-          activeLoopTl.set(beacon, { x: 0, y: 0 });
-          gates.forEach((gate, gi) => {
-            const targetX = (gi / (gates.length - 1)) * travelW;
-            activeLoopTl
-              .to(beacon, { x: targetX, duration: 0.55, ease: "power2.inOut" })
-              .call(() => gate.classList.add("lit"))
-              .to({}, { duration: 0.35 });
-          });
-        }
+      confettiBurst(180, 480);
+      const rv = slide.querySelector("#roadvan");
+      const p = slide.querySelector("#roadpath");
+      if (rv && p && !isMobileViewport()) {
+        try {
+          const len = p.getTotalLength();
+          const Place = (t) => {
+            const a = p.getPointAtLength(t * len);
+            const b = p.getPointAtLength(Math.min(len, t * len + 2));
+            const ang = Math.atan2(b.y - a.y, b.x - a.x) * 57.2958;
+            rv.setAttribute("transform", `translate(${a.x.toFixed(1)},${a.y.toFixed(1)}) rotate(${ang.toFixed(1)})`);
+          };
+          Place(0);
+          const obj = { t: 0 };
+          activeLoopTl = gsap.timeline({ repeat: -1, repeatDelay: 1.1 });
+          activeLoopTl.fromTo(
+            obj,
+            { t: 0 },
+            {
+              t: 1,
+              duration: 2.8,
+              ease: "power1.inOut",
+              onUpdate: () => Place(obj.t),
+            }
+          );
+        } catch (_) {}
       }
     }
   }
 
-  // ── Stage Sync + Slide Activation ─────────────────────────────────────
-  function updateStage(index) {
+  // ── Stage Sync: Driving Van on Rail + Big Van Cross-Stage Ride ────────
+  function updateStage(index, isInitial = false) {
     const clamped = Math.max(0, Math.min(SLIDE_STAGE.length - 1, index));
     const cfg = SLIDE_STAGE[clamped];
+    const pct = (clamped / (SLIDE_STAGE.length - 1)) * 100;
 
     if (window.setBayerSlide) window.setBayerSlide(clamped, cfg.warm);
     setDoctorState(cfg.state);
 
-    if (doctorWrap && doctorFlip) {
-      if (!motionPaused && typeof gsap !== "undefined") {
-        gsap.to(doctorWrap, { x: cfg.x, y: cfg.y, duration: 0.72, ease: "power3.out" });
-        gsap.to(doctorFlip, { scaleX: cfg.flip, duration: 0.32, ease: "power2.out" });
+    // 1. Desktop Route Rail: Mini Medical Van drives stop-to-stop & bobs
+    railDots.forEach((d, k) => d.classList.toggle("on", k <= clamped));
+    if (pageNoEl) {
+      pageNoEl.textContent =
+        String(clamped + 1).padStart(2, "0") + " / " + String(SLIDE_STAGE.length).padStart(2, "0");
+    }
+    if (railVan) {
+      if (!motionPaused && !isInitial && typeof gsap !== "undefined") {
+        gsap.to(railVan, { left: pct + "%", duration: 1.15, ease: "power2.inOut" });
+        gsap.fromTo(railVan, { y: 0 }, { y: -3.5, duration: 0.11, yoyo: true, repeat: 9, ease: "sine.inOut" });
       } else {
-        doctorWrap.style.transform = `translate(${cfg.x}px, ${cfg.y}px)`;
-        doctorFlip.style.transform = `scaleX(${cfg.flip})`;
+        railVan.style.left = pct + "%";
       }
     }
 
+    // 2. Mobile Route Rail: Mobile Medical Van drives across bottom track
+    if (mobileCountEl) {
+      mobileCountEl.textContent =
+        String(clamped + 1).padStart(2, "0") + " / " + String(SLIDE_STAGE.length).padStart(2, "0");
+    }
+    if (mobileVanEl) {
+      mobileVanEl.style.left = `calc(10px + ${(pct / 100).toFixed(3)} * (100% - 54px))`;
+    }
+
+    // 3. Position Speech Bubble in Safe Zone
     if (bubble && bubbleText) {
       bubble.style.setProperty("--tail", cfg.tail);
       bubble.style.left = cfg.bx + "px";
       bubble.style.top = cfg.by + "px";
       bubbleText.textContent = cfg.line;
-      if (!motionPaused && typeof gsap !== "undefined") {
-        gsap.killTweensOf(bubble);
-        gsap.fromTo(
+    }
+
+    // 4. Dr. Mira Movement + Big Medical Van Cross-Stage Ride (when moving Left -> Right)
+    if (!doctorWrap || !doctorFlip) return;
+    if (transitTl) {
+      transitTl.kill();
+      transitTl = null;
+    }
+    stopBigVan();
+    stopWalkCycle();
+
+    const dx = cfg.x - currentDocX;
+    currentDocX = cfg.x;
+
+    if (motionPaused || isInitial || typeof gsap === "undefined" || isMobileViewport()) {
+      gsap.set(doctorWrap, { x: cfg.x, y: cfg.y, autoAlpha: 1 });
+      gsap.set(doctorFlip, { scaleX: cfg.flip });
+      if (bubble) gsap.set(bubble, { opacity: 1, transform: "none" });
+      return;
+    }
+
+    if (dx > 400 && bigVan) {
+      // Moving from left zone to right zone: Dr. Mira rides the Big Medical Care Van across the stage!
+      gsap.set(bubble, { opacity: 0 });
+      gsap.set(doctorWrap, { x: cfg.x, y: cfg.y, autoAlpha: 0 });
+      gsap.set(doctorFlip, { scaleX: cfg.flip });
+
+      transitTl = gsap.timeline({
+        onStart: () => {
+          gsap.set(bigVan, { display: "block", x: -420, y: 520, scale: 0.92 });
+          if (vanWheelsTl) vanWheelsTl.play();
+          if (vanBobTl) vanBobTl.play();
+          dustTimer = setInterval(spawnExhaustPuff, 65);
+        },
+        onComplete: () => {
+          stopBigVan();
+          stopWalkCycle();
+          gsap.set(doctorWrap, { x: cfg.x, y: cfg.y, autoAlpha: 1 });
+          gsap.set(bubble, { opacity: 1, clearProps: "transform" });
+        },
+      });
+
+      transitTl
+        .fromTo(bigVan, { x: -420 }, { x: 1660, duration: 0.62, ease: "power1.inOut" }, 0)
+        .call(() => {
+          stopBigVan();
+          gsap.set(doctorWrap, { x: 1480, y: cfg.y, autoAlpha: 1 });
+          if (walkTl) walkTl.play();
+        })
+        .to(doctorWrap, { x: cfg.x, duration: 0.22, ease: "power2.out" })
+        .call(() => stopWalkCycle())
+        .fromTo(
           bubble,
-          { y: 12, opacity: 0, scale: 0.94 },
-          { y: 0, opacity: 1, scale: 1, duration: 0.42, delay: 0.2, ease: "back.out(1.4)", clearProps: "transform" }
+          { y: 10, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.22, ease: "back.out(1.5)", clearProps: "transform" },
+          "-=0.12"
         );
-      } else {
-        bubble.style.transform = "none";
-        bubble.style.opacity = "1";
-      }
+    } else {
+      // Walking transition
+      if (walkTl) walkTl.play();
+      gsap.to(doctorFlip, { scaleX: cfg.flip, duration: 0.25, ease: "power2.out" });
+      transitTl = gsap
+        .timeline({
+          onComplete: () => {
+            stopWalkCycle();
+            gsap.set(doctorWrap, { x: cfg.x, y: cfg.y, autoAlpha: 1 });
+            if (bubble) gsap.set(bubble, { opacity: 1, clearProps: "transform" });
+          },
+        })
+        .to(doctorWrap, { x: cfg.x, y: cfg.y, duration: 0.58, ease: "power3.out" }, 0)
+        .fromTo(
+          bubble,
+          { y: 10, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.32, delay: 0.18, ease: "back.out(1.4)", clearProps: "transform" },
+          0
+        );
     }
-
-    if (mobileBubbleEl) mobileBubbleEl.textContent = cfg.line;
-    if (mobileCountEl) {
-      mobileCountEl.textContent = String(clamped + 1).padStart(2, "0") + "/" + SLIDE_STAGE.length;
-    }
-
-    const pct = (clamped / (SLIDE_STAGE.length - 1)) * 100;
-    if (railToken) {
-      if (!motionPaused && typeof gsap !== "undefined") {
-        gsap.to(railToken, { left: pct + "%", duration: 0.55, ease: "power3.out" });
-      } else {
-        railToken.style.left = pct + "%";
-      }
-    }
-
-    railDots.forEach((d, i) => d.classList.toggle("active", i === clamped));
-    railLbls.forEach((l, i) => l.classList.toggle("active", i === clamped));
-    mobileDotEls.forEach((d, i) => d.classList.toggle("active", i === clamped));
   }
 
-  function onSlideActive(slide, index) {
-    updateStage(index);
+  function onSlideActive(slide, index, isInitial = false) {
+    updateStage(index, isInitial);
     runSlideStoryAnimations(slide, index);
     waveDoctor();
 
@@ -914,10 +971,8 @@
     if (motionPaused || typeof gsap === "undefined") return;
 
     const eyebrows = slide.querySelectorAll(".eyebrow");
-    const headings = slide.querySelectorAll(".hero-title, .h2, .tagline, .quote-bar, .patient-flow-wrap");
-    const cards = slide.querySelectorAll(
-      ".chip, .card, .plat-card, .story-stage, .ai-theatre, .art-frame, .gate-card, .intake-chip, .commercial"
-    );
+    const headings = slide.querySelectorAll(".wordmark, .x, .sub, .h2, .lede");
+    const cards = slide.querySelectorAll(".chip, .card, .deepen, .commercial, .cta-pill, .meta");
 
     gsap.killTweensOf([...eyebrows, ...headings, ...cards]);
     const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
@@ -946,6 +1001,8 @@
       if (motionPaused) {
         if (window.bayerBg) window.bayerBg.pause();
         stopAmbientDoctor();
+        stopBigVan();
+        stopWalkCycle();
         killStoryAnimations();
         if (typeof gsap !== "undefined") gsap.globalTimeline.pause();
         forceSlideVisible(Reveal.getCurrentSlide());
@@ -962,10 +1019,10 @@
     renderAiConsole(false);
     setWatchPhase(3);
     startAmbientDoctor();
-    onSlideActive(e.currentSlide, e.indexh || 0);
+    onSlideActive(e.currentSlide, e.indexh || 0, true);
   });
 
   Reveal.on("slidechanged", (e) => {
-    onSlideActive(e.currentSlide, e.indexh || 0);
+    onSlideActive(e.currentSlide, e.indexh || 0, false);
   });
 })();
