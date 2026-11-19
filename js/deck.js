@@ -156,6 +156,17 @@
   const bubbleText = document.getElementById("bubble-text");
   const bigVan = document.getElementById("bigvan");
 
+  // Mobile Interactive Stage Dock Elements (Animated Dr. Mira + Warm Cream Bubble + Transit Van)
+  const mDocBtn = document.getElementById("mobile-doc-btn");
+  const mDocBody = document.getElementById("m-doc-body");
+  const mDocArm = document.getElementById("m-doc-arm");
+  const mDocPupils = document.getElementById("m-doc-pupils");
+  const mPropHalo = document.getElementById("m-prop-halo");
+  const mPropStars = document.getElementById("m-prop-stars");
+  const mBubbleCard = document.getElementById("mobile-bubble-card");
+  const mBubbleText = document.getElementById("mobile-bubble-text");
+  const mTransitVan = document.getElementById("m-transit-van");
+
   const FACES = {
     calm: document.getElementById("doc-face-calm"),
     celebrating: document.getElementById("doc-face-celebrating"),
@@ -186,6 +197,8 @@
     Object.entries(PROPS).forEach(([k, el]) => {
       if (el) el.setAttribute("opacity", activeProps.includes(k) ? "1" : "0");
     });
+    if (mPropHalo) mPropHalo.setAttribute("opacity", activeProps.includes("halo") ? "1" : "0");
+    if (mPropStars) mPropStars.setAttribute("opacity", activeProps.includes("stars") ? "1" : "0");
 
     if (!motionPaused && typeof gsap !== "undefined" && docHead) {
       gsap.fromTo(
@@ -335,26 +348,58 @@
         })
       );
     }
+    if (mDocBody) {
+      ambientTls.push(
+        gsap.to(mDocBody, { y: -2.6, duration: 1.9, repeat: -1, yoyo: true, ease: "sine.inOut" })
+      );
+    }
+    if (mDocPupils) {
+      ambientTls.push(
+        gsap.to(mDocPupils, {
+          scaleY: 0.15,
+          transformOrigin: "55px 44px",
+          duration: 0.1,
+          repeat: -1,
+          repeatDelay: 3.1,
+          yoyo: true,
+        })
+      );
+    }
   }
 
   function waveDoctor() {
-    if (motionPaused || typeof gsap === "undefined" || !docArmWave) return;
-    gsap.fromTo(
-      docArmWave,
-      { rotation: 0, transformOrigin: "24px 8px" },
-      { rotation: -24, duration: 0.2, yoyo: true, repeat: 3, ease: "power1.inOut" }
-    );
+    if (motionPaused || typeof gsap === "undefined") return;
+    if (docArmWave) {
+      gsap.fromTo(
+        docArmWave,
+        { rotation: 0, transformOrigin: "24px 8px" },
+        { rotation: -24, duration: 0.2, yoyo: true, repeat: 3, ease: "power1.inOut" }
+      );
+    }
+    if (mDocArm) {
+      gsap.fromTo(
+        mDocArm,
+        { rotation: 0, transformOrigin: "14px 8px" },
+        { rotation: -22, duration: 0.2, yoyo: true, repeat: 3, ease: "power1.inOut" }
+      );
+    }
   }
 
   function cycleTip() {
     const tip = BONUS_TIPS[bonusIdx % BONUS_TIPS.length];
     bonusIdx++;
     if (bubbleText) bubbleText.textContent = tip;
+    if (mBubbleText) mBubbleText.textContent = tip;
+    if (mBubbleCard && !motionPaused && typeof gsap !== "undefined") {
+      gsap.fromTo(mBubbleCard, { scale: 0.96 }, { scale: 1, duration: 0.24, ease: "back.out(2)" });
+    }
     waveDoctor();
   }
 
   if (doctorWrap) doctorWrap.addEventListener("click", cycleTip);
   if (bubble) bubble.addEventListener("click", cycleTip);
+  if (mDocBtn) mDocBtn.addEventListener("click", cycleTip);
+  if (mBubbleCard) mBubbleCard.addEventListener("click", cycleTip);
 
   // ── Slide 6: Interactive SEO / AEO / GEO AI Theatre ───────────────────
   const AI_SCENARIOS = [
@@ -657,6 +702,21 @@
       );
     });
 
+    // Slide 1 (index 0): Animated Glowing EEG Waveform across the Hero Clinic Card (Desktop + Mobile)
+    if (index === 0) {
+      const eegPath = slide.querySelector("#cover-eeg-path");
+      if (eegPath) {
+        activeLoopTl = gsap.timeline({ repeat: -1, repeatDelay: 0.6 });
+        activeLoopTl
+          .fromTo(
+            eegPath,
+            { strokeDashoffset: 440, opacity: 0.45 },
+            { strokeDashoffset: 0, opacity: 1, duration: 1.9, ease: "power2.out" }
+          )
+          .to(eegPath, { opacity: 0.75, duration: 0.7, ease: "sine.inOut" });
+      }
+    }
+
     // Animated Number Counters ([data-count])
     slide.querySelectorAll("[data-count]").forEach((el) => {
       const to = Number(el.dataset.count) || 0;
@@ -808,12 +868,12 @@
       }
     }
 
-    // Slide 10: Winding Highway Road — Medical Care Van (#roadvan) drives the curved route!
+    // Slide 10: Winding Highway Road — Medical Care Van (#roadvan) drives the curved route on Desktop AND Mobile!
     if (index === 9) {
       confettiBurst(180, 480);
       const rv = slide.querySelector("#roadvan");
       const p = slide.querySelector("#roadpath");
-      if (rv && p && !isMobileViewport()) {
+      if (rv && p) {
         try {
           const len = p.getTotalLength();
           const Place = (t) => {
@@ -873,12 +933,31 @@
       mobileVanEl.style.left = `calc(10px + ${(pct / 100).toFixed(3)} * (100% - 54px))`;
     }
 
-    // 3. Position Speech Bubble in Safe Zone
+    // 3. Position Speech Bubble in Safe Zone (Desktop + Mobile Warm Cream Bubble)
     if (bubble && bubbleText) {
       bubble.style.setProperty("--tail", cfg.tail);
       bubble.style.left = cfg.bx + "px";
       bubble.style.top = cfg.by + "px";
       bubbleText.textContent = cfg.line;
+    }
+    if (mBubbleText) {
+      mBubbleText.textContent = cfg.line;
+    }
+    if (!motionPaused && !isInitial && typeof gsap !== "undefined" && isMobileViewport()) {
+      if (mBubbleCard) {
+        gsap.fromTo(
+          mBubbleCard,
+          { y: 5, opacity: 0.65 },
+          { y: 0, opacity: 1, duration: 0.3, ease: "power2.out" }
+        );
+      }
+      if (mTransitVan) {
+        gsap.fromTo(
+          mTransitVan,
+          { x: -80, opacity: 0.95 },
+          { x: window.innerWidth + 90, opacity: 0, duration: 0.75, ease: "power2.inOut" }
+        );
+      }
     }
 
     // 4. Dr. Mira Movement + Big Medical Van Cross-Stage Ride (when moving Left -> Right)

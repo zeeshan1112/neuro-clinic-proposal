@@ -33,7 +33,7 @@
     rel="stylesheet"
   />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
-  <link rel="stylesheet" href="css/deck.css?v=6" />
+  <link rel="stylesheet" href="css/deck.css?v=7" />
 </head>
 <body>
   <!-- Official Brand, Medical Van & Editorial Vector Sprite -->
@@ -45,7 +45,6 @@
         <path d="M38 7 H41 Q43 7 45 10 L50 17 H38 Z" fill="#223C3E" />
         <rect x="7" y="7.5" width="9" height="7.5" rx="1.5" fill="#223C3E" />
         <rect x="29" y="7.5" width="7" height="7.5" rx="1.5" fill="#223C3E" />
-        <!-- Medical Cross on Van Side -->
         <path d="M21 7.5 h3 v2.5 h2.5 v3 h-2.5 v2.5 h-3 v-2.5 h-2.5 v-3 h2.5 z" fill="#1E5153" />
         <rect x="3" y="18.5" width="50" height="2.5" fill="#FFCC78" />
         <circle cx="13" cy="27" r="5" fill="#111818" />
@@ -229,7 +228,7 @@
     </div>
   </header>
 
-  <!-- Persistent 1600x900 Stage: Big Medical Van + Dr. Mira + Warm Cream Bubble + Route Rail -->
+  <!-- Persistent 1600x900 Desktop Stage: Big Medical Van + Dr. Mira + Warm Cream Bubble + Route Rail -->
   <div id="stage">
     <div id="footer">
       <span class="brand" data-bind="partnerBrand">DocScale</span>
@@ -261,18 +260,15 @@
         <g id="bv-body">
           <rect x="92" y="42" width="66" height="9" rx="4" fill="#1E5153" stroke="#FFCC78" stroke-width="1.5" />
           <path d="M18 68 Q18 50 38 50 H214 Q240 50 256 76 L296 122 V154 H18 Z" fill="#F4F1EA" stroke="#344747" stroke-width="2" />
-          <!-- Front Cab Window with Dr. Mira peeking out -->
           <path d="M212 62 H232 Q244 62 254 78 L278 112 H212 Z" fill="#183234" />
           <circle cx="236" cy="88" r="14" fill="#D89B74" />
           <path d="M222 85 C224 72, 248 72, 250 85 Z" fill="#131A2D" />
           <rect x="228" y="83" width="8" height="5" rx="2" fill="#F4F8FF" />
           <rect x="238" y="83" width="8" height="5" rx="2" fill="#F4F8FF" />
-          <!-- Side Windows & Medical Cross Emblem -->
           <rect x="36" y="64" width="44" height="36" rx="6" fill="#183234" />
           <rect x="90" y="64" width="44" height="36" rx="6" fill="#183234" />
           <circle cx="174" cy="84" r="21" fill="#152222" stroke="#FFCC78" stroke-width="2" />
           <path d="M170 72 h8 v8 h8 v8 h-8 v8 h-8 v-8 h-8 v-8 h8 z" fill="#5FC4BC" />
-          <!-- Champagne Gold & Teal Stripe -->
           <rect x="18" y="118" width="278" height="9" fill="#FFCC78" />
           <rect x="18" y="127" width="278" height="5" fill="#1E5153" />
           <circle cx="294" cy="126" r="6" fill="#FFE7B3" />
@@ -296,7 +292,6 @@
         <svg id="doctor-svg" viewBox="0 0 240 310" xmlns="http://www.w3.org/2000/svg">
           <ellipse id="doc-shadow" cx="120" cy="294" rx="58" ry="9" fill="rgba(0,0,0,0.5)" />
 
-          <!-- State Prop: Illuminated Halo -->
           <g id="prop-halo" opacity="0">
             <circle cx="120" cy="78" r="64" fill="none" stroke="#5FC4BC" stroke-width="1.5" stroke-dasharray="6 5" />
             <circle cx="120" cy="78" r="50" fill="rgba(255,204,120,0.08)" stroke="#FFCC78" stroke-width="1.4" />
@@ -304,7 +299,6 @@
             <circle cx="178" cy="48" r="5" fill="#FFCC78" />
           </g>
 
-          <!-- State Prop: Gold Stars -->
           <g id="prop-stars" opacity="0" fill="#FFCC78" stroke="#081313" stroke-width="1.4">
             <polygon points="56,36 59,43 66,44 61,48 62,55 56,51 50,55 51,48 46,44 53,43" />
             <polygon points="120,16 124,25 133,26 126,32 128,41 120,36 112,41 114,32 107,26 116,25" />
@@ -312,7 +306,6 @@
           </g>
 
           <g id="doc-body">
-            <!-- Articulated Walking Legs -->
             <g id="leg-l">
               <rect x="88" y="232" width="24" height="52" rx="10" fill="#16383A" />
               <rect x="82" y="276" width="34" height="12" rx="6" fill="#223030" />
@@ -396,23 +389,81 @@
     </div>
   </div>
 
-  <!-- Sleek Airy Mobile Bottom Progress Bar with Driving Medical Van -->
-  <div id="mobile-bar" aria-label="Mobile navigation">
-    <div class="m-rail-track">
-      <div class="m-rail-line"></div>
-      <svg id="m-van" viewBox="0 0 56 34" aria-hidden="true"><use href="#vanglyph" /></svg>
+  <!-- Mobile Interactive Stage Dock: Animated Dr. Mira + Warm Cream Bubble + Driving Medical Van + Route Rail -->
+  <div id="mobile-bar" aria-label="Mobile interactive guide and navigation">
+    <!-- Animated Transit Medical Van that sweeps across the mobile stage on slide change -->
+    <div id="m-transit-van" aria-hidden="true">
+      <svg viewBox="0 0 56 34" width="68" height="42"><use href="#vanglyph" /></svg>
     </div>
-    <div class="mobile-nav-group">
-      <button type="button" class="mobile-nav-btn" id="mobile-prev" aria-label="Previous slide">←</button>
-      <span class="mobile-count" id="mobile-count">01 / 10</span>
-      <button type="button" class="mobile-nav-btn" id="mobile-next" aria-label="Next slide">→</button>
+
+    <div class="m-stage-row">
+      <!-- Animated Mobile Dr. Mira Character with Evolving Props, Blinking & Waving -->
+      <div class="m-doc-avatar" id="mobile-doc-btn" title="Tap Dr. Mira for a clinic tip">
+        <svg id="mobile-doc-svg" viewBox="0 0 110 120" width="56" height="62" aria-hidden="true">
+          <!-- Mobile Neural Halo Prop -->
+          <circle id="m-prop-halo" cx="55" cy="44" r="34" fill="none" stroke="#5FC4BC" stroke-width="1.8" stroke-dasharray="4 4" opacity="0" />
+          <!-- Mobile Stars Prop -->
+          <g id="m-prop-stars" fill="#FFCC78" opacity="0">
+            <polygon points="16,18 18,23 23,24 19,27 20,32 16,29 12,32 13,27 9,24 14,23" />
+            <polygon points="94,18 96,23 101,24 97,27 98,32 94,29 90,32 91,27 87,24 92,23" />
+          </g>
+          <g id="m-doc-body">
+            <path d="M24 74 C24 66, 86 66, 86 74 L92 118 L18 118 Z" fill="#F4F1EA" stroke="#C9DAD7" stroke-width="1.8" />
+            <path d="M40 72 L55 96 L70 72 Z" fill="#1E5153" />
+            <path d="M36 70 C34 90, 38 104, 55 104 C72 104, 76 90, 74 70" fill="none" stroke="#223636" stroke-width="3.5" />
+            <circle cx="55" cy="108" r="5" fill="#FFCC78" stroke="#0C1A1A" stroke-width="1.6" />
+            <g id="m-doc-arm" transform="translate(10, 72)">
+              <path d="M14 8 Q2 0 4 -14" stroke="#F4F1EA" stroke-width="9" stroke-linecap="round" fill="none" />
+              <circle cx="4" cy="-16" r="5.5" fill="#D89B74" />
+            </g>
+            <circle cx="55" cy="18" r="13" fill="#171E26" />
+            <circle cx="55" cy="44" r="22" fill="#171E26" />
+            <circle cx="55" cy="46" r="20" fill="#D89B74" />
+            <path d="M35 44 C37 26, 73 26, 75 44 C67 34, 43 34, 35 44 Z" fill="#171E26" />
+            <g id="m-doc-eyes">
+              <rect x="40" y="39" width="13" height="9.5" rx="3" fill="#F4F8FF" stroke="#0C1A1A" stroke-width="1.8" />
+              <rect x="57" y="39" width="13" height="9.5" rx="3" fill="#F4F8FF" stroke="#0C1A1A" stroke-width="1.8" />
+              <line x1="53" y1="43.5" x2="57" y2="43.5" stroke="#0C1A1A" stroke-width="1.8" />
+              <g id="m-doc-pupils">
+                <circle cx="46.5" cy="44" r="2.3" fill="#0C1A1A" />
+                <circle cx="63.5" cy="44" r="2.3" fill="#0C1A1A" />
+              </g>
+            </g>
+            <path d="M49 56 q6 5 12 0" stroke="#6B3726" stroke-width="2" fill="none" stroke-linecap="round" />
+          </g>
+        </svg>
+      </div>
+
+      <!-- TripVan-Style Warm Cream Speech Bubble on Mobile -->
+      <div class="m-cream-bubble" id="mobile-bubble-card" title="Tap for another clinic tip">
+        <div class="m-bubble-who">
+          <span>DR. MIRA · CLINIC GUIDE</span>
+          <span>TAP TIP ↻</span>
+        </div>
+        <div class="m-bubble-text" id="mobile-bubble-text">
+          Welcome! First, we build a free 48-hour demo of your clinic website at ₹0 cost.
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Row: Driving Medical Van Progress Rail + Slide Controls -->
+    <div class="m-rail-row">
+      <div class="m-rail-track" id="m-rail-track">
+        <div class="m-rail-line"></div>
+        <svg id="m-van" viewBox="0 0 56 34" aria-hidden="true"><use href="#vanglyph" /></svg>
+      </div>
+      <div class="mobile-nav-group">
+        <button type="button" class="mobile-nav-btn" id="mobile-prev" aria-label="Previous slide">←</button>
+        <span class="mobile-count" id="mobile-count">01 / 10</span>
+        <button type="button" class="mobile-nav-btn" id="mobile-next" aria-label="Next slide">→</button>
+      </div>
     </div>
   </div>
 
   <div class="reveal">
     <div class="slides">
 
-      <!-- ===================== 1 · TITLE ===================== -->
+      <!-- ===================== 1 · TITLE (Mobile-First Hero with Animated Polaroid + EEG Wave) ===================== -->
       <section>
         <div class="sl s1 zone-r">
           <div class="eyebrow">A digital launch proposal for</div>
@@ -424,6 +475,28 @@
           <div class="sub">
             The complete patient discovery engine for <em>Neurology &amp; Neurosurgery</em>—live from Day 1.
           </div>
+
+          <!-- Polaroid Hero Blueprint Card with Animated EEG Pulse Waveform (Visible on BOTH Desktop & Mobile!) -->
+          <div class="photo ph-in s1-hero-photo" style="right: 345px; top: 96px; width: 292px; height: 204px; transform: rotate(3deg);">
+            <div class="photo-img-wrap">
+              <img src="assets/art-neuro-hero.jpg" alt="Neurology & Neurosurgery Clinic Blueprint" />
+              <svg class="photo-eeg-wave" viewBox="0 0 360 44" preserveAspectRatio="none" aria-hidden="true">
+                <path
+                  id="cover-eeg-path"
+                  d="M0 26 L60 26 L78 12 L94 36 L112 6 L130 34 L148 24 L210 24 L228 10 L246 36 L264 14 L282 26 L360 26"
+                  fill="none"
+                  stroke="#5FC4BC"
+                  stroke-width="2.6"
+                  stroke-linecap="round"
+                  stroke-dasharray="440"
+                  stroke-dashoffset="0"
+                />
+              </svg>
+              <span class="photo-live-pill">FREE 48H WEBSITE DEMO · ₹0</span>
+            </div>
+            <span class="cap"><span>CLINIC BLUEPRINT</span><span>DAY-1 READY</span></span>
+          </div>
+
           <div class="chips">
             <span class="chip"><b>01</b>Free 48h Website Demo</span>
             <span class="chip"><b>02</b>One-Time Clinic Setup</span>
@@ -432,11 +505,6 @@
           <div class="meta">
             Prepared for your upcoming <strong>Neurology &amp; Neurosurgery Clinic</strong> · Ranchi, Jharkhand<br />
             We build a <strong>free 48-hour demo of your clinic website</strong> first — pay ₹0 until you approve the website preview.
-          </div>
-
-          <div class="photo ph-in" style="right: 345px; top: 96px; width: 292px; height: 204px; transform: rotate(3deg);">
-            <img src="assets/art-neuro-hero.jpg" alt="Neurology & Neurosurgery Clinic Blueprint" />
-            <span class="cap"><span>CLINIC BLUEPRINT</span><span>SAMPLE NAME</span></span>
           </div>
         </div>
       </section>
@@ -450,6 +518,13 @@
             <p class="lede">
               While you set up your clinic space, diagnostics, and surgical &amp; OPD care in Ranchi, we build the digital engine that brings patients to your door.
             </p>
+
+            <!-- Primary Polaroid Artwork (Visible on both Desktop & Mobile!) -->
+            <div class="photo ph-in s2-primary-photo" style="left: 1015px; top: 108px; width: 390px; height: 265px; transform: rotate(-2.5deg);">
+              <img src="assets/art-neuro-brain.jpg" alt="Neurology and Neurosurgery Care" />
+              <span class="cap"><span>NEUROLOGY &amp; NEUROSURGERY</span><span>RANCHI</span></span>
+            </div>
+
             <div class="facts">
               <div class="card fact">
                 <div class="v"><span data-count="48">48</span> hrs</div>
@@ -470,11 +545,7 @@
             </div>
           </div>
 
-          <div class="photo ph-in" style="left: 1015px; top: 108px; width: 390px; height: 265px; transform: rotate(-2.5deg);">
-            <img src="assets/art-neuro-brain.jpg" alt="Neurology and Neurosurgery Care" />
-            <span class="cap"><span>NEUROLOGY &amp; NEUROSURGERY</span><span>RANCHI</span></span>
-          </div>
-          <div class="photo ph-in" style="left: 1055px; top: 412px; width: 390px; height: 255px; transform: rotate(2.5deg);">
+          <div class="photo ph-in desktop-only-photo" style="left: 1055px; top: 412px; width: 390px; height: 255px; transform: rotate(2.5deg);">
             <img src="assets/art-launch-clinic.jpg" alt="Reception Desk Booking" />
             <span class="cap"><span>DIRECT OPD BOOKINGS</span><span>DAY 1 READY</span></span>
           </div>
@@ -780,7 +851,7 @@
           <h2 class="h2">Google Business Profile + <em>Reception QR.</em></h2>
 
           <div class="gbp-qr-grid">
-            <!-- Left: Google Business Profile (Google Maps) -->
+            <!-- Left: Google Business Profile (Google Maps) with Map Illustration -->
             <div class="card gbp-card">
               <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px;">
                 <div style="display: flex; align-items: center; gap: 12px;">
@@ -793,8 +864,13 @@
                 <span class="verdict-pill is-ok">Verified Pin</span>
               </div>
 
+              <div class="gbp-map-thumb">
+                <img src="assets/art-maps-search.jpg" alt="Google Business Profile Ranchi Maps Pin" width="600" height="260" />
+                <span class="gbp-map-tag">★★★★★ 4.9 · Neurology &amp; Neurosurgery · Ranchi</span>
+              </div>
+
               <div class="gbp-explainer">
-                <strong style="color: var(--gold);">What is Google Business Profile?</strong><br />
+                <strong style="color: var(--gold);">What is Google Business Profile?</strong>
                 Your official Google Maps &amp; Search clinic card—showing your photos, neurology &amp; neurosurgery services, OPD hours, directions &amp; 5★ reviews.
               </div>
 
@@ -921,7 +997,7 @@
               </div>
             </div>
 
-            <!-- Right: Animated Month-over-Month Growth Benchmark Card -->
+            <!-- Right: Animated Month-over-Month Growth Benchmark Card (Shown FIRST on mobile!) -->
             <div class="card bench">
               <div>
                 <div style="display: flex; justify-content: space-between; align-items: center;">
@@ -1039,8 +1115,8 @@
 
   <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-  <script src="js/config.js?v=6"></script>
-  <script src="js/bayer-bg.js?v=6"></script>
-  <script src="js/deck.js?v=6"></script>
+  <script src="js/config.js?v=7"></script>
+  <script src="js/bayer-bg.js?v=7"></script>
+  <script src="js/deck.js?v=7"></script>
 </body>
 </html>
