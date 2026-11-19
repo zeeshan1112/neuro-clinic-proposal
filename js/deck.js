@@ -1,11 +1,10 @@
 /**
- * V2 Story-Driven Deck Engine
+ * V3 Story-Driven Deck Engine
  * - Reveal.js 5.1.0 (1600x900) + GSAP 3.12.5
- * - Evolving Dr. Mira character states & props inside scaled 1600x900 safe zones
- * - 8 animated visual storytelling scenes + interactive SEO/AEO/GEO & Monthly Watch consoles
- * - Respects prefers-reduced-motion & ?print-pdf (zero hidden elements)
+ * - Never leaves elements at opacity: 0 (uses clearProps + instant reset)
+ * - Evolving Dr. Mira guide + TripVan-inspired confetti bursts + 4-platform icons
  */
-(function initDeckV2() {
+(function initDeckV3() {
   const isPrint = window.location.search.includes("print-pdf");
   if (isPrint) {
     document.documentElement.classList.add("print-pdf");
@@ -42,69 +41,69 @@
       label: "01 Intro",
       x: 1315, y: 472, flip: 1, bx: 1272, by: 298, tail: "64%",
       state: "planning", warm: 0.10,
-      line: "Let’s map how Ranchi patients discover and book your neurology clinic from Day 1.",
+      line: "Welcome Dr. Shiwangi! Let’s map how we help launch your Ranchi neuro clinic.",
     },
     {
-      label: "02 Scope",
+      label: "02 How We Help",
       x: 52, y: 472, flip: -1, bx: 32, by: 298, tail: "32%",
       state: "planning", warm: 0.08,
-      line: "You lead clinical care; our digital engine keeps OPD slots steady without burdening staff.",
+      line: "You focus on neurology and patient care; we build your entire digital patient funnel.",
     },
     {
-      label: "03 Journey",
+      label: "03 Offerings",
       x: 1315, y: 472, flip: 1, bx: 1272, by: 298, tail: "64%",
-      state: "concerned", warm: 0.04,
-      line: "Without clear Maps & AI presence, urgent migraine and stroke searches drift elsewhere.",
+      state: "planning", warm: 0.16,
+      line: "Clear menu: One-Time Clinic Launch upfront, plus optional Monthly AI Watch & Analytics.",
     },
     {
-      label: "04 Booking",
+      label: "04 Website",
       x: 52, y: 472, flip: -1, bx: 32, by: 298, tail: "32%",
       state: "connected", warm: 0.14,
-      line: "One mobile tap opens pre-filled WhatsApp chat AND drops a full patient alert in your email.",
+      line: "One mobile tap opens pre-filled WhatsApp chat AND emails full patient details to you.",
     },
     {
-      label: "05 AEO·GEO",
+      label: "05 AI Search",
       x: 1315, y: 472, flip: 1, bx: 1272, by: 298, tail: "64%",
-      state: "illuminated", warm: 0.20,
-      line: "Physician JSON-LD + official AI hubs teach ChatGPT, Gemini & Google to recommend you.",
+      state: "illuminated", warm: 0.22,
+      line: "Structured Physician schema + hubs teach ChatGPT, Gemini & Google AI Mode to recommend you.",
     },
     {
-      label: "06 AI Watch",
+      label: "06 GBP & Ads",
       x: 52, y: 472, flip: -1, bx: 32, by: 298, tail: "32%",
-      state: "illuminated", warm: 0.25,
-      line: "AI answers shift weekly—we monitor 25 local Ranchi prompts across 4 engines and ship fixes.",
+      state: "leading", warm: 0.36,
+      line: "GBP puts you on Maps free; Google Ads spend comes from your own card with full review access.",
     },
     {
-      label: "07 Reviews",
+      label: "07 QR Reviews",
       x: 1315, y: 472, flip: 1, bx: 1272, by: 298, tail: "64%",
-      state: "celebrating", warm: 0.60,
-      line: "Happy OPD visits power 5★ Google Maps rank while 1–3★ alerts reach your inbox privately.",
+      state: "celebrating", warm: 0.62,
+      line: "Happy patients boost your 5★ Maps rating; 1–3★ alerts stay private so you fix issues fast!",
     },
     {
-      label: "08 Maps/Ads",
+      label: "08 One-Time",
       x: 52, y: 472, flip: -1, bx: 32, by: 298, tail: "32%",
-      state: "leading", warm: 0.45,
-      line: "Organic Google Maps runs 24/7; optional Ads run straight from your own billing account.",
+      state: "leading", warm: 0.28,
+      line: "Everything in your One-Time Launch Setup—with ₹0 charged until your 48h demo is approved.",
     },
     {
-      label: "09 Roadmap",
+      label: "09 Monthly",
       x: 1315, y: 472, flip: 1, bx: 1272, by: 298, tail: "64%",
-      state: "leading", warm: 0.35,
-      line: "Zero upfront risk—review your working 48-hour clinic preview before spending a rupee.",
+      state: "illuminated", warm: 0.30,
+      line: "Monthly Retainer pairs weekly 4-engine AI monitoring with Google Site Analytics & ongoing care.",
     },
     {
       label: "10 Start",
       x: 52, y: 472, flip: -1, bx: 32, by: 298, tail: "32%",
       state: "inviting", warm: 0.68,
-      line: "Send five quick clinic details on WhatsApp and let’s build your custom preview next!",
+      line: "Share 5 quick details on WhatsApp and review your custom preview before paying a rupee!",
     },
   ];
 
   const BONUS_TIPS = [
-    "85%+ of Tier-2 clinic searches happen on 4G mobile—speed under 1s doubles WhatsApp taps.",
+    "85%+ of Tier-2 clinic searches happen on 4G mobile—fast sites double WhatsApp consultations.",
     "Getting your first 20–30 five-star Maps reviews is the fastest Day-1 ranking lever in Ranchi.",
-    "Post-visit WhatsApp review links convert 3–4× better than passive reception cards alone.",
-    "Schema JSON-LD + Bing/OpenAI Business Hubs prevent AI chatbots from quoting wrong timings.",
+    "Google Analytics (GA4) lets you see exact visitor counts, Maps clicks & WhatsApp taps monthly.",
+    "Schema JSON-LD + Bing/OpenAI hubs prevent AI tools from quoting outdated hospital hours.",
   ];
   let bonusIdx = 0;
 
@@ -157,9 +156,7 @@
     });
   }
 
-  if (mobileNavStop) {
-    mobileNavStop.addEventListener("click", (e) => e.stopPropagation());
-  }
+  if (mobileNavStop) mobileNavStop.addEventListener("click", (e) => e.stopPropagation());
   if (mobilePrevBtn) mobilePrevBtn.addEventListener("click", () => Reveal.prev());
   if (mobileNextBtn) mobileNextBtn.addEventListener("click", () => Reveal.next());
 
@@ -176,6 +173,7 @@
   syncMotionButton();
 
   // ── Evolving Dr. Mira Character Engine ────────────────────────────────
+  const stageEl = document.getElementById("stage");
   const doctorWrap = document.getElementById("doctor-wrap");
   const doctorFlip = document.getElementById("doctor-flip");
   const docBody = document.getElementById("doc-body");
@@ -224,6 +222,31 @@
     Object.entries(PROPS).forEach(([k, el]) => {
       if (el) el.setAttribute("opacity", activeProps.includes(k) ? "1" : "0");
     });
+  }
+
+  function confettiBurst(cx, cy) {
+    if (!stageEl || isPrint || motionPaused || typeof gsap === "undefined" || isMobileViewport()) return;
+    const colors = ["#F5C45E", "#38E1C6", "#56B4FF", "#F4F8FF"];
+    for (let i = 0; i < 18; i++) {
+      const dot = document.createElement("div");
+      dot.className = "confetti-dot";
+      dot.style.background = colors[i % colors.length];
+      dot.style.left = cx + "px";
+      dot.style.top = cy + "px";
+      stageEl.appendChild(dot);
+
+      const angle = (Math.PI * 2 * i) / 18 + Math.random() * 0.35;
+      const dist = 55 + Math.random() * 90;
+      gsap.to(dot, {
+        x: Math.cos(angle) * dist,
+        y: Math.sin(angle) * dist - 40,
+        rotation: Math.random() * 360,
+        opacity: 0,
+        duration: 1.1 + Math.random() * 0.4,
+        ease: "power2.out",
+        onComplete: () => dot.remove(),
+      });
+    }
   }
 
   let ambientTls = [];
@@ -306,23 +329,23 @@
       before: {
         score: 34,
         reply: "Lists 3 established hospital chains and older clinics; your new clinic is omitted from recommendations.",
-        signalNote: "Missing Physician JSON-LD · AI bots blocked or hubs unclaimed",
+        signalNote: "Missing Physician JSON-LD · AI bots or hubs unclaimed",
         engines: [
-          { name: "ChatGPT", val: "✗ 3 rivals named", state: "miss" },
-          { name: "Google Gemini", val: "✗ Not listed", state: "miss" },
-          { name: "AI Overviews", val: "⚠ Directory only", state: "warn" },
-          { name: "Perplexity", val: "✗ No clinic data", state: "miss" },
+          { icon: "ico-chatgpt", name: "ChatGPT", val: "✗ 3 rivals", state: "miss" },
+          { icon: "ico-gemini", name: "Gemini", val: "✗ Not listed", state: "miss" },
+          { icon: "ico-aimode", name: "AI Mode", val: "⚠ Directory", state: "warn" },
+          { icon: "ico-gmaps", name: "Overviews", val: "✗ Omitted", state: "miss" },
         ],
       },
       after: {
         score: 94,
         reply: "Recommended: Ranchi Neuro Care (Bariatu Rd) — Dedicated migraine & epilepsy OPD, verified timings, 4.9★ rating & direct booking.",
-        signalNote: "Schema JSON-LD · AI Bots · Bing & OpenAI Hubs verified",
+        signalNote: "Physician JSON-LD · llms.txt · Bing & OpenAI Hubs verified",
         engines: [
-          { name: "ChatGPT", val: "✓ Cited #1", state: "ok" },
-          { name: "Google Gemini", val: "✓ Recommended", state: "ok" },
-          { name: "AI Overviews", val: "✓ Clinic & Map", state: "ok" },
-          { name: "Perplexity", val: "✓ Source Linked", state: "ok" },
+          { icon: "ico-chatgpt", name: "ChatGPT", val: "✓ Cited #1", state: "ok" },
+          { icon: "ico-gemini", name: "Gemini", val: "✓ Top Pick", state: "ok" },
+          { icon: "ico-aimode", name: "AI Mode", val: "✓ Cited", state: "ok" },
+          { icon: "ico-gmaps", name: "Overviews", val: "✓ Map + Link", state: "ok" },
         ],
       },
     },
@@ -333,10 +356,10 @@
         reply: "Only large multi-specialty hospitals appear; AI cannot confirm your outpatient neurology or stroke follow-up scope.",
         signalNote: "No dedicated EEG or stroke condition pages indexed",
         engines: [
-          { name: "ChatGPT", val: "✗ Hospitals only", state: "miss" },
-          { name: "Google Gemini", val: "⚠ No service bio", state: "warn" },
-          { name: "AI Overviews", val: "✗ Skipped", state: "miss" },
-          { name: "Perplexity", val: "✗ Unverified", state: "miss" },
+          { icon: "ico-chatgpt", name: "ChatGPT", val: "✗ Hospitals", state: "miss" },
+          { icon: "ico-gemini", name: "Gemini", val: "⚠ No page", state: "warn" },
+          { icon: "ico-aimode", name: "AI Mode", val: "✗ Skipped", state: "miss" },
+          { icon: "ico-gmaps", name: "Overviews", val: "✗ Unlisted", state: "miss" },
         ],
       },
       after: {
@@ -344,10 +367,10 @@
         reply: "Ranchi Neuro Care near Bariatu provides outpatient EEG diagnostics, post-stroke neuro recovery & direct WhatsApp slot booking.",
         signalNote: "Condition FAQs + MedicalClinic schema extracted cleanly",
         engines: [
-          { name: "ChatGPT", val: "✓ Services Cited", state: "ok" },
-          { name: "Google Gemini", val: "✓ Top Local Pick", state: "ok" },
-          { name: "AI Overviews", val: "✓ Highlighted", state: "ok" },
-          { name: "Perplexity", val: "✓ FAQ Quoted", state: "ok" },
+          { icon: "ico-chatgpt", name: "ChatGPT", val: "✓ Services", state: "ok" },
+          { icon: "ico-gemini", name: "Gemini", val: "✓ Top Local", state: "ok" },
+          { icon: "ico-aimode", name: "AI Mode", val: "✓ Highlight", state: "ok" },
+          { icon: "ico-gmaps", name: "Overviews", val: "✓ Quoted", state: "ok" },
         ],
       },
     },
@@ -358,10 +381,10 @@
         reply: "Third-party aggregator snippet with incomplete clinic hours and outdated or missing consultation info.",
         signalNote: "Conflicting directory hours · Few verified Google reviews",
         engines: [
-          { name: "ChatGPT", val: "⚠ Thin summary", state: "warn" },
-          { name: "Google Gemini", val: "⚠ Wrong hours", state: "warn" },
-          { name: "AI Overviews", val: "✗ Few reviews", state: "miss" },
-          { name: "Perplexity", val: "⚠ Aggregator", state: "warn" },
+          { icon: "ico-chatgpt", name: "ChatGPT", val: "⚠ Thin bio", state: "warn" },
+          { icon: "ico-gemini", name: "Gemini", val: "⚠ Old hours", state: "warn" },
+          { icon: "ico-aimode", name: "AI Mode", val: "✗ Few stars", state: "miss" },
+          { icon: "ico-gmaps", name: "Overviews", val: "⚠ 3rd-party", state: "warn" },
         ],
       },
       after: {
@@ -369,10 +392,10 @@
         reply: "Ranchi Neuro Care · Verified Bariatu OPD hours, specialist credentials, 4.9★ Google reviews & instant booking link.",
         signalNote: "100% factual accuracy synced across Google, Bing & OpenAI",
         engines: [
-          { name: "ChatGPT", val: "✓ Exact OPD Bio", state: "ok" },
-          { name: "Google Gemini", val: "✓ 4.9★ & Hours", state: "ok" },
-          { name: "AI Overviews", val: "✓ Direct Link", state: "ok" },
-          { name: "Perplexity", val: "✓ Official Site", state: "ok" },
+          { icon: "ico-chatgpt", name: "ChatGPT", val: "✓ Exact OPD", state: "ok" },
+          { icon: "ico-gemini", name: "Gemini", val: "✓ 4.9★ Info", state: "ok" },
+          { icon: "ico-aimode", name: "AI Mode", val: "✓ Verified", state: "ok" },
+          { icon: "ico-gmaps", name: "Overviews", val: "✓ Official", state: "ok" },
         ],
       },
     },
@@ -410,7 +433,10 @@
       aiGridEl.innerHTML = data.engines
         .map(
           (e) =>
-            `<div class="engine-cell"><span class="engine-name">${e.name}</span><span class="verdict-pill is-${e.state}">${e.val}</span></div>`
+            `<div class="engine-cell">
+               <span class="engine-name-wrap"><svg class="plat-ico"><use href="#${e.icon}"/></svg><span class="engine-name">${e.name}</span></span>
+               <span class="verdict-pill is-${e.state}">${e.val}</span>
+             </div>`
         )
         .join("");
     }
@@ -452,27 +478,27 @@
     })
   );
 
-  // ── Slide 6: Monthly Watch Control Room ───────────────────────────────
+  // ── Slide 9: Monthly Watch Control Room ───────────────────────────────
   const WATCH_PHASES = [
     {
-      share: "14%", delta: "Month 0 Baseline", accuracy: "62%",
+      share: "14%", delta: "M0 Baseline", accuracy: "62%",
       note: "✓ Baseline logged across 25 Ranchi prompts × 4 AI engines",
-      chatgpt: 12, gemini: 18, aio: 11, perp: 15, dash: 290, dotX: 36, dotY: 82,
+      chatgpt: 12, gemini: 18, aio: 11, dash: 290, dotX: 36, dotY: 66,
     },
     {
       share: "29%", delta: "▲ +15% vs M0", accuracy: "100%",
-      note: "✓ Shipped M1: Physician JSON-LD + Bing AI & OpenAI Business Hubs",
-      chatgpt: 28, gemini: 34, aio: 25, perp: 29, dash: 195, dotX: 152, dotY: 60,
+      note: "✓ Shipped M1: Physician JSON-LD + Bing AI & OpenAI Hubs",
+      chatgpt: 28, gemini: 34, aio: 25, dash: 195, dotX: 152, dotY: 46,
     },
     {
       share: "46%", delta: "▲ +32% vs M0", accuracy: "100%",
-      note: "✓ Shipped M2: Migraine, Epilepsy & Stroke local FAQ answer blocks",
-      chatgpt: 44, gemini: 52, aio: 42, perp: 46, dash: 95, dotX: 268, dotY: 34,
+      note: "✓ Shipped M2: Migraine, Epilepsy & Stroke FAQ pages",
+      chatgpt: 44, gemini: 52, aio: 42, dash: 95, dotX: 268, dotY: 25,
     },
     {
       share: "58%", delta: "▲ +44% vs M0", accuracy: "100%",
-      note: "✓ Shipped: Migraine & Stroke FAQ Schema + Monthly PDF Diff Report",
-      chatgpt: 56, gemini: 64, aio: 54, perp: 58, dash: 0, dotX: 386, dotY: 18,
+      note: "✓ Monthly PDF report + shipped content & schema fix",
+      chatgpt: 56, gemini: 64, aio: 54, dash: 0, dotX: 386, dotY: 14,
     },
   ];
 
@@ -510,7 +536,6 @@
       { id: "chatgpt", val: p.chatgpt },
       { id: "gemini", val: p.gemini },
       { id: "aio", val: p.aio },
-      { id: "perp", val: p.perp },
     ].forEach((b) => {
       const pctEl = document.getElementById(`pct-${b.id}`);
       const barEl = document.getElementById(`bar-${b.id}`);
@@ -543,11 +568,19 @@
     }
   }
 
+  function forceSlideVisible(slide) {
+    if (!slide || typeof gsap === "undefined") return;
+    const all = slide.querySelectorAll(
+      ".eyebrow, .hero-title, .h2, .tagline, .lede, .quote-bar, .chip, .card, .pipe-pill, .plat-card, .pill-mini, .story-stage, .ai-theatre, .art-frame, .gate-card, .intake-chip, .commercial, .tile"
+    );
+    gsap.set(all, { opacity: 1, clearProps: "transform" });
+  }
+
   function runSlideStoryAnimations(slide, index) {
     killStoryAnimations();
     if (!slide || isPrint || motionPaused || typeof gsap === "undefined") {
-      if (index === 5) setWatchPhase(3);
-      if (index === 8) slide?.querySelectorAll(".gate-card").forEach((c) => c.classList.add("lit"));
+      if (index === 8) setWatchPhase(3);
+      if (index === 9) slide?.querySelectorAll(".gate-card").forEach((c) => c.classList.add("lit"));
       return;
     }
 
@@ -562,69 +595,7 @@
       }
     }
 
-    // Slide 2: Partnership Bridge Stream
-    if (index === 1) {
-      const p1 = slide.querySelector("#bridge-pkt-1");
-      const p2 = slide.querySelector("#bridge-pkt-2");
-      if (p1 && p2) {
-        activeLoopTl = gsap.timeline({ repeat: -1, repeatDelay: 0.4 });
-        activeLoopTl
-          .fromTo(p1, { x: 472, opacity: 0 }, { x: 350, opacity: 1, duration: 1.25, ease: "power2.inOut" })
-          .to(p1, { opacity: 0, duration: 0.25 })
-          .fromTo(p2, { x: 482, opacity: 0 }, { x: 356, opacity: 1, duration: 1.0, ease: "power2.inOut" }, "-=0.8")
-          .to(p2, { opacity: 0, duration: 0.25 });
-      }
-    }
-
-    // Slide 3: Ranchi City Map — Unlisted Deflection -> DocScale Ignition Capture
-    if (index === 2) {
-      const p1 = slide.querySelector("#pat-pin-1");
-      const p2 = slide.querySelector("#pat-pin-2");
-      const p3 = slide.querySelector("#pat-pin-3");
-      const box = slide.querySelector("#city-clinic-box");
-      const ring = slide.querySelector("#city-radar-ring");
-      const kicker = slide.querySelector("#city-clinic-kicker");
-      const status = slide.querySelector("#city-clinic-status");
-      const cap = slide.querySelector("#city-caption");
-      const cnt = slide.querySelector("#city-counter");
-
-      if (p1 && p2 && p3 && box) {
-        activeLoopTl = gsap.timeline({ repeat: -1, repeatDelay: 0.8 });
-        activeLoopTl
-          .call(() => {
-            if (cap) cap.textContent = "Act 1: Unlisted clinics lose local searches to rivals";
-            if (cnt) cnt.textContent = "0 / 3 OPD CAPTURED";
-            box.setAttribute("stroke", "#8EA4C4");
-            if (kicker) { kicker.textContent = "UNLISTED CLINIC"; kicker.setAttribute("fill", "#8EA4C4"); }
-            if (status) { status.textContent = "No Site · Invisible on AI"; status.setAttribute("fill", "#FF6B6B"); }
-          })
-          .set([p1, p2, p3], { opacity: 1 })
-          .set(p1, { attr: { cx: 230, cy: 93 } })
-          .set(p2, { attr: { cx: 230, cy: 193 } })
-          .set(p3, { attr: { cx: 230, cy: 293 } })
-          .to(p1, { attr: { cx: 612, cy: 72 }, duration: 0.9, ease: "power2.inOut" }, "deflect")
-          .to(p2, { attr: { cx: 612, cy: 84 }, duration: 1.0, ease: "power2.inOut" }, "deflect+=0.15")
-          .to([p1, p2], { opacity: 0.25, duration: 0.25 })
-          .call(() => {
-            if (cap) cap.textContent = "Act 2: Site + Maps + Schema ignites → captures all 3 local searches!";
-            if (cnt) cnt.textContent = "3 / 3 OPD CAPTURED ✓";
-            box.setAttribute("stroke", "#38E1C6");
-            if (kicker) { kicker.textContent = "LIVE & AI VERIFIED"; kicker.setAttribute("fill", "#38E1C6"); }
-            if (status) { status.textContent = "Site + Maps + Schema ✓"; status.setAttribute("fill", "#38E1C6"); }
-          })
-          .fromTo(ring, { attr: { r: 40 }, opacity: 0.9 }, { attr: { r: 120 }, opacity: 0, duration: 0.85, ease: "power2.out" })
-          .set([p1, p2, p3], { opacity: 1 })
-          .set(p1, { attr: { cx: 230, cy: 93 } })
-          .set(p2, { attr: { cx: 230, cy: 193 } })
-          .set(p3, { attr: { cx: 230, cy: 293 } })
-          .to(p1, { attr: { cx: 604, cy: 235 }, duration: 0.95, ease: "power2.inOut" }, "capture")
-          .to(p2, { attr: { cx: 604, cy: 255 }, duration: 0.95, ease: "power2.inOut" }, "capture+=0.12")
-          .to(p3, { attr: { cx: 604, cy: 275 }, duration: 0.95, ease: "power2.inOut" }, "capture+=0.24")
-          .to({}, { duration: 1.1 });
-      }
-    }
-
-    // Slide 4: Symptom Tap -> WhatsApp & Inbox Cinema
+    // Slide 4: Website Booking Cinema (WhatsApp + Email)
     if (index === 3) {
       const btn = slide.querySelector("#phone-submit-btn");
       const waPkt = slide.querySelector("#cinema-wa-pkt");
@@ -640,10 +611,10 @@
             if (badgeTxt) badgeTxt.textContent = "NEW BOOKING";
           })
           .to(btn, { opacity: 0.65, duration: 0.16, yoyo: true, repeat: 1 })
-          .set(waPkt, { x: 274, y: 128, opacity: 1 })
-          .set(mailPkt, { x: 274, y: 238, opacity: 1 })
-          .to(waPkt, { x: 416, y: 84, duration: 0.95, ease: "power2.inOut" }, "send")
-          .to(mailPkt, { x: 416, y: 268, duration: 0.95, ease: "power2.inOut" }, "send")
+          .set(waPkt, { x: 274, y: 122, opacity: 1 })
+          .set(mailPkt, { x: 274, y: 230, opacity: 1 })
+          .to(waPkt, { x: 406, y: 78, duration: 0.95, ease: "power2.inOut" }, "send")
+          .to(mailPkt, { x: 406, y: 260, duration: 0.95, ease: "power2.inOut" }, "send")
           .call(() => {
             if (badge) badge.setAttribute("fill", "#38E1C6");
             if (badgeTxt) badgeTxt.textContent = "ALERT SENT ✓";
@@ -668,13 +639,47 @@
       }
     }
 
-    // Slide 6: Auto-step Monthly Watch Trajectory
+    // Slide 6: Glass-Wallet Ads Rupee Stream (Cleanly between card borders)
     if (index === 5) {
+      const r1 = slide.querySelector("#rupee-tok-1");
+      const r2 = slide.querySelector("#rupee-tok-2");
+      if (r1 && r2) {
+        activeLoopTl = gsap.timeline({ repeat: -1, repeatDelay: 0.45 });
+        activeLoopTl
+          .fromTo(r1, { x: 134, opacity: 0 }, { x: 142, opacity: 1, duration: 0.55, ease: "power2.out" })
+          .to(r1, { opacity: 0, duration: 0.2 })
+          .fromTo(r2, { x: 296, opacity: 0 }, { x: 304, opacity: 1, duration: 0.55, ease: "power2.out" }, "-=0.2")
+          .to(r2, { opacity: 0, duration: 0.2, delay: 0.35 });
+      }
+    }
+
+    // Slide 7: Smart QR Laser Scan + Confetti Burst
+    if (index === 6) {
+      const beam = slide.querySelector("#qr-scan-beam");
+      const starPkt = slide.querySelector("#qr-star-pkt");
+      const privPkt = slide.querySelector("#qr-priv-pkt");
+      confettiBurst(1430, 500);
+      if (beam && starPkt && privPkt) {
+        activeLoopTl = gsap.timeline({ repeat: -1, repeatDelay: 0.8 });
+        activeLoopTl
+          .fromTo(beam, { y: 0 }, { y: 108, duration: 0.65, yoyo: true, repeat: 1, ease: "sine.inOut" })
+          .set(starPkt, { x: 240, y: 146, opacity: 1 })
+          .set(privPkt, { x: 240, y: 198, opacity: 0.25 })
+          .to(starPkt, { x: 428, y: 74, duration: 1.0, ease: "power2.inOut" })
+          .to(starPkt, { opacity: 0.2, duration: 0.25 })
+          .set(privPkt, { x: 240, y: 198, opacity: 1 })
+          .to(privPkt, { x: 428, y: 264, duration: 1.0, ease: "power2.inOut" })
+          .to(privPkt, { opacity: 0.2, duration: 0.25, delay: 0.45 });
+      }
+    }
+
+    // Slide 9: Monthly AI Watch Trajectory Stepper
+    if (index === 8) {
       if (!watchUserInteracted) {
         setWatchPhase(0);
         [1, 2, 3].forEach((phaseIdx, step) => {
           const tId = setTimeout(() => {
-            if (!watchUserInteracted && Reveal.getIndices().h === 5 && !motionPaused) {
+            if (!watchUserInteracted && Reveal.getIndices().h === 8 && !motionPaused) {
               setWatchPhase(phaseIdx);
             }
           }, (step + 1) * 1100);
@@ -683,47 +688,15 @@
       }
     }
 
-    // Slide 7: Smart QR Laser Scan + Dual Review Router
-    if (index === 6) {
-      const beam = slide.querySelector("#qr-scan-beam");
-      const starPkt = slide.querySelector("#qr-star-pkt");
-      const privPkt = slide.querySelector("#qr-priv-pkt");
-      if (beam && starPkt && privPkt) {
-        activeLoopTl = gsap.timeline({ repeat: -1, repeatDelay: 0.8 });
-        activeLoopTl
-          .fromTo(beam, { y: 0 }, { y: 104, duration: 0.65, yoyo: true, repeat: 1, ease: "sine.inOut" })
-          .set(starPkt, { x: 240, y: 156, opacity: 1 })
-          .set(privPkt, { x: 240, y: 208, opacity: 0.25 })
-          .to(starPkt, { x: 432, y: 78, duration: 1.0, ease: "power2.inOut" })
-          .to(starPkt, { opacity: 0.2, duration: 0.25 })
-          .set(privPkt, { x: 240, y: 208, opacity: 1 })
-          .to(privPkt, { x: 432, y: 274, duration: 1.0, ease: "power2.inOut" })
-          .to(privPkt, { opacity: 0.2, duration: 0.25, delay: 0.45 });
-      }
-    }
-
-    // Slide 8: Glass-Wallet Ads Rupee Pipeline
-    if (index === 7) {
-      const r1 = slide.querySelector("#rupee-tok-1");
-      const r2 = slide.querySelector("#rupee-tok-2");
-      if (r1 && r2) {
-        activeLoopTl = gsap.timeline({ repeat: -1, repeatDelay: 0.5 });
-        activeLoopTl
-          .fromTo(r1, { x: 256, opacity: 0 }, { x: 284, opacity: 1, duration: 0.6, ease: "power2.out" })
-          .to(r1, { opacity: 0, duration: 0.2 })
-          .fromTo(r2, { x: 560, opacity: 0 }, { x: 588, opacity: 1, duration: 0.6, ease: "power2.out" }, "-=0.25")
-          .to(r2, { opacity: 0, duration: 0.2, delay: 0.35 });
-      }
-    }
-
-    // Slide 9: 4-Gate Launch Beacon (Horizontal Desktop / Vertical Mobile)
-    if (index === 8) {
+    // Slide 10: 4-Gate Medical Pulse Beacon (Horizontal Desktop / Vertical Mobile) + Celebration Confetti
+    if (index === 9) {
+      confettiBurst(170, 500);
       const beacon = slide.querySelector("#launch-beacon");
       const highway = slide.querySelector(".launch-highway");
       const gates = slide.querySelectorAll(".gate-card");
       if (beacon && highway && gates.length) {
         const mobileMode = isMobileViewport();
-        const travelW = Math.max(200, highway.clientWidth - 36);
+        const travelW = Math.max(200, highway.clientWidth - 34);
         const travelH = Math.max(200, highway.clientHeight - 30);
 
         activeLoopTl = gsap.timeline({ repeat: -1, repeatDelay: 0.8 });
@@ -772,16 +745,18 @@
 
     if (bubble && bubbleText) {
       bubble.style.setProperty("--tail", cfg.tail);
+      bubble.style.left = cfg.bx + "px";
+      bubble.style.top = cfg.by + "px";
       bubbleText.textContent = cfg.line;
       if (!motionPaused && !isPrint && typeof gsap !== "undefined") {
         gsap.killTweensOf(bubble);
         gsap.fromTo(
           bubble,
-          { x: cfg.bx, y: cfg.by + 12, opacity: 0, scale: 0.94 },
-          { x: cfg.bx, y: cfg.by, opacity: 1, scale: 1, duration: 0.42, delay: 0.2, ease: "back.out(1.4)" }
+          { y: 12, opacity: 0, scale: 0.94 },
+          { y: 0, opacity: 1, scale: 1, duration: 0.42, delay: 0.2, ease: "back.out(1.4)", clearProps: "transform" }
         );
       } else {
-        bubble.style.transform = `translate(${cfg.bx}px, ${cfg.by}px)`;
+        bubble.style.transform = "none";
         bubble.style.opacity = "1";
       }
     }
@@ -810,20 +785,22 @@
     runSlideStoryAnimations(slide, index);
     waveDoctor();
 
-    if (isPrint || motionPaused || typeof gsap === "undefined" || !slide) return;
+    if (!slide) return;
+    forceSlideVisible(slide);
+    if (isPrint || motionPaused || typeof gsap === "undefined") return;
 
     const eyebrows = slide.querySelectorAll(".eyebrow");
-    const headings = slide.querySelectorAll(".hero-title, .h2, .tagline, .lede");
+    const headings = slide.querySelectorAll(".hero-title, .h2, .tagline, .lede, .quote-bar");
     const cards = slide.querySelectorAll(
-      ".chip, .card, .pipe-pill, .pill-mini, .metric-box, .story-stage, .ai-theatre, .watch-board, .art-frame, .gate-card, .intake-chip"
+      ".chip, .card, .plat-card, .pill-mini, .story-stage, .ai-theatre, .art-frame, .gate-card, .intake-chip, .commercial"
     );
 
     gsap.killTweensOf([...eyebrows, ...headings, ...cards]);
     const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
-    if (eyebrows.length) tl.fromTo(eyebrows, { x: -14, opacity: 0 }, { x: 0, opacity: 1, duration: 0.3 });
-    if (headings.length) tl.fromTo(headings, { y: 16, opacity: 0 }, { y: 0, opacity: 1, duration: 0.42, stagger: 0.05 }, "-=0.18");
-    if (cards.length) tl.fromTo(cards, { y: 18, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, stagger: 0.045 }, "-=0.22");
+    if (eyebrows.length) tl.from(eyebrows, { x: -14, opacity: 0, duration: 0.28, clearProps: "opacity,transform" });
+    if (headings.length) tl.from(headings, { y: 14, opacity: 0, duration: 0.36, stagger: 0.04, clearProps: "opacity,transform" }, "-=0.15");
+    if (cards.length) tl.from(cards, { y: 16, opacity: 0, duration: 0.36, stagger: 0.04, clearProps: "opacity,transform" }, "-=0.2");
   }
 
   window.addEventListener("resize", () => {
@@ -832,8 +809,9 @@
     if (mobileNow !== lastMobileState) {
       lastMobileState = mobileNow;
       Reveal.configure({ disableLayout: mobileNow });
-      const idx = Reveal.getIndices().h || 0;
-      runSlideStoryAnimations(Reveal.getCurrentSlide(), idx);
+      const slide = Reveal.getCurrentSlide();
+      forceSlideVisible(slide);
+      runSlideStoryAnimations(slide, Reveal.getIndices().h || 0);
     }
   });
 
@@ -846,12 +824,12 @@
         stopAmbientDoctor();
         killStoryAnimations();
         if (typeof gsap !== "undefined") gsap.globalTimeline.pause();
+        forceSlideVisible(Reveal.getCurrentSlide());
       } else {
         if (window.bayerBg) window.bayerBg.resume();
         if (typeof gsap !== "undefined") gsap.globalTimeline.resume();
         startAmbientDoctor();
-        const idx = Reveal.getIndices().h || 0;
-        runSlideStoryAnimations(Reveal.getCurrentSlide(), idx);
+        runSlideStoryAnimations(Reveal.getCurrentSlide(), Reveal.getIndices().h || 0);
       }
     });
   }
