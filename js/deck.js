@@ -1,10 +1,10 @@
 /**
- * V4 Story-Driven Deck Engine
- * - Reveal.js 5.1.0 (1600x900) + GSAP 3.12.5 + WebGL 8x8 Bayer Dithering
- * - Never leaves elements at opacity: 0 (uses clearProps + instant reset)
- * - Evolving Dr. Mira guide with pointer-tracking pupils + TripVan-inspired confetti & story timelines
+ * V5 Story-Driven Deck Engine
+ * - Reveal.js 5.1.0 (1600x900 desktop / App-Shell bounded viewport on mobile <= 900px)
+ * - GSAP 3.12.5 story animations on responsive HTML/CSS + SVG components
+ * - Evolving Dr. Mira guide with pointer-tracking pupils + confetti bursts
  */
-(function initDeckV4() {
+(function initDeckV5() {
   const isMobileViewport = () => window.innerWidth <= 900;
   let lastMobileState = isMobileViewport();
 
@@ -59,7 +59,7 @@
       label: "05 AI Search",
       x: 1315, y: 472, flip: 1, bx: 1272, by: 298, tail: "64%",
       state: "illuminated", warm: 0.22,
-      line: "Structured Physician schema + hubs teach ChatGPT, Gemini & Google AI Mode to recommend you.",
+      line: "Medical schema + verified hubs teach ChatGPT, Gemini & Google AI Mode to recommend you.",
     },
     {
       label: "06 Google Maps",
@@ -77,7 +77,7 @@
       label: "08 One-Time",
       x: 52, y: 472, flip: -1, bx: 32, by: 298, tail: "32%",
       state: "leading", warm: 0.28,
-      line: "You preview your mobile-friendly website demo first at ₹0 before starting the One-Time Launch Setup.",
+      line: "Preview your mobile-friendly website demo first at ₹0 before starting the One-Time Launch Setup.",
     },
     {
       label: "09 Monthly",
@@ -89,7 +89,7 @@
       label: "10 Start",
       x: 52, y: 472, flip: -1, bx: 32, by: 298, tail: "32%",
       state: "inviting", warm: 0.68,
-      line: "Share 5 quick details on WhatsApp and preview your custom clinic website demo at ₹0!",
+      line: "Send 5 quick details on WhatsApp and preview your custom clinic website demo at ₹0!",
     },
   ];
 
@@ -227,7 +227,6 @@
     }
   }
 
-  // Pointer-tracking pupils (TripVan-inspired character life)
   window.addEventListener("pointermove", (e) => {
     if (motionPaused || typeof gsap === "undefined" || !doctorWrap || !docPupils || isMobileViewport()) return;
     const rect = doctorWrap.getBoundingClientRect();
@@ -342,8 +341,8 @@
       prompt: "“Who is the best neurologist for migraine and epilepsy in Ranchi?”",
       before: {
         score: 34,
-        reply: "Lists 3 established hospital chains and older clinics; your new clinic is omitted from recommendations.",
-        signalNote: "Missing Physician JSON-LD · AI bots or hubs unclaimed",
+        reply: "Lists 3 older hospitals; your new clinic is omitted from AI answers.",
+        signalNote: "Missing medical schema · AI business hubs unclaimed",
         engines: [
           { icon: "ico-chatgpt", name: "ChatGPT", val: "✗ 3 rivals", state: "miss" },
           { icon: "ico-gemini", name: "Gemini", val: "✗ Not listed", state: "miss" },
@@ -354,7 +353,7 @@
       after: {
         score: 94,
         reply: "Recommended: Ranchi Neuro Care (Bariatu Rd) — Dedicated migraine & epilepsy OPD, verified timings, 4.9★ rating & direct booking.",
-        signalNote: "Physician JSON-LD · llms.txt · Bing & OpenAI Hubs verified",
+        signalNote: "Medical schema + Bing & OpenAI Hubs verified",
         engines: [
           { icon: "ico-chatgpt", name: "ChatGPT", val: "✓ Cited #1", state: "ok" },
           { icon: "ico-gemini", name: "Gemini", val: "✓ Top Pick", state: "ok" },
@@ -367,7 +366,7 @@
       prompt: "“Which neurology clinic near Bariatu Ranchi offers EEG & stroke follow-up?”",
       before: {
         score: 31,
-        reply: "Only large multi-specialty hospitals appear; AI cannot confirm your outpatient neurology or stroke follow-up scope.",
+        reply: "Only large hospital chains appear; AI cannot confirm your EEG or stroke care.",
         signalNote: "No dedicated EEG or stroke condition pages indexed",
         engines: [
           { icon: "ico-chatgpt", name: "ChatGPT", val: "✗ Hospitals", state: "miss" },
@@ -392,7 +391,7 @@
       prompt: "“Ranchi Neuro Care OPD timings, doctor credentials & reviews”",
       before: {
         score: 40,
-        reply: "Third-party aggregator snippet with incomplete clinic hours and outdated or missing consultation info.",
+        reply: "Third-party directory snippet with incomplete clinic hours and missing booking links.",
         signalNote: "Conflicting directory hours · Few verified Google reviews",
         engines: [
           { icon: "ico-chatgpt", name: "ChatGPT", val: "⚠ Thin bio", state: "warn" },
@@ -653,7 +652,7 @@
   function forceSlideVisible(slide) {
     if (!slide || typeof gsap === "undefined") return;
     const all = slide.querySelectorAll(
-      ".eyebrow, .hero-title, .h2, .tagline, .lede, .quote-bar, .chip, .card, .p-step, .plat-card, .pill-mini, .story-stage, .ai-theatre, .art-frame, .gate-card, .intake-chip, .commercial, .tile"
+      ".eyebrow, .hero-title, .h2, .tagline, .quote-bar, .chip, .card, .p-step, .plat-card, .story-stage, .ai-theatre, .art-frame, .gate-card, .intake-chip, .commercial, .tile"
     );
     gsap.set(all, { opacity: 1, clearProps: "transform" });
   }
@@ -681,42 +680,47 @@
     if (index === 1) {
       const steps = slide.querySelectorAll(".p-step");
       if (steps.length) {
-        activeLoopTl = gsap.timeline({ repeat: -1, repeatDelay: 0.4 });
+        activeLoopTl = gsap.timeline({ repeat: -1, repeatDelay: 0.35 });
         steps.forEach((step, idx) => {
           activeLoopTl
             .call(() => {
               steps.forEach((s, j) => s.classList.toggle("is-lit", j === idx));
             })
-            .to({}, { duration: 1.05 });
+            .to({}, { duration: 1.0 });
         });
       }
     }
 
-    // Slide 4: Mobile-Friendly Website Booking Cinema (Desktop + Mobile + WhatsApp + Email)
+    // Slide 4: Responsive Mobile-First Booking Cinema (Animated Cursor + Bridge + Toasts)
     if (index === 3) {
+      const cursor = slide.querySelector("#sim-cursor");
       const btn = slide.querySelector("#phone-submit-btn");
       const waPkt = slide.querySelector("#cinema-wa-pkt");
       const mailPkt = slide.querySelector("#cinema-mail-pkt");
-      const badge = slide.querySelector("#inbox-badge");
+      const waCard = slide.querySelector("#wa-toast-card");
+      const mailCard = slide.querySelector("#mail-toast-card");
       const badgeTxt = slide.querySelector("#inbox-badge-txt");
 
       if (btn && waPkt && mailPkt) {
-        activeLoopTl = gsap.timeline({ repeat: -1, repeatDelay: 0.9 });
+        activeLoopTl = gsap.timeline({ repeat: -1, repeatDelay: 0.8 });
         activeLoopTl
           .call(() => {
-            if (badge) badge.setAttribute("fill", "#F5C45E");
-            if (badgeTxt) badgeTxt.textContent = "NEW BOOKING";
+            if (badgeTxt) {
+              badgeTxt.textContent = "NEW BOOKING";
+              badgeTxt.className = "verdict-pill is-warn";
+            }
           })
-          .to(btn, { opacity: 0.65, duration: 0.16, yoyo: true, repeat: 1 })
-          .set(waPkt, { x: 336, y: 122, opacity: 1 })
-          .set(mailPkt, { x: 336, y: 230, opacity: 1 })
-          .to(waPkt, { x: 416, y: 78, duration: 0.95, ease: "power2.inOut" }, "send")
-          .to(mailPkt, { x: 416, y: 260, duration: 0.95, ease: "power2.inOut" }, "send")
+          .fromTo(cursor, { x: 40, y: -60, opacity: 0.4 }, { x: 0, y: 0, opacity: 1, duration: 0.55, ease: "power2.out" })
+          .to(btn, { scale: 0.96, duration: 0.14, yoyo: true, repeat: 1 })
+          .fromTo([waPkt, mailPkt], { scale: 0.88, opacity: 0.5 }, { scale: 1.06, opacity: 1, duration: 0.35, yoyo: true, repeat: 1 })
+          .fromTo([waCard, mailCard], { y: 4 }, { y: 0, duration: 0.35, ease: "back.out(2)" })
           .call(() => {
-            if (badge) badge.setAttribute("fill", "#38E1C6");
-            if (badgeTxt) badgeTxt.textContent = "ALERT SENT ✓";
+            if (badgeTxt) {
+              badgeTxt.textContent = "ALERT SENT ✓";
+              badgeTxt.className = "verdict-pill is-ok";
+            }
           })
-          .to([waPkt, mailPkt], { opacity: 0, duration: 0.3, delay: 0.65 });
+          .to({}, { duration: 1.1 });
       }
     }
 
@@ -736,46 +740,57 @@
       }
     }
 
-    // Slide 6: Google Business Profile Action Cycler + Glass-Wallet Ads Rupee Stream
+    // Slide 6: Google Business Profile Action Cycler + 3-Step Glass-Wallet Ads Pipeline
     if (index === 5) {
-      const r1 = slide.querySelector("#rupee-tok-1");
-      const r2 = slide.querySelector("#rupee-tok-2");
       const gbpPills = slide.querySelectorAll("#gbp-actions .gbp-act-pill");
-      let pillStep = 0;
+      const walletNodes = slide.querySelectorAll("#wallet-flow .wallet-node");
+      let step = 0;
 
-      if (r1 && r2) {
-        activeLoopTl = gsap.timeline({ repeat: -1, repeatDelay: 0.45 });
+      if (gbpPills.length || walletNodes.length) {
+        activeLoopTl = gsap.timeline({ repeat: -1 });
         activeLoopTl
           .call(() => {
             if (gbpPills.length) {
-              gbpPills.forEach((p, idx) => p.classList.toggle("is-pulsing", idx === pillStep % gbpPills.length));
-              pillStep++;
+              gbpPills.forEach((p, idx) => p.classList.toggle("is-pulsing", idx === step % gbpPills.length));
             }
+            if (walletNodes.length) {
+              walletNodes.forEach((n, idx) => n.classList.toggle("is-active-node", idx === step % walletNodes.length));
+            }
+            step++;
           })
-          .fromTo(r1, { x: 134, opacity: 0 }, { x: 142, opacity: 1, duration: 0.55, ease: "power2.out" })
-          .to(r1, { opacity: 0, duration: 0.2 })
-          .fromTo(r2, { x: 296, opacity: 0 }, { x: 304, opacity: 1, duration: 0.55, ease: "power2.out" }, "-=0.2")
-          .to(r2, { opacity: 0, duration: 0.2, delay: 0.35 });
+          .to({}, { duration: 1.05 });
       }
     }
 
-    // Slide 7: Realistic 21x21 QR Laser Scan + Confetti Burst
+    // Slide 7: Real QR Code Laser Scan + 5-Star Pop-In + Route Alternator + Confetti Burst
     if (index === 6) {
-      const beam = slide.querySelector("#qr-scan-beam");
-      const starPkt = slide.querySelector("#qr-star-pkt");
-      const privPkt = slide.querySelector("#qr-priv-pkt");
+      const laser = slide.querySelector("#qr-laser-line");
+      const stars = slide.querySelectorAll(".qr-star");
+      const pubCard = slide.querySelector("#qr-route-public");
+      const privCard = slide.querySelector("#qr-route-private");
       confettiBurst(1430, 500);
-      if (beam && starPkt && privPkt) {
-        activeLoopTl = gsap.timeline({ repeat: -1, repeatDelay: 0.8 });
+
+      if (stars.length) {
+        gsap.fromTo(
+          stars,
+          { scale: 0.4, opacity: 0.3 },
+          { scale: 1, opacity: 1, duration: 0.35, stagger: 0.08, ease: "back.out(2)" }
+        );
+      }
+
+      if (laser && pubCard && privCard) {
+        activeLoopTl = gsap.timeline({ repeat: -1, repeatDelay: 0.3 });
         activeLoopTl
-          .fromTo(beam, { y: 0 }, { y: 116, duration: 0.65, yoyo: true, repeat: 1, ease: "sine.inOut" })
-          .set(starPkt, { x: 242, y: 142, opacity: 1 })
-          .set(privPkt, { x: 242, y: 198, opacity: 0.25 })
-          .to(starPkt, { x: 428, y: 74, duration: 1.0, ease: "power2.inOut" })
-          .to(starPkt, { opacity: 0.2, duration: 0.25 })
-          .set(privPkt, { x: 242, y: 198, opacity: 1 })
-          .to(privPkt, { x: 428, y: 264, duration: 1.0, ease: "power2.inOut" })
-          .to(privPkt, { opacity: 0.2, duration: 0.25, delay: 0.45 });
+          .call(() => {
+            pubCard.classList.add("is-active-route");
+            privCard.classList.remove("is-active-route");
+          })
+          .fromTo(laser, { y: 0 }, { y: 112, duration: 1.1, yoyo: true, repeat: 1, ease: "sine.inOut" })
+          .call(() => {
+            pubCard.classList.remove("is-active-route");
+            privCard.classList.add("is-active-route");
+          })
+          .fromTo(laser, { y: 0 }, { y: 112, duration: 1.1, yoyo: true, repeat: 1, ease: "sine.inOut" });
       }
     }
 
@@ -803,7 +818,7 @@
       if (beacon && highway && gates.length) {
         const mobileMode = isMobileViewport();
         const travelW = Math.max(200, highway.clientWidth - 34);
-        const travelH = Math.max(200, highway.clientHeight - 30);
+        const travelH = Math.max(140, highway.clientHeight - 28);
 
         activeLoopTl = gsap.timeline({ repeat: -1, repeatDelay: 0.8 });
         activeLoopTl.call(() => gates.forEach((g) => g.classList.remove("lit")));
@@ -892,13 +907,16 @@
     waveDoctor();
 
     if (!slide) return;
+    if (isMobileViewport()) {
+      slide.scrollTop = 0;
+    }
     forceSlideVisible(slide);
     if (motionPaused || typeof gsap === "undefined") return;
 
     const eyebrows = slide.querySelectorAll(".eyebrow");
-    const headings = slide.querySelectorAll(".hero-title, .h2, .tagline, .lede, .quote-bar, .patient-flow-wrap");
+    const headings = slide.querySelectorAll(".hero-title, .h2, .tagline, .quote-bar, .patient-flow-wrap");
     const cards = slide.querySelectorAll(
-      ".chip, .card, .plat-card, .pill-mini, .story-stage, .ai-theatre, .art-frame, .gate-card, .intake-chip, .commercial"
+      ".chip, .card, .plat-card, .story-stage, .ai-theatre, .art-frame, .gate-card, .intake-chip, .commercial"
     );
 
     gsap.killTweensOf([...eyebrows, ...headings, ...cards]);

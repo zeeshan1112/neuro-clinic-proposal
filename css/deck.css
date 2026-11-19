@@ -1,8 +1,8 @@
 :root {
   --bg-void: #060A14;
   --bg-navy: #0C1528;
-  --card-bg: rgba(13, 22, 42, 0.88);
-  --card-border: rgba(86, 180, 255, 0.24);
+  --card-bg: rgba(13, 22, 42, 0.90);
+  --card-border: rgba(86, 180, 255, 0.25);
   --rule: rgba(142, 164, 196, 0.24);
   --rule-soft: rgba(142, 164, 196, 0.13);
 
@@ -109,11 +109,6 @@ body {
   object-fit: contain;
   flex-shrink: 0;
   display: block;
-}
-
-.docscale-logo.lg {
-  width: 34px;
-  height: 34px;
 }
 
 .hud-right {
@@ -477,7 +472,7 @@ body {
 }
 
 .hero-title {
-  font-size: 66px !important;
+  font-size: 68px !important;
   font-weight: 700 !important;
   line-height: 0.98 !important;
   letter-spacing: -0.035em !important;
@@ -511,14 +506,6 @@ body {
   margin-top: 10px !important;
 }
 
-.lede {
-  font-size: 20px !important;
-  line-height: 1.4 !important;
-  color: var(--body) !important;
-  margin-top: 10px !important;
-  max-width: 960px;
-}
-
 .mono {
   font-family: var(--mono);
 }
@@ -526,11 +513,11 @@ body {
 /* Context Banner (Website Demo First Notice) */
 .quote-bar {
   margin-top: 14px;
-  padding: 13px 18px;
+  padding: 14px 18px;
   border-left: 3px solid var(--gold);
   background: rgba(245, 196, 94, 0.09);
   border-radius: 0 14px 14px 0;
-  font-size: 16.5px;
+  font-size: 17px;
   line-height: 1.42;
   color: var(--ink);
 }
@@ -552,7 +539,7 @@ body {
 .patient-flow-wrap {
   position: relative;
   margin-top: 14px;
-  padding: 12px 16px;
+  padding: 13px 16px;
   border-radius: 16px;
   background: rgba(9, 16, 32, 0.90);
   border: 1px solid var(--card-border);
@@ -562,7 +549,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 8px;
+  margin-bottom: 9px;
   font-family: var(--mono);
   font-size: 11px;
   font-weight: 700;
@@ -579,10 +566,10 @@ body {
 }
 
 .p-step {
-  background: rgba(6, 10, 20, 0.78);
+  background: rgba(6, 10, 20, 0.80);
   border: 1px solid var(--rule);
   border-radius: 12px;
-  padding: 10px 12px;
+  padding: 11px 12px;
   transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
 }
 
@@ -602,16 +589,16 @@ body {
 
 .p-step strong {
   display: block;
-  font-size: 14.5px;
+  font-size: 15px;
   color: var(--ink);
-  margin-top: 2px;
+  margin-top: 3px;
 }
 
 .p-step span {
   display: block;
-  font-size: 12.5px;
+  font-size: 13px;
   color: var(--body);
-  margin-top: 2px;
+  margin-top: 3px;
   line-height: 1.3;
 }
 
@@ -624,8 +611,8 @@ body {
 }
 
 .plat-ico.lg {
-  width: 28px;
-  height: 28px;
+  width: 30px;
+  height: 30px;
 }
 
 .ico-row {
@@ -640,9 +627,9 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  padding: 5px 10px;
+  padding: 6px 11px;
   border-radius: 999px;
-  background: rgba(6, 10, 20, 0.76);
+  background: rgba(6, 10, 20, 0.78);
   border: 1px solid var(--rule);
   font-family: var(--mono);
   font-size: 10.5px;
@@ -683,7 +670,7 @@ body {
 }
 
 .card h3 {
-  font-size: 21px !important;
+  font-size: 22px !important;
   font-weight: 700 !important;
   color: var(--ink) !important;
   margin-bottom: 5px !important;
@@ -692,8 +679,8 @@ body {
 
 .card p,
 .card li {
-  font-size: 16px !important;
-  line-height: 1.38 !important;
+  font-size: 16.5px !important;
+  line-height: 1.4 !important;
   color: var(--body) !important;
 }
 
@@ -703,7 +690,7 @@ body {
 }
 
 .card li + li {
-  margin-top: 5px;
+  margin-top: 6px;
 }
 
 .commercial {
@@ -753,28 +740,28 @@ body {
 }
 
 .offer-camp {
-  padding: 18px 20px;
+  padding: 18px 22px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
 .offer-camp h3 {
-  font-size: 25px !important;
+  font-size: 26px !important;
   margin-bottom: 3px !important;
 }
 
 .offer-sub {
   font-family: var(--serif);
   font-style: italic;
-  font-size: 17.5px;
+  font-size: 18px;
   color: var(--gold);
   margin-bottom: 6px;
 }
 
 .offer-foot {
-  margin-top: 10px;
-  padding-top: 9px;
+  margin-top: 12px;
+  padding-top: 10px;
   border-top: 1px solid var(--rule);
   font-family: var(--mono);
   font-size: 11.5px;
@@ -787,53 +774,13 @@ body {
   color: var(--gold);
 }
 
-/* TripVan 6-Tile Deliverables Grid (Slide 8) */
-.tiles {
-  display: grid;
-  gap: 13px;
-  margin-top: 14px;
-}
-
-.tiles.c3 {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
-.tile {
-  padding: 15px 17px;
-}
-
-.tile .hd {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.tile .t {
-  font-size: 18.5px;
-  font-weight: 700;
-  color: var(--ink);
-  line-height: 1.2;
-}
-
-.tile .d {
-  font-size: 14.8px !important;
-  line-height: 1.38 !important;
-  color: var(--body) !important;
-  margin-top: 8px;
-}
-
-.tile .d b {
-  color: var(--gold);
-  font-weight: 600;
-}
-
-/* Story Stage Container (SVGs) */
+/* Slide 4: Responsive HTML/CSS + GSAP Interactive Booking Cinema (Never shrinks to tiny SVG on mobile!) */
 .story-stage {
   margin-top: 12px;
   background: rgba(10, 18, 35, 0.90);
   border: 1px solid var(--card-border);
   border-radius: 20px;
-  padding: 13px 18px;
+  padding: 14px 18px;
   backdrop-filter: blur(14px);
   box-shadow: 0 20px 46px rgba(0, 0, 0, 0.48);
 }
@@ -843,7 +790,7 @@ body {
   justify-content: space-between;
   align-items: center;
   gap: 12px;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
   flex-wrap: wrap;
 }
 
@@ -880,10 +827,370 @@ body {
   border-radius: 999px;
 }
 
-.story-svg {
+.booking-cinema-grid {
+  display: grid;
+  grid-template-columns: 1fr 120px 1.15fr;
+  gap: 14px;
+  align-items: center;
+}
+
+.phone-sim-card {
+  position: relative;
+  background: #070D1B;
+  border: 2px solid var(--cyan);
+  border-radius: 22px;
+  padding: 14px 16px;
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.45);
+}
+
+.phone-sim-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.phone-sim-badge {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  font-weight: 700;
+  color: var(--cyan);
+  background: var(--cyan-soft);
+  padding: 3px 9px;
+  border-radius: 999px;
+}
+
+.phone-sim-device {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  color: var(--gold);
+}
+
+.phone-sim-clinic {
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.phone-sim-sub {
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+.sim-slot-list {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin-top: 10px;
+}
+
+.sim-slot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 9px 12px;
+  border-radius: 11px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--rule);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--body);
+  transition: border-color 0.25s ease, background-color 0.25s ease, color 0.25s ease, transform 0.2s ease;
+}
+
+.sim-slot.is-selected {
+  background: rgba(56, 225, 198, 0.16);
+  border-color: var(--cyan);
+  color: var(--ink);
+}
+
+.sim-slot span.slot-time {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--gold);
+}
+
+.sim-book-btn {
+  margin-top: 11px;
   width: 100%;
-  height: auto;
+  padding: 11px 14px;
+  border-radius: 14px;
+  background: var(--cyan);
+  color: var(--bg-void);
+  font-family: var(--mono);
+  font-size: 12.5px;
+  font-weight: 700;
+  text-align: center;
+  letter-spacing: 0.06em;
+  box-shadow: 0 8px 20px rgba(56, 225, 198, 0.28);
+}
+
+.sim-cursor {
+  position: absolute;
+  right: 26px;
+  bottom: 18px;
+  width: 26px;
+  height: 26px;
+  pointer-events: none;
+  z-index: 10;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.5));
+}
+
+.cinema-bridge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+}
+
+.bridge-pill {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 700;
+  padding: 6px 11px;
+  border-radius: 999px;
+  white-space: nowrap;
+  letter-spacing: 0.06em;
+}
+
+.bridge-pill.is-wa {
+  background: #25D366;
+  color: #060A14;
+  box-shadow: 0 0 16px rgba(37, 211, 102, 0.4);
+}
+
+.bridge-pill.is-mail {
+  background: var(--sky);
+  color: #060A14;
+  box-shadow: 0 0 16px rgba(86, 180, 255, 0.4);
+}
+
+.cinema-toasts {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+
+.toast-card {
+  background: #0B1426;
+  border-radius: 16px;
+  padding: 13px 16px;
+  border: 1.5px solid var(--rule);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.toast-card.is-wa {
+  border-color: rgba(37, 211, 102, 0.65);
+}
+
+.toast-card.is-mail {
+  border-color: rgba(86, 180, 255, 0.65);
+}
+
+.toast-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 7px;
+}
+
+.toast-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.toast-bubble {
+  padding: 9px 12px;
+  border-radius: 11px;
+  background: rgba(37, 211, 102, 0.11);
+  border: 1px solid rgba(37, 211, 102, 0.28);
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.35;
+}
+
+.toast-meta {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  color: var(--body);
+  margin-top: 6px;
+  line-height: 1.38;
+}
+
+/* Slide 7: Responsive HTML/CSS + GSAP QR Standee Cinema (Uses actual qr-code-demo.png!) */
+.qr-cinema-grid {
+  display: grid;
+  grid-template-columns: 290px 1fr;
+  gap: 18px;
+  align-items: stretch;
+}
+
+.qr-stand-card {
+  background: linear-gradient(155deg, rgba(16, 29, 54, 0.96), rgba(9, 16, 32, 0.96));
+  border: 2px solid var(--cyan);
+  border-radius: 20px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.qr-stand-brand {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--cyan);
+  text-transform: uppercase;
+}
+
+.qr-box-wrap {
+  position: relative;
+  width: 144px;
+  height: 144px;
+  background: #FFFFFF;
+  border-radius: 14px;
+  padding: 8px;
+  margin: 8px 0;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+}
+
+.qr-box-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
   display: block;
+}
+
+#qr-laser-line {
+  position: absolute;
+  left: 6px;
+  right: 6px;
+  top: 10px;
+  height: 3.5px;
+  border-radius: 2px;
+  background: var(--cyan);
+  box-shadow: 0 0 12px var(--cyan), 0 0 4px #FFFFFF;
+}
+
+.qr-stars-row {
+  display: inline-flex;
+  gap: 4px;
+  color: var(--gold);
+  font-size: 20px;
+  line-height: 1;
+}
+
+.qr-stand-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-top: 3px;
+}
+
+.qr-stand-sub {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+.qr-routes-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.qr-route-card {
+  background: #0B1426;
+  border-radius: 16px;
+  padding: 14px 18px;
+  border: 1.5px solid var(--rule);
+  transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.qr-route-card.is-public {
+  border-color: rgba(56, 225, 198, 0.55);
+}
+
+.qr-route-card.is-private {
+  border-color: rgba(245, 196, 94, 0.55);
+}
+
+.qr-route-card.is-active-route {
+  transform: translateX(4px);
+  box-shadow: 0 10px 28px rgba(56, 225, 198, 0.18);
+}
+
+.qr-route-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.qr-route-head {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+/* TripVan 6-Tile Deliverables Grid (Slide 8) */
+.tiles {
+  display: grid;
+  gap: 13px;
+  margin-top: 14px;
+}
+
+.tiles.c3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.tile {
+  padding: 15px 17px;
+}
+
+.tile .hd {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.tile .t {
+  font-size: 18.5px;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.2;
+}
+
+.tile .d {
+  font-size: 15px !important;
+  line-height: 1.38 !important;
+  color: var(--body) !important;
+  margin-top: 8px;
+}
+
+.tile .d b {
+  color: var(--gold);
+  font-weight: 600;
 }
 
 /* Pills & Chips */
@@ -1247,7 +1554,7 @@ body {
   color: var(--ink);
 }
 
-/* Slide 6: Google Business Profile Mockup + Google Ads Pipeline */
+/* Slide 6: Google Business Profile Mockup + Responsive Glass-Wallet Ads Pipeline */
 .gbp-ads-grid {
   display: grid;
   grid-template-columns: 0.98fr 1.02fr;
@@ -1318,6 +1625,52 @@ body {
   border-color: var(--cyan);
   color: var(--bg-void);
   transform: translateY(-2px);
+}
+
+/* Responsive 3-Step Glass-Wallet Ads Pipeline */
+.wallet-flow {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.wallet-node {
+  background: rgba(6, 10, 20, 0.78);
+  border: 1.5px solid var(--rule);
+  border-radius: 13px;
+  padding: 12px 10px;
+  text-align: center;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.wallet-node.is-active-node {
+  border-color: var(--gold);
+  box-shadow: 0 0 18px rgba(245, 196, 94, 0.25);
+  transform: translateY(-2px);
+}
+
+.wallet-node .wn-tag {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: 0.08em;
+  display: block;
+}
+
+.wallet-node strong {
+  display: block;
+  font-size: 15px;
+  color: var(--ink);
+  margin-top: 4px;
+}
+
+.wallet-node span.wn-sub {
+  display: block;
+  font-size: 12px;
+  color: var(--body);
+  margin-top: 2px;
 }
 
 /* Slide 9: Monthly Retainer (Improvement Data + Website Maintenance & 2 Free Blogs) */
@@ -1730,48 +2083,70 @@ body {
   }
 }
 
-/* Mobile Compatibility (<= 900px) — Desktop (> 900px) stays untouched */
+/* ============================================================================
+   Mobile Compatibility (<= 900px) — Dedicated App-Shell Layout
+   - Top bar docked at 0..48px
+   - Bottom Dr. Mira bar docked at bottom 0..76px
+   - Scrollable slide viewport strictly bounded between top:48px and bottom:76px
+     so chrome NEVER overlaps slide cards or buttons!
+   ============================================================================ */
 @media (max-width: 900px) {
   .hud-top {
-    top: 10px;
-    left: 10px;
-    right: 10px;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 48px;
+    padding: 0 12px;
+    background: rgba(6, 10, 20, 0.96);
+    border-bottom: 1px solid var(--rule-soft);
     font-size: 9.5px;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.07em;
     gap: 8px;
+    z-index: 70;
   }
 
   .hud-brand {
     padding: 4px 10px 4px 6px;
     gap: 7px;
     white-space: nowrap;
-    max-width: 68vw;
+    max-width: 66vw;
     overflow: hidden;
     text-overflow: ellipsis;
+    background: rgba(13, 22, 42, 0.95);
   }
 
   .docscale-logo {
-    width: 22px;
-    height: 22px;
+    width: 20px;
+    height: 20px;
   }
 
   .hud-hint,
   #stage,
   .reveal .controls,
+  .reveal .progress,
   .bignum {
     display: none !important;
   }
 
   .motion-btn {
-    padding: 6px 10px;
+    padding: 5px 10px;
     font-size: 9.5px;
     white-space: nowrap;
   }
 
+  /* Strict middle viewport between top header (48px) and bottom bar (78px) */
   .reveal .slides > section {
-    height: 100dvh !important;
+    position: fixed !important;
+    top: 48px !important;
+    bottom: 78px !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    height: calc(100dvh - 126px) !important;
     overflow-y: auto !important;
+    overflow-x: hidden !important;
     -webkit-overflow-scrolling: touch;
+    touch-action: pan-y;
   }
 
   .sl,
@@ -1779,83 +2154,201 @@ body {
   .sl.zone-l {
     position: relative !important;
     inset: auto !important;
-    padding: 58px 16px 128px !important;
+    padding: 14px 14px 24px !important;
     min-height: 100%;
     justify-content: flex-start;
   }
 
   .sl.zone-r::before,
   .sl.zone-l::before {
-    background: linear-gradient(180deg, rgba(6, 10, 20, 0.92), rgba(6, 10, 20, 0.80)) !important;
+    background: linear-gradient(180deg, rgba(6, 10, 20, 0.92), rgba(6, 10, 20, 0.82)) !important;
   }
 
   .eyebrow {
-    font-size: 11px;
+    font-size: 10.5px;
     letter-spacing: 0.14em;
+    gap: 8px;
   }
 
   .eyebrow::before {
-    width: 18px;
+    width: 16px;
   }
 
   .hero-title {
-    font-size: clamp(2.05rem, 8vw, 2.9rem) !important;
-    margin-top: 8px !important;
+    font-size: clamp(1.95rem, 7.6vw, 2.5rem) !important;
+    margin-top: 6px !important;
   }
 
   .h2 {
-    font-size: clamp(1.6rem, 5.8vw, 2.15rem) !important;
+    font-size: clamp(1.45rem, 5.5vw, 1.95rem) !important;
     line-height: 1.12 !important;
-    margin-top: 8px !important;
+    margin-top: 6px !important;
   }
 
   .tagline {
-    font-size: clamp(1.12rem, 4.2vw, 1.45rem) !important;
+    font-size: clamp(1.05rem, 4vw, 1.3rem) !important;
+    margin-top: 6px !important;
   }
 
-  .lede {
-    font-size: clamp(0.95rem, 3.5vw, 1.08rem) !important;
+  .quote-bar {
+    margin-top: 10px;
+    padding: 10px 13px;
+    font-size: 14px;
+    line-height: 1.36;
+  }
+
+  .chips {
+    margin-top: 10px;
+    gap: 7px;
+  }
+
+  .chip {
+    font-size: 11px;
+    padding: 6px 11px;
+  }
+
+  /* Compact editorial banner height on mobile so cards stay above the fold */
+  .art-frame,
+  .art-frame.compact,
+  .art-frame.wide {
+    aspect-ratio: 16 / 7.5 !important;
+    max-height: 165px;
+    border-radius: 14px;
+  }
+
+  .art-cap {
+    padding: 7px 12px;
+    font-size: 12px;
   }
 
   .cover-split,
   .split-2,
-  .patient-flow-grid,
   .offer-camps,
-  .tiles.c3,
-  .platform-strip,
-  .prompt-tabs,
+  .booking-cinema-grid,
+  .qr-cinema-grid,
   .theatre-body,
-  .engine-grid,
   .gbp-ads-grid,
   .retainer-split,
-  .care-pill-grid,
   .cta-split {
     grid-template-columns: 1fr !important;
     gap: 10px !important;
   }
 
+  /* On Slide 10 mobile, put the Free Website Demo CTA buttons FIRST so doctor taps immediately */
+  .cta-split > div:last-child {
+    order: -1;
+  }
+
+  /* 2-column compact grids on mobile for fast scanning */
+  .patient-flow-grid,
+  .platform-strip,
+  .engine-grid,
   .phase-tabs,
-  .kpi-4 {
+  .kpi-4,
+  .care-pill-grid,
+  .tiles.c3 {
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
     gap: 8px !important;
+  }
+
+  .prompt-tabs,
+  .wallet-flow {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 6px !important;
+  }
+
+  .prompt-tab {
+    font-size: 10px;
+    padding: 6px 7px;
+    text-align: center;
+  }
+
+  .p-step {
+    padding: 9px 10px;
+  }
+
+  .p-step strong {
+    font-size: 13.5px;
+  }
+
+  .p-step span {
+    font-size: 11.5px;
+  }
+
+  .card {
+    padding: 13px 15px;
+    border-radius: 15px;
+  }
+
+  .card h3,
+  .offer-camp h3 {
+    font-size: 18.5px !important;
+  }
+
+  .card p,
+  .card li {
+    font-size: 14px !important;
+    line-height: 1.35 !important;
+  }
+
+  .tile {
+    padding: 11px 12px;
+  }
+
+  .tile .t {
+    font-size: 14.5px;
+  }
+
+  .tile .d {
+    font-size: 12.2px !important;
+    line-height: 1.32 !important;
+    margin-top: 5px;
+  }
+
+  /* Slide 4 mobile connector bridge becomes a sleek horizontal status row */
+  .cinema-bridge {
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+    padding: 2px 0;
+  }
+
+  /* Slide 7 mobile QR standee becomes a horizontal compact card */
+  .qr-stand-card {
+    flex-direction: row;
+    text-align: left;
+    gap: 14px;
+    padding: 12px 14px;
+  }
+
+  .qr-box-wrap {
+    width: 96px;
+    height: 96px;
+    margin: 0;
+    flex-shrink: 0;
+  }
+
+  .qr-route-head {
+    font-size: 15px;
   }
 
   .commercial {
     flex-direction: column;
     align-items: flex-start;
-    gap: 6px;
-    padding: 13px 15px;
+    gap: 4px;
+    padding: 10px 13px;
+    margin-top: 10px;
   }
 
   .commercial .v {
-    font-size: 15.5px;
+    font-size: 14.5px;
   }
 
   /* Slide 10 mobile vertical left-rail alongside stacked cards */
   .launch-track-wrap {
-    margin-top: 10px;
+    margin-top: 8px;
     padding-top: 0;
-    padding-left: 44px;
+    padding-left: 38px;
   }
 
   .launch-highway {
@@ -1863,7 +2356,7 @@ body {
     bottom: 8px;
     left: 0;
     right: auto;
-    width: 34px;
+    width: 28px;
     height: auto;
     border-bottom: none;
     border-right: 2px dashed rgba(142, 164, 196, 0.35);
@@ -1871,18 +2364,30 @@ body {
 
   #launch-beacon {
     top: 0;
-    left: 20px;
-    width: 28px;
-    height: 28px;
+    left: 14px;
+    width: 26px;
+    height: 26px;
   }
 
   .gate-row {
-    grid-template-columns: 1fr !important;
-    gap: 9px;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 8px;
+  }
+
+  .gate-card {
+    padding: 9px 11px;
+  }
+
+  .gate-card h3 {
+    font-size: 14px !important;
+  }
+
+  .gate-card p {
+    font-size: 11.8px !important;
   }
 
   .cta-btn {
-    padding: 12px 14px;
+    padding: 11px 13px;
     font-size: 14px;
     gap: 8px;
   }
@@ -1892,33 +2397,37 @@ body {
     white-space: nowrap;
   }
 
+  /* Docked Bottom Bar (78px height — never overlaps slide viewport!) */
   #mobile-bar {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     position: fixed;
-    left: 10px;
-    right: 10px;
-    bottom: 8px;
-    z-index: 60;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 78px;
+    padding: 6px 12px;
+    background: rgba(8, 14, 28, 0.98);
+    border-top: 1.5px solid rgba(56, 225, 198, 0.42);
+    z-index: 70;
+    box-shadow: 0 -10px 28px rgba(0, 0, 0, 0.55);
   }
 
   .mobile-doc-card {
     display: flex;
     align-items: center;
-    gap: 10px;
-    background: rgba(11, 20, 39, 0.96);
-    border: 1.5px solid rgba(56, 225, 198, 0.50);
+    gap: 9px;
     color: var(--ink);
-    border-radius: 16px;
-    padding: 8px 12px 8px 8px;
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.55);
     cursor: pointer;
   }
 
   #mobile-doc-svg {
+    width: 42px;
+    height: 46px;
     flex-shrink: 0;
-    margin-top: -14px;
+    margin-top: -4px;
     overflow: visible;
-    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.4));
   }
 
   .mobile-bubble-wrap {
@@ -1928,18 +2437,21 @@ body {
 
   .mobile-who {
     font-family: var(--mono);
-    font-size: 9.5px;
+    font-size: 9px;
     font-weight: 700;
     letter-spacing: 0.1em;
     color: var(--cyan);
     display: block;
-    margin-bottom: 2px;
   }
 
   .mobile-bubble {
-    font-size: 12px;
-    line-height: 1.28;
+    font-size: 11.5px;
+    line-height: 1.25;
     color: var(--ink);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
   .mobile-nav-group {
@@ -1952,12 +2464,16 @@ body {
   .mobile-nav-btn {
     appearance: none;
     border: 1px solid var(--card-border);
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(56, 225, 198, 0.14);
     color: var(--ink);
     font-family: var(--mono);
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 700;
-    padding: 4px 8px;
+    width: 32px;
+    height: 32px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     border-radius: 8px;
     cursor: pointer;
   }
@@ -1965,6 +2481,7 @@ body {
   .mobile-count {
     font-family: var(--mono);
     font-size: 10.5px;
+    font-weight: 700;
     color: var(--gold);
   }
 
@@ -1972,7 +2489,7 @@ body {
     display: flex;
     justify-content: center;
     gap: 6px;
-    margin-top: 5px;
+    margin-top: 4px;
   }
 
   .mobile-dots button {
