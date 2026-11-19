@@ -15,38 +15,210 @@
   <link rel="stylesheet" href="css/deck.css" />
 </head>
 <body>
-  <!-- Pixelated Topographical Bayer-Dithered WebGL Backdrop -->
+  <!-- Original 8x8 Bayer-Dithered Neural Wave WebGL Backdrop -->
   <canvas id="bayer-bg" aria-hidden="true"></canvas>
   <div id="vignette" aria-hidden="true"></div>
 
-  <!-- Top HUD -->
+  <!-- Top HUD with Custom DocScale Vector Emblem (Zero external links) -->
   <header class="hud-top">
     <div class="hud-brand">
-      <img src="assets/docscale-logo.png" alt="DocScale Logo" width="24" height="24" />
+      <svg class="docscale-mark" viewBox="0 0 32 32" aria-hidden="true">
+        <circle cx="16" cy="16" r="15" fill="#0C1528" stroke="#38E1C6" stroke-width="1.6" />
+        <rect x="8" y="18" width="4" height="7" rx="1" fill="#56B4FF" />
+        <rect x="14" y="14" width="4" height="11" rx="1" fill="#38E1C6" />
+        <rect x="20" y="9" width="4" height="16" rx="1" fill="#F5C45E" />
+        <path d="M9 12 h3 v-3 h2 v3 h3 v2 h-3 v3 h-2 v-3 h-3 z" fill="#F4F8FF" />
+      </svg>
       <span><strong data-bind="partnerBrand">DocScale</strong> · <span data-bind="clinicName">Ranchi Neuro Care</span></span>
     </div>
     <div class="hud-right">
-      <span class="hud-hint">← → navigate · ?print-pdf to export</span>
+      <span class="hud-hint">← → navigate · click Dr. Mira for tips · ?print-pdf</span>
       <button type="button" id="motion-toggle" class="motion-btn">Pause Motion</button>
     </div>
   </header>
 
-  <!-- Desktop Bottom Chapter Journey Rail -->
-  <nav id="rail" aria-label="Slide chapters">
-    <div class="ln"></div>
-    <div id="rail-token" aria-hidden="true">
-      <svg viewBox="0 0 24 24" width="24" height="24">
-        <circle cx="12" cy="12" r="10" fill="#1363B8" stroke="#FCFEFF" stroke-width="2.5" />
-        <circle cx="12" cy="12" r="4" fill="#EAB338" />
-      </svg>
+  <!-- Scaled 1600x900 Persistent Stage: Evolving Dr. Mira + Speech Bubble + Journey Rail -->
+  <div id="stage">
+    <div id="bubble" title="Click for another clinic tip">
+      <div class="bubble-who">
+        <span>DR. MIRA · CLINIC GUIDE</span>
+        <span class="bubble-tip-tag">CLICK TIP ↻</span>
+      </div>
+      <span id="bubble-text">Let’s map how Ranchi patients discover and book your neurology clinic from Day 1.</span>
     </div>
-  </nav>
 
-  <!-- Mobile Bottom Chapter & Navigation Bar -->
-  <div id="mobile-bar" aria-label="Mobile slide navigation">
-    <div class="mobile-bar-top">
-      <span class="mobile-chapter" id="mobile-chapter">01 · Cover</span>
-      <div class="mobile-nav-group">
+    <div id="doctor-wrap" title="Click Dr. Mira for an insight">
+      <div id="doctor-flip">
+        <svg id="doctor-svg" viewBox="0 0 240 310" xmlns="http://www.w3.org/2000/svg">
+          <!-- Floor Shadow -->
+          <ellipse cx="120" cy="294" rx="58" ry="9" fill="rgba(0,0,0,0.55)" />
+
+          <!-- State 4 Prop: Illuminated Neural Halo (Slides 5-6) -->
+          <g id="prop-halo" opacity="0">
+            <circle cx="120" cy="78" r="66" fill="none" stroke="#38E1C6" stroke-width="1.5" stroke-dasharray="6 5" />
+            <circle cx="120" cy="78" r="52" fill="rgba(56,225,198,0.08)" stroke="#F5C45E" stroke-width="1.4" />
+            <circle cx="62" cy="48" r="5" fill="#38E1C6" />
+            <circle cx="178" cy="48" r="5" fill="#F5C45E" />
+            <circle cx="120" cy="14" r="5" fill="#56B4FF" />
+          </g>
+
+          <!-- State 5 Prop: 5 Gold Stars (Slide 7) -->
+          <g id="prop-stars" opacity="0" fill="#F5C45E" stroke="#060A14" stroke-width="1.4">
+            <polygon points="56,36 59,43 66,44 61,48 62,55 56,51 50,55 51,48 46,44 53,43" />
+            <polygon points="120,16 124,25 133,26 126,32 128,41 120,36 112,41 114,32 107,26 116,25" />
+            <polygon points="184,36 187,43 194,44 189,48 190,55 184,51 178,55 179,48 174,44 181,43" />
+          </g>
+
+          <g id="doc-body">
+            <!-- Scrub Trousers & Shoes -->
+            <rect x="88" y="232" width="24" height="52" rx="10" fill="#0F3A47" />
+            <rect x="128" y="232" width="24" height="52" rx="10" fill="#0F3A47" />
+            <rect x="82" y="276" width="34" height="12" rx="6" fill="#1C2942" />
+            <rect x="124" y="276" width="34" height="12" rx="6" fill="#1C2942" />
+
+            <!-- Teal Scrub Top -->
+            <path d="M84 134 h72 v104 h-72 z" fill="#135A68" />
+
+            <!-- Crisp Tailored White Lab Coat -->
+            <path d="M74 132 C74 122, 166 122, 166 132 L176 244 L132 244 L126 170 L114 170 L108 244 L64 244 Z" fill="#F4F8FF" stroke="#B7C9E2" stroke-width="2" />
+            <!-- Coat Lapels -->
+            <path d="M98 130 L120 176 L104 176 Z" fill="#DCE6F5" />
+            <path d="M142 130 L120 176 L136 176 Z" fill="#DCE6F5" />
+            <!-- Coat Pocket + Pen -->
+            <rect x="136" y="188" width="24" height="22" rx="4" fill="#E9F0FA" stroke="#B7C9E2" stroke-width="1.4" />
+            <rect x="144" y="178" width="4" height="12" rx="2" fill="#38E1C6" />
+
+            <!-- Stethoscope Draped Around Neck -->
+            <path d="M96 126 C92 158, 96 184, 120 184 C144 184, 148 158, 144 126" fill="none" stroke="#1E2F4D" stroke-width="5.5" stroke-linecap="round" />
+            <path d="M120 184 L120 202" stroke="#1E2F4D" stroke-width="4.5" stroke-linecap="round" />
+            <circle cx="120" cy="208" r="8" fill="#38E1C6" stroke="#0C1528" stroke-width="2.5" />
+
+            <!-- Left Waving / Expressive Arm -->
+            <g id="doc-arm-wave" transform="translate(52, 134)">
+              <path d="M24 8 Q2 24 0 56" stroke="#F4F8FF" stroke-width="18" stroke-linecap="round" fill="none" />
+              <path d="M24 8 Q2 24 0 56" stroke="#B7C9E2" stroke-width="2" fill="none" />
+              <circle cx="0" cy="58" r="10" fill="#D89B74" />
+            </g>
+
+            <!-- Right Prop Arm + Swappable Story Props -->
+            <g transform="translate(160, 136)">
+              <path d="M4 6 Q24 26 16 56" stroke="#F4F8FF" stroke-width="18" stroke-linecap="round" fill="none" />
+              <circle cx="14" cy="58" r="10" fill="#D89B74" />
+
+              <!-- Prop 1: Blueprint Clipboard (Slides 1-2) -->
+              <g id="prop-clipboard" transform="translate(6, 20)" opacity="1">
+                <rect x="0" y="0" width="34" height="44" rx="5" fill="#0C1528" stroke="#38E1C6" stroke-width="2" />
+                <rect x="10" y="-4" width="14" height="7" rx="2" fill="#56B4FF" />
+                <line x1="7" y1="14" x2="27" y2="14" stroke="#38E1C6" stroke-width="2.2" />
+                <line x1="7" y1="22" x2="24" y2="22" stroke="#56B4FF" stroke-width="2.2" />
+                <line x1="7" y1="30" x2="20" y2="30" stroke="#F5C45E" stroke-width="2.2" />
+              </g>
+
+              <!-- Prop 2: Search Scanner Lens (Slide 3) -->
+              <g id="prop-lens" transform="translate(4, 14)" opacity="0">
+                <circle cx="16" cy="16" r="15" fill="rgba(86,180,255,0.22)" stroke="#56B4FF" stroke-width="3" />
+                <line x1="27" y1="27" x2="38" y2="38" stroke="#F5C45E" stroke-width="4" stroke-linecap="round" />
+              </g>
+
+              <!-- Prop 3: Connected Smartphone (Slide 4) -->
+              <g id="prop-phone" transform="translate(6, 18)" opacity="0">
+                <rect x="0" y="0" width="26" height="42" rx="5" fill="#060A14" stroke="#38E1C6" stroke-width="2" />
+                <circle cx="13" cy="18" r="7" fill="#38E1C6" />
+                <path d="M9.5 18 l2.5 2.5 l4.5 -5" fill="none" stroke="#060A14" stroke-width="2" stroke-linecap="round" />
+              </g>
+
+              <!-- Prop 4: Executive Beacon Badge (Slides 8-10) -->
+              <g id="prop-badge" transform="translate(4, 24)" opacity="0">
+                <circle cx="16" cy="16" r="16" fill="#0C1528" stroke="#F5C45E" stroke-width="2.2" />
+                <circle cx="16" cy="16" r="7" fill="#38E1C6" />
+              </g>
+            </g>
+
+            <!-- Neck & Head -->
+            <g id="doc-head">
+              <rect x="109" y="110" width="22" height="18" rx="6" fill="#C78A63" />
+              <!-- Hair Bun Behind -->
+              <circle cx="120" cy="40" r="22" fill="#131A2D" />
+              <circle cx="120" cy="78" r="37" fill="#131A2D" />
+              <!-- Face -->
+              <circle cx="120" cy="80" r="34" fill="#D89B74" />
+              <!-- Side-Swept Hair Bangs -->
+              <path d="M86 76 C88 46, 152 46, 154 76 C144 60, 126 56, 114 60 C102 64, 92 70, 86 76 Z" fill="#131A2D" />
+
+              <!-- Glasses + Eyes (Only pupils blink; frames stay sharp) -->
+              <g id="doc-eyes">
+                <rect x="94" y="70" width="22" height="16" rx="5" fill="#F4F8FF" stroke="#0C1528" stroke-width="2.5" />
+                <rect x="124" y="70" width="22" height="16" rx="5" fill="#F4F8FF" stroke="#0C1528" stroke-width="2.5" />
+                <line x1="116" y1="77" x2="124" y2="77" stroke="#0C1528" stroke-width="2.5" />
+                <g id="doc-pupils">
+                  <circle cx="105" cy="78" r="3.8" fill="#0C1528" />
+                  <circle cx="135" cy="78" r="3.8" fill="#0C1528" />
+                </g>
+              </g>
+
+              <!-- Expressions -->
+              <g id="doc-face-calm">
+                <path d="M97 65 q8 -3 16 0" stroke="#131A2D" stroke-width="2.2" fill="none" stroke-linecap="round" />
+                <path d="M127 65 q8 -3 16 0" stroke="#131A2D" stroke-width="2.2" fill="none" stroke-linecap="round" />
+                <path d="M110 97 q10 7 20 0" stroke="#6B3726" stroke-width="2.6" fill="none" stroke-linecap="round" />
+              </g>
+              <g id="doc-face-concerned" opacity="0">
+                <path d="M97 67 q8 -5 16 -1" stroke="#131A2D" stroke-width="2.4" fill="none" stroke-linecap="round" />
+                <path d="M127 66 q8 -4 16 1" stroke="#131A2D" stroke-width="2.4" fill="none" stroke-linecap="round" />
+                <path d="M111 101 q9 -5 18 0" stroke="#6B3726" stroke-width="2.5" fill="none" stroke-linecap="round" />
+              </g>
+              <g id="doc-face-celebrating" opacity="0">
+                <path d="M97 63 q8 -5 16 0" stroke="#131A2D" stroke-width="2.2" fill="none" stroke-linecap="round" />
+                <path d="M127 63 q8 -5 16 0" stroke="#131A2D" stroke-width="2.2" fill="none" stroke-linecap="round" />
+                <path d="M108 95 q12 11 24 0 Z" fill="#F4F8FF" stroke="#6B3726" stroke-width="2" />
+              </g>
+            </g>
+          </g>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Bottom Journey Rail -->
+    <nav id="rail" aria-label="Slide chapters">
+      <div class="ln"></div>
+      <div id="rail-token" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <circle cx="12" cy="12" r="10" fill="#38E1C6" stroke="#060A14" stroke-width="2.5" />
+          <circle cx="12" cy="12" r="4" fill="#F5C45E" />
+        </svg>
+      </div>
+    </nav>
+  </div>
+
+  <!-- Mobile Bottom Bar with Animated Mini Dr. Mira -->
+  <div id="mobile-bar" aria-label="Mobile navigation">
+    <div class="mobile-doc-card" id="mobile-doc-btn" title="Tap Dr. Mira for a clinic tip">
+      <svg id="mobile-doc-svg" viewBox="0 0 80 88" width="54" height="60" aria-hidden="true">
+        <rect x="16" y="54" width="48" height="32" rx="12" fill="#F4F8FF" stroke="#B7C9E2" stroke-width="1.5" />
+        <path d="M28 54 L40 72 L52 54 Z" fill="#135A68" />
+        <g id="m-doc-arm" transform="translate(6, 52)">
+          <path d="M12 10 Q2 0 4 -10" stroke="#F4F8FF" stroke-width="7" stroke-linecap="round" fill="none" />
+          <circle cx="4" cy="-12" r="4.5" fill="#D89B74" />
+        </g>
+        <circle cx="40" cy="14" r="11" fill="#131A2D" />
+        <circle cx="40" cy="34" r="18" fill="#131A2D" />
+        <circle cx="40" cy="36" r="16.5" fill="#D89B74" />
+        <path d="M24 34 C25 20, 55 20, 56 34 C50 26, 30 26, 24 34 Z" fill="#131A2D" />
+        <g id="m-doc-eyes">
+          <rect x="27" y="31" width="11" height="8" rx="2.5" fill="#F4F8FF" stroke="#0C1528" stroke-width="1.5" />
+          <rect x="42" y="31" width="11" height="8" rx="2.5" fill="#F4F8FF" stroke="#0C1528" stroke-width="1.5" />
+          <g id="m-doc-pupils">
+            <circle cx="32.5" cy="35" r="2" fill="#0C1528" />
+            <circle cx="47.5" cy="35" r="2" fill="#0C1528" />
+          </g>
+        </g>
+        <path d="M35 44 q5 4 10 0" stroke="#6B3726" stroke-width="1.8" fill="none" stroke-linecap="round" />
+      </svg>
+      <div class="mobile-bubble-wrap">
+        <span class="mobile-who">DR. MIRA · TAP FOR TIP</span>
+        <div class="mobile-bubble" id="mobile-bubble-text">Let’s map how Ranchi patients discover and book your clinic.</div>
+      </div>
+      <div class="mobile-nav-group" id="mobile-nav-stop">
         <button type="button" class="mobile-nav-btn" id="mobile-prev" aria-label="Previous slide">←</button>
         <span class="mobile-count" id="mobile-count">01/10</span>
         <button type="button" class="mobile-nav-btn" id="mobile-next" aria-label="Next slide">→</button>
@@ -58,413 +230,449 @@
   <div class="reveal">
     <div class="slides">
 
-      <!-- SLIDE 1: COVER -->
-      <section class="s1">
-        <div class="sl scrim">
-          <div class="split-hero">
+      <!-- SLIDE 1: COVER (Dr. Mira: right lane, planning) -->
+      <section>
+        <div class="sl zone-r">
+          <div class="cover-split">
             <div>
-              <div class="eyebrow" data-bind="proposalBadge">Sample Clinic Proposal · Ranchi</div>
+              <div class="eyebrow" data-bind="proposalBadge">DocScale · Sample Clinic Launch Blueprint</div>
               <h1 class="hero-title" data-bind="clinicName">Ranchi Neuro Care</h1>
-              <p class="tagline">
-                Turning local &amp; AI searches into <em>booked OPD appointments.</em>
-              </p>
+              <p class="tagline">From first symptom search to <em>booked OPD.</em></p>
               <p class="lede">
                 A complete Day-1 digital patient engine—fast clinic website, WhatsApp &amp; email booking,
-                Google Maps, AI visibility (SEO · AEO · GEO), and smart review growth.
+                AI search visibility, and smart Google review growth.
               </p>
               <p class="mono" style="font-size: 13px; color: var(--muted); margin-top: 10px;" data-bind="clinicMeta">
-                Dr. Ananya Sinha, MD, DM (Neurology) · Bariatu Road, Ranchi
+                Sample Neurology Clinic · Bariatu Road, Ranchi
               </p>
               <div class="chips">
-                <div class="chip"><b>4 AI Engines</b> Monitored</div>
-                <div class="chip"><b>48h</b> Free Custom Demo</div>
-                <div class="chip"><b>₹0</b> Upfront Risk</div>
-                <div class="chip"><b>100%</b> Transparent Ads</div>
+                <div class="chip"><b>4</b> AI Engines Monitored</div>
+                <div class="chip"><b>48h</b> Free Demo</div>
+                <div class="chip"><b>₹0</b> Upfront</div>
               </div>
             </div>
 
-            <div class="illus-frame">
+            <div class="art-frame">
               <img
-                src="assets/illus-neuro-clinic.jpg"
-                alt="Modern neurology clinic consultation doorway and mobile appointment confirmation"
+                src="assets/art-neuro-hero.jpg"
+                alt="Midnight neurology clinic entrance with warm champagne glow and neural contour sky"
                 width="1200"
                 height="900"
               />
-              <div class="frame-cap">
-                <span>Digital Launch Blueprint</span>
-                <span class="cap-tag">Sample Clinic</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- SLIDE 2: CLEAR PARTNERSHIP SCOPE -->
-      <section>
-        <div class="sl scrim">
-          <div class="eyebrow">02 · Partnership Scope</div>
-          <h2 class="h2">You lead clinical care. We run the <em>digital engine.</em></h2>
-          <p class="lede">
-            Clear scope from Day 1—we operate purely as your digital patient-discovery partner, with zero operational burden on your clinic staff.
-          </p>
-
-          <div class="grid-2">
-            <div class="card">
-              <span class="card-num">Your Focus · Clinic Operations</span>
-              <h3>Clinical Care &amp; In-Clinic Setup</h3>
-              <ul>
-                <li>Physical clinic space, interiors, and diagnostic equipment</li>
-                <li>Medical registrations, licensing, and clinical compliance</li>
-                <li>Front-desk staffing, OPD consultations, and patient care</li>
-              </ul>
-            </div>
-
-            <div class="card card-accent">
-              <span class="card-num">Our Scope · Digital Patient Engine</span>
-              <h3>Online Visibility &amp; Bookings</h3>
-              <ul>
-                <li>Fast clinic website with WhatsApp &amp; instant email booking alerts</li>
-                <li>Google Business Profile + SEO, AEO &amp; GEO for AI recommendations</li>
-                <li>Reception QR review booster &amp; optional transparent Google Ads</li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="proof-strip">
-            <div class="proof-item"><span class="proof-dot"></span><span>Proven Neurology Clinic Track Record</span></div>
-            <div class="proof-item"><span class="proof-dot"></span><span>Built for Mobile-First Ranchi Patients</span></div>
-            <div class="proof-item"><span class="proof-dot"></span><span>Zero Extra Burden on Reception</span></div>
-          </div>
-        </div>
-      </section>
-
-      <!-- SLIDE 3: HOW RANCHI PATIENTS FIND A NEUROLOGIST TODAY -->
-      <section>
-        <div class="sl scrim">
-          <div class="eyebrow">03 · The Patient Journey</div>
-          <h2 class="h2">Patients check Google &amp; AI <em>before they ever call.</em></h2>
-          <p class="lede">
-            Word-of-mouth takes months to compound. From Day 1, patients search on their phone—and pick the clinic that shows up clearly and books fast.
-          </p>
-
-          <div class="split-visual">
-            <div class="compact-grid">
-              <div class="card">
-                <span class="card-num">01 · Local Maps</span>
-                <h3>“Neurologist near me”</h3>
-                <p>Patients compare nearby Ranchi clinics by proximity, hours, and photos.</p>
-              </div>
-              <div class="card">
-                <span class="card-num">02 · AI Chats</span>
-                <h3>ChatGPT &amp; Gemini</h3>
-                <p>Families ask AI tools who treats migraines, seizures, or stroke recovery locally.</p>
-              </div>
-              <div class="card">
-                <span class="card-num">03 · Instant Trust</span>
-                <h3>First 30+ Reviews</h3>
-                <p>Recent 5-star Google reviews and clean credentials decide who gets the call.</p>
-              </div>
-              <div class="card">
-                <span class="card-num">04 · Fast Action</span>
-                <h3>1-Tap Booking</h3>
-                <p>Slow sites or missed calls push urgent patients to the very next listing.</p>
-              </div>
-            </div>
-
-            <div class="story-stage">
-              <div class="story-caption" id="discovery-caption">1. Without a site, patient queries deflect to rivals</div>
-              <svg id="discovery-story-svg" class="story-svg" viewBox="0 0 520 310" xmlns="http://www.w3.org/2000/svg">
-                <!-- Patient Node (Left) -->
-                <rect x="12" y="102" width="134" height="84" rx="14" fill="#FCFEFF" stroke="#1363B8" stroke-width="2" />
-                <circle cx="34" cy="130" r="11" fill="#1363B8" opacity="0.14" />
-                <circle cx="34" cy="130" r="5.5" fill="#1363B8" />
-                <text x="51" y="134" fill="#0D2239" font-family="Space Grotesk, sans-serif" font-size="12" font-weight="700">Ranchi Patient</text>
-                <text x="24" y="158" fill="#4D6277" font-family="Space Mono, monospace" font-size="10.2">“Migraine doctor</text>
-                <text x="24" y="172" fill="#4D6277" font-family="Space Mono, monospace" font-size="10.2">near Bariatu?”</text>
-
-                <!-- Straight Success Track & Deflect Track -->
-                <path d="M146 144 L368 144" stroke="#C5D3E0" stroke-width="2.5" stroke-dasharray="6 6" fill="none" />
-                <path d="M242 144 Q282 195 368 232" stroke="#DCE6EF" stroke-width="2" stroke-dasharray="5 5" fill="none" />
-
-                <!-- Barrier Gate (Center) -->
-                <g id="discovery-barrier">
-                  <rect id="barrier-box" x="236" y="88" width="46" height="112" rx="10" fill="#0D2239" stroke="#C23B3B" stroke-width="2.5" />
-                  <text id="barrier-txt" x="259" y="144" text-anchor="middle" fill="#FCFEFF" font-family="Space Mono, monospace" font-size="9.5" font-weight="700" transform="rotate(-90 259 144)">NO SITE / GAP</text>
-                </g>
-
-                <!-- Launch Stack Pill (Above Gate) -->
-                <g id="launch-stack-pill">
-                  <rect x="184" y="24" width="150" height="36" rx="18" fill="#FCFEFF" stroke="#C5D3E0" stroke-width="2" />
-                  <text x="259" y="46" text-anchor="middle" fill="#4D6277" font-family="Space Mono, monospace" font-size="10.5" font-weight="700">SITE + GBP + SCHEMA</text>
-                </g>
-
-                <!-- Moving Patient Query Packet -->
-                <g id="query-packet" transform="translate(152, 128)">
-                  <rect x="0" y="0" width="70" height="32" rx="8" fill="#1363B8" stroke="#0D2239" stroke-width="2" />
-                  <text x="35" y="20" text-anchor="middle" fill="#FCFEFF" font-family="Space Mono, monospace" font-size="10" font-weight="700">QUERY</text>
-                </g>
-
-                <!-- Destination Top: Booked OPD -->
-                <g id="clinic-dest">
-                  <rect id="clinic-dest-box" x="368" y="102" width="136" height="84" rx="14" fill="#FCFEFF" stroke="#186A4D" stroke-width="2" />
-                  <text x="436" y="136" text-anchor="middle" fill="#0D2239" font-family="Space Grotesk, sans-serif" font-size="14" font-weight="700">Your Clinic OPD</text>
-                  <text id="clinic-dest-sub" x="436" y="158" text-anchor="middle" fill="#186A4D" font-family="Space Mono, monospace" font-size="11" font-weight="700">BOOKED ✓</text>
-                </g>
-
-                <!-- Destination Bottom: Other Clinics -->
-                <g id="rival-dest">
-                  <rect x="368" y="210" width="136" height="58" rx="12" fill="#F4F7FA" stroke="#C5D3E0" stroke-width="1.5" />
-                  <text x="436" y="236" text-anchor="middle" fill="#4D6277" font-family="Space Grotesk, sans-serif" font-size="13" font-weight="600">Other Clinics</text>
-                  <text x="436" y="253" text-anchor="middle" fill="#C23B3B" font-family="Space Mono, monospace" font-size="10">Patient lost</text>
-                </g>
+              <svg class="art-overlay-wave" viewBox="0 0 400 54" preserveAspectRatio="none" aria-hidden="true">
+                <path
+                  id="cover-eeg-path"
+                  d="M0 32 L70 32 L90 18 L108 44 L126 10 L146 40 L166 28 L230 28 L250 14 L268 42 L288 18 L308 32 L400 32"
+                  fill="none"
+                  stroke="#38E1C6"
+                  stroke-width="2.4"
+                  stroke-linecap="round"
+                  stroke-dasharray="480"
+                  stroke-dashoffset="0"
+                />
               </svg>
+              <div class="art-cap">
+                <span>Neurology Digital Patient Engine</span>
+                <span class="tag">Sample Clinic</span>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 4: CLINIC WEBSITE + WHATSAPP + EMAIL BOOKING -->
+      <!-- SLIDE 2: VISUAL PARTNERSHIP ORBIT (Dr. Mira: left lane, planning) -->
       <section>
-        <div class="sl scrim">
+        <div class="sl zone-l">
+          <div class="eyebrow">02 · Partnership Clarity</div>
+          <h2 class="h2">You treat patients. We power <em>discovery.</em></h2>
+
+          <div class="story-stage">
+            <div class="story-head">
+              <span class="story-caption">Clear boundary: zero clinic-ops interference, pure digital patient flow</span>
+              <span class="story-tag">DocScale Digital Engine</span>
+            </div>
+            <svg id="scope-orbit-svg" class="story-svg" viewBox="0 0 880 355" xmlns="http://www.w3.org/2000/svg">
+              <!-- Left Hemisphere: Doctor & Clinical Care -->
+              <rect x="20" y="34" width="320" height="286" rx="22" fill="rgba(245,196,94,0.06)" stroke="#F5C45E" stroke-opacity="0.45" stroke-width="1.8" />
+              <text x="44" y="68" fill="#F5C45E" font-family="Space Mono, monospace" font-size="12" font-weight="700">YOUR CLINIC · CLINICAL CARE</text>
+              <text x="44" y="94" fill="#F4F8FF" font-family="Space Grotesk, sans-serif" font-size="22" font-weight="700">In-Clinic Excellence</text>
+
+              <g transform="translate(44, 118)">
+                <rect x="0" y="0" width="272" height="50" rx="12" fill="#0C1528" stroke="rgba(245,196,94,0.35)" />
+                <text x="16" y="30" fill="#F4F8FF" font-family="Space Grotesk, sans-serif" font-size="14.5" font-weight="600">OPD Consultations &amp; Diagnostics</text>
+              </g>
+              <g transform="translate(44, 180)">
+                <rect x="0" y="0" width="272" height="50" rx="12" fill="#0C1528" stroke="rgba(245,196,94,0.35)" />
+                <text x="18" y="30" fill="#F4F8FF" font-family="Space Grotesk, sans-serif" font-size="16" font-weight="600">Clinic Setup, Staff &amp; Licensing</text>
+              </g>
+              <g transform="translate(44, 242)">
+                <rect x="0" y="0" width="272" height="50" rx="12" fill="#0C1528" stroke="rgba(245,196,94,0.35)" />
+                <text x="18" y="30" fill="#F4F8FF" font-family="Space Grotesk, sans-serif" font-size="16" font-weight="600">Patient Care &amp; Follow-Ups</text>
+              </g>
+
+              <!-- Glowing Synaptic Bridge (Center) -->
+              <path d="M340 178 L510 178" stroke="#38E1C6" stroke-width="2.5" stroke-dasharray="7 6" stroke-opacity="0.55" />
+              <g id="bridge-pkt-1" transform="translate(470, 166)">
+                <rect x="0" y="0" width="54" height="24" rx="12" fill="#38E1C6" />
+                <text x="27" y="16" text-anchor="middle" fill="#060A14" font-family="Space Mono, monospace" font-size="10.5" font-weight="700">OPD ✓</text>
+              </g>
+              <g id="bridge-pkt-2" transform="translate(430, 166)">
+                <circle cx="12" cy="12" r="8" fill="#F5C45E" />
+              </g>
+
+              <!-- Right Hemisphere: DocScale Digital Engine -->
+              <rect x="510" y="34" width="350" height="286" rx="22" fill="rgba(56,225,198,0.06)" stroke="#38E1C6" stroke-opacity="0.5" stroke-width="1.8" />
+              <text x="534" y="68" fill="#38E1C6" font-family="Space Mono, monospace" font-size="12" font-weight="700">OUR SCOPE · DIGITAL ENGINE</text>
+              <text x="534" y="94" fill="#F4F8FF" font-family="Space Grotesk, sans-serif" font-size="22" font-weight="700">Always-On Patient Funnel</text>
+
+              <g transform="translate(534, 118)">
+                <rect x="0" y="0" width="146" height="82" rx="14" fill="#0C1528" stroke="rgba(56,225,198,0.4)" />
+                <text x="14" y="32" fill="#38E1C6" font-family="Space Mono, monospace" font-size="11" font-weight="700">01 · WEBSITE</text>
+                <text x="14" y="56" fill="#F4F8FF" font-family="Space Grotesk, sans-serif" font-size="13.5" font-weight="700">WhatsApp + Email</text>
+              </g>
+              <g transform="translate(692, 118)">
+                <rect x="0" y="0" width="146" height="82" rx="14" fill="#0C1528" stroke="rgba(86,180,255,0.4)" />
+                <text x="16" y="32" fill="#56B4FF" font-family="Space Mono, monospace" font-size="11" font-weight="700">02 · MAPS</text>
+                <text x="16" y="56" fill="#F4F8FF" font-family="Space Grotesk, sans-serif" font-size="15" font-weight="700">GBP + Local Ads</text>
+              </g>
+              <g transform="translate(534, 212)">
+                <rect x="0" y="0" width="146" height="82" rx="14" fill="#0C1528" stroke="rgba(86,180,255,0.4)" />
+                <text x="16" y="32" fill="#56B4FF" font-family="Space Mono, monospace" font-size="11" font-weight="700">03 · AI SEARCH</text>
+                <text x="16" y="56" fill="#F4F8FF" font-family="Space Grotesk, sans-serif" font-size="15" font-weight="700">SEO · AEO · GEO</text>
+              </g>
+              <g transform="translate(692, 212)">
+                <rect x="0" y="0" width="146" height="82" rx="14" fill="#0C1528" stroke="rgba(245,196,94,0.45)" />
+                <text x="16" y="32" fill="#F5C45E" font-family="Space Mono, monospace" font-size="11" font-weight="700">04 · REVIEWS</text>
+                <text x="16" y="56" fill="#F4F8FF" font-family="Space Grotesk, sans-serif" font-size="15" font-weight="700">QR Booster 5★</text>
+              </g>
+            </svg>
+          </div>
+
+          <div class="pill-row">
+            <span class="pill-mini"><span class="pill-dot"></span>Purely Digital Partner</span>
+            <span class="pill-mini"><span class="pill-dot" style="background: var(--gold);"></span>Zero Burden on Reception</span>
+            <span class="pill-mini"><span class="pill-dot" style="background: var(--sky);"></span>Built for Ranchi Neurology</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 3: STORY SCENE #1 — ANIMATED RANCHI NEIGHBOURHOOD RADAR (Dr. Mira: right lane, concerned) -->
+      <section>
+        <div class="sl zone-r">
+          <div class="eyebrow">03 · The Discovery Problem</div>
+          <h2 class="h2">Where Ranchi patients go when you’re <em>invisible.</em></h2>
+
+          <div class="story-stage">
+            <div class="story-head">
+              <span class="story-caption" id="city-caption">Act 1: Unlisted clinics lose local searches to rivals</span>
+              <span class="story-tag" id="city-counter">0 / 3 OPD CAPTURED</span>
+            </div>
+            <svg id="city-map-svg" class="story-svg" viewBox="0 0 880 390" xmlns="http://www.w3.org/2000/svg">
+              <!-- Subtle Ranchi Grid Map -->
+              <g stroke="rgba(142,164,196,0.12)" stroke-width="1">
+                <line x1="0" y1="80" x2="880" y2="80" />
+                <line x1="0" y1="195" x2="880" y2="195" />
+                <line x1="0" y1="310" x2="880" y2="310" />
+                <line x1="220" y1="0" x2="220" y2="390" />
+                <line x1="460" y1="0" x2="460" y2="390" />
+                <line x1="680" y1="0" x2="680" y2="390" />
+              </g>
+              <text x="28" y="34" fill="#8EA4C4" font-family="Space Mono, monospace" font-size="11">BARIATU · LALPUR · KANKE RD · HINOO</text>
+
+              <!-- 3 Ranchi Patient Search Pins (Left) -->
+              <g transform="translate(36, 62)">
+                <rect x="0" y="0" width="186" height="62" rx="14" fill="#0C1528" stroke="#56B4FF" stroke-width="1.6" />
+                <text x="16" y="26" fill="#56B4FF" font-family="Space Mono, monospace" font-size="10.5" font-weight="700">SEARCH #1 · BARIATU</text>
+                <text x="16" y="47" fill="#F4F8FF" font-family="Space Grotesk, sans-serif" font-size="14" font-weight="700">“Migraine doctor?”</text>
+              </g>
+              <g transform="translate(36, 162)">
+                <rect x="0" y="0" width="186" height="62" rx="14" fill="#0C1528" stroke="#56B4FF" stroke-width="1.6" />
+                <text x="16" y="26" fill="#56B4FF" font-family="Space Mono, monospace" font-size="10.5" font-weight="700">SEARCH #2 · LALPUR</text>
+                <text x="16" y="47" fill="#F4F8FF" font-family="Space Grotesk, sans-serif" font-size="14" font-weight="700">“ChatGPT: Best Neuro?”</text>
+              </g>
+              <g transform="translate(36, 262)">
+                <rect x="0" y="0" width="186" height="62" rx="14" fill="#0C1528" stroke="#56B4FF" stroke-width="1.6" />
+                <text x="16" y="26" fill="#56B4FF" font-family="Space Mono, monospace" font-size="10.5" font-weight="700">SEARCH #3 · KANKE RD</text>
+                <text x="16" y="47" fill="#F4F8FF" font-family="Space Grotesk, sans-serif" font-size="14" font-weight="700">“Stroke follow-up?”</text>
+              </g>
+
+              <!-- Deflection & Capture Dashed Paths -->
+              <path d="M222 93 C360 93, 470 72, 620 72" stroke="rgba(255,107,107,0.3)" stroke-width="2" stroke-dasharray="5 5" fill="none" />
+              <path d="M222 193 L620 72" stroke="rgba(255,107,107,0.22)" stroke-width="2" stroke-dasharray="5 5" fill="none" />
+              <path d="M222 93 C360 120, 470 250, 610 250" stroke="rgba(56,225,198,0.35)" stroke-width="2" stroke-dasharray="5 5" fill="none" />
+              <path d="M222 193 C360 193, 470 250, 610 250" stroke="rgba(56,225,198,0.35)" stroke-width="2" stroke-dasharray="5 5" fill="none" />
+              <path d="M222 293 C360 293, 470 260, 610 250" stroke="rgba(56,225,198,0.35)" stroke-width="2" stroke-dasharray="5 5" fill="none" />
+
+              <!-- Moving Patient Pins -->
+              <circle id="pat-pin-1" cx="230" cy="93" r="10" fill="#F5C45E" stroke="#060A14" stroke-width="2" />
+              <circle id="pat-pin-2" cx="230" cy="193" r="10" fill="#56B4FF" stroke="#060A14" stroke-width="2" />
+              <circle id="pat-pin-3" cx="230" cy="293" r="10" fill="#38E1C6" stroke="#060A14" stroke-width="2" />
+
+              <!-- Top Right: Rival Clinic (Gets traffic before launch) -->
+              <g transform="translate(620, 38)">
+                <rect x="0" y="0" width="224" height="82" rx="16" fill="#131B2E" stroke="#FF6B6B" stroke-opacity="0.6" stroke-width="1.8" />
+                <text x="18" y="28" fill="#FF6B6B" font-family="Space Mono, monospace" font-size="11" font-weight="700">LISTED COMPETITOR</text>
+                <text x="18" y="52" fill="#F4F8FF" font-family="Space Grotesk, sans-serif" font-size="17" font-weight="700">Other Ranchi Clinic</text>
+                <text x="18" y="70" fill="#8EA4C4" font-family="Space Mono, monospace" font-size="10.5">Captures unserved traffic</text>
+              </g>
+
+              <!-- Bottom Right: Your Clinic Ignition Hub -->
+              <g id="city-clinic-hub" transform="translate(610, 198)">
+                <circle id="city-radar-ring" cx="117" cy="58" r="78" fill="none" stroke="#38E1C6" stroke-width="2" opacity="0" />
+                <rect id="city-clinic-box" x="0" y="0" width="234" height="116" rx="18" fill="#0C1528" stroke="#8EA4C4" stroke-width="2" />
+                <text id="city-clinic-kicker" x="20" y="30" fill="#8EA4C4" font-family="Space Mono, monospace" font-size="11" font-weight="700">UNLISTED CLINIC</text>
+                <text x="20" y="58" fill="#F4F8FF" font-family="Space Grotesk, sans-serif" font-size="19" font-weight="700" data-bind="clinicName">Ranchi Neuro Care</text>
+                <text id="city-clinic-status" x="20" y="84" fill="#FF6B6B" font-family="Space Mono, monospace" font-size="11.5" font-weight="700">No Site · Invisible on AI</text>
+              </g>
+            </svg>
+          </div>
+
+          <div class="pill-row">
+            <span class="pill-mini"><span class="pill-dot"></span>Google Maps First</span>
+            <span class="pill-mini"><span class="pill-dot" style="background: var(--gold);"></span>AI Verified Answer</span>
+            <span class="pill-mini"><span class="pill-dot" style="background: var(--sky);"></span>Instant Booking Link</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- SLIDE 4: STORY SCENE #2 — SYMPTOM TAP TO INBOX CINEMA (Dr. Mira: left lane, connected) -->
+      <section>
+        <div class="sl zone-l">
           <div class="eyebrow">04 · Digital Front Desk</div>
-          <h2 class="h2">A fast clinic website built to <em>book patients.</em></h2>
+          <h2 class="h2">One tap on mobile. <em>Instant clinic alert.</em></h2>
 
-          <div class="split-visual">
-            <div class="stack-3">
-              <div class="card">
-                <span class="card-num">01 · Credible &amp; Mobile-First</span>
-                <h3>Built for 4G/Mobile Speed</h3>
-                <p>Doctor qualifications, OPD timings, Ranchi map pin, neurology services, and a clear emergency stroke/seizure disclaimer.</p>
-              </div>
-              <div class="card card-neuro">
-                <span class="card-num">02 · Direct Chat</span>
-                <h3>One-Tap WhatsApp Integration</h3>
-                <p>Patients tap once to message your clinic WhatsApp with a pre-filled appointment request—no phone tag needed.</p>
-              </div>
-              <div class="card card-accent">
-                <span class="card-num">03 · Instant Inbox Alerts</span>
-                <h3>Booking Form → Direct Email</h3>
-                <p>Captures patient name, phone, symptom, and preferred slot—sending a clean instant email directly to you or reception.</p>
-              </div>
+          <div class="story-stage">
+            <div class="story-head">
+              <span class="story-caption" id="cinema-caption">Patient selects symptom → WhatsApp + Email alert fire in 1 sec</span>
+              <span class="story-tag">&lt;1s 4G Mobile Load</span>
             </div>
+            <svg id="booking-cinema-svg" class="story-svg" viewBox="0 0 880 390" xmlns="http://www.w3.org/2000/svg">
+              <!-- Smartphone Mockup (Left) -->
+              <rect x="28" y="24" width="236" height="342" rx="28" fill="#060A14" stroke="#56B4FF" stroke-width="2.5" />
+              <rect x="42" y="42" width="208" height="306" rx="18" fill="#0C1528" />
+              <rect x="108" y="48" width="76" height="8" rx="4" fill="#1C2A45" />
+              <text x="146" y="84" text-anchor="middle" fill="#38E1C6" font-family="Space Mono, monospace" font-size="10.5" font-weight="700" data-bind="clinicName">RANCHI NEURO CARE</text>
+              <text x="146" y="106" text-anchor="middle" fill="#F4F8FF" font-family="Space Grotesk, sans-serif" font-size="16" font-weight="700">Book Consultation</text>
 
-            <div>
-              <div class="story-stage">
-                <div class="story-caption" id="booking-caption">Patient taps Book → WhatsApp &amp; Email alert fire</div>
-                <svg id="booking-story-svg" class="story-svg" viewBox="0 0 520 245" xmlns="http://www.w3.org/2000/svg">
-                  <!-- Mobile Clinic Site Card (Left) -->
-                  <rect x="14" y="34" width="138" height="176" rx="18" fill="#0D2239" />
-                  <rect x="22" y="46" width="122" height="152" rx="12" fill="#FCFEFF" />
-                  <text x="83" y="72" text-anchor="middle" fill="#0D2239" font-family="Space Grotesk, sans-serif" font-size="12" font-weight="700">Neuro Clinic</text>
-                  <rect x="34" y="84" width="98" height="22" rx="6" fill="#F4F7FA" stroke="#DCE6EF" />
-                  <rect x="34" y="112" width="98" height="22" rx="6" fill="#F4F7FA" stroke="#DCE6EF" />
-                  <rect id="phone-cta-btn" x="34" y="148" width="98" height="32" rx="16" fill="#1363B8" />
-                  <text x="83" y="168" text-anchor="middle" fill="#FCFEFF" font-family="Space Mono, monospace" font-size="10" font-weight="700">BOOK OPD</text>
+              <!-- Symptom Selection Chips -->
+              <rect id="sym-chip-1" x="58" y="124" width="176" height="34" rx="10" fill="rgba(56,225,198,0.16)" stroke="#38E1C6" stroke-width="1.6" />
+              <text x="72" y="146" fill="#F4F8FF" font-family="Space Grotesk, sans-serif" font-size="13.5" font-weight="600">✓ Chronic Migraine</text>
 
-                  <!-- Dual Lanes -->
-                  <path d="M152 104 C215 104, 240 66, 330 66" stroke="#186A4D" stroke-opacity="0.35" stroke-width="2.5" stroke-dasharray="5 5" fill="none" />
-                  <path d="M152 152 C215 152, 240 182, 330 182" stroke="#1363B8" stroke-opacity="0.35" stroke-width="2.5" stroke-dasharray="5 5" fill="none" />
+              <rect x="58" y="166" width="176" height="34" rx="10" fill="rgba(255,255,255,0.04)" stroke="rgba(142,164,196,0.25)" />
+              <text x="72" y="188" fill="#CBD7EA" font-family="Space Grotesk, sans-serif" font-size="13">Slot: Tomorrow · 5:00 PM</text>
 
-                  <!-- Moving Packets -->
-                  <g id="wa-packet" transform="translate(152, 92)">
-                    <rect x="0" y="0" width="54" height="24" rx="12" fill="#186A4D" />
-                    <text x="27" y="15.5" text-anchor="middle" fill="#FCFEFF" font-family="Space Mono, monospace" font-size="9.5" font-weight="700">WA</text>
-                  </g>
-                  <g id="mail-packet" transform="translate(152, 140)">
-                    <rect x="0" y="0" width="54" height="24" rx="12" fill="#1363B8" />
-                    <text x="27" y="15.5" text-anchor="middle" fill="#FCFEFF" font-family="Space Mono, monospace" font-size="9.5" font-weight="700">MAIL</text>
-                  </g>
+              <rect x="58" y="208" width="176" height="34" rx="10" fill="rgba(255,255,255,0.04)" stroke="rgba(142,164,196,0.25)" />
+              <text x="72" y="230" fill="#CBD7EA" font-family="Space Grotesk, sans-serif" font-size="13">Rohit K. · +91 98••••</text>
 
-                  <!-- Top Target: WhatsApp -->
-                  <g id="wa-target">
-                    <rect x="330" y="28" width="174" height="76" rx="14" fill="#FCFEFF" stroke="#186A4D" stroke-width="2" />
-                    <text x="348" y="55" fill="#186A4D" font-family="Space Mono, monospace" font-size="10.5" font-weight="700">WHATSAPP CHAT</text>
-                    <text x="348" y="76" fill="#0D2239" font-family="Space Grotesk, sans-serif" font-size="13" font-weight="700">1-Tap Consultation</text>
-                    <text x="348" y="93" fill="#4D6277" font-family="Space Mono, monospace" font-size="10">Pre-filled patient note</text>
-                  </g>
+              <g id="phone-submit-btn">
+                <rect x="58" y="264" width="176" height="44" rx="22" fill="#38E1C6" />
+                <text x="146" y="291" text-anchor="middle" fill="#060A14" font-family="Space Mono, monospace" font-size="12.5" font-weight="700">CONFIRM BOOKING</text>
+              </g>
+              <text x="146" y="330" text-anchor="middle" fill="#F5C45E" font-family="Space Mono, monospace" font-size="9.5">Emergency stroke? Call ER banner</text>
 
-                  <!-- Bottom Target: Email Inbox -->
-                  <g id="mail-target">
-                    <rect x="330" y="140" width="174" height="78" rx="14" fill="#FCFEFF" stroke="#1363B8" stroke-width="2" />
-                    <text x="348" y="166" fill="#1363B8" font-family="Space Mono, monospace" font-size="10.5" font-weight="700">DOCTOR INBOX</text>
-                    <text x="348" y="187" fill="#0D2239" font-family="Space Grotesk, sans-serif" font-size="13" font-weight="700">Instant Email Alert</text>
-                    <text id="mail-badge" x="348" y="204" fill="#186A4D" font-family="Space Mono, monospace" font-size="10" font-weight="700">Name · Slot · Symptom</text>
-                  </g>
-                </svg>
-              </div>
+              <!-- Glowing Connectors -->
+              <path d="M264 140 C350 140, 385 96, 486 96" stroke="#38E1C6" stroke-opacity="0.45" stroke-width="2.5" stroke-dasharray="6 6" fill="none" />
+              <path d="M264 250 C350 250, 385 282, 486 282" stroke="#56B4FF" stroke-opacity="0.45" stroke-width="2.5" stroke-dasharray="6 6" fill="none" />
 
-              <div class="photo-banner">
-                <img src="assets/neuro-visual.jpg" alt="Neurology care visual" width="1200" height="600" />
-                <div class="frame-cap">
-                  <span>Dedicated Condition Sections: Migraine · Stroke · Epilepsy · Spine</span>
-                  <span class="cap-tag">Ranchi OPD</span>
-                </div>
-              </div>
-            </div>
+              <!-- Flying Signal Packets -->
+              <g id="cinema-wa-pkt" transform="translate(274, 128)">
+                <rect x="0" y="0" width="70" height="26" rx="13" fill="#38E1C6" />
+                <text x="35" y="17" text-anchor="middle" fill="#060A14" font-family="Space Mono, monospace" font-size="10.5" font-weight="700">WHATSAPP</text>
+              </g>
+              <g id="cinema-mail-pkt" transform="translate(274, 238)">
+                <rect x="0" y="0" width="70" height="26" rx="13" fill="#56B4FF" />
+                <text x="35" y="17" text-anchor="middle" fill="#060A14" font-family="Space Mono, monospace" font-size="10.5" font-weight="700">EMAIL</text>
+              </g>
+
+              <!-- Top Card: Live WhatsApp Thread -->
+              <g id="cinema-wa-card" transform="translate(486, 26)">
+                <rect x="0" y="0" width="366" height="146" rx="18" fill="#0C1528" stroke="#38E1C6" stroke-width="2" />
+                <text x="20" y="28" fill="#38E1C6" font-family="Space Mono, monospace" font-size="11" font-weight="700">WHATSAPP INTEGRATION · 1-TAP CHAT</text>
+                <rect x="20" y="44" width="326" height="58" rx="12" fill="rgba(56,225,198,0.10)" />
+                <text x="34" y="68" fill="#F4F8FF" font-family="Space Grotesk, sans-serif" font-size="14.5" font-weight="600">“Hello Doctor, I’d like a migraine</text>
+                <text x="34" y="88" fill="#F4F8FF" font-family="Space Grotesk, sans-serif" font-size="14.5" font-weight="600">OPD appointment tomorrow at 5 PM.”</text>
+                <text x="20" y="126" fill="#8EA4C4" font-family="Space Mono, monospace" font-size="11">Delivered directly to clinic WhatsApp ✓✓</text>
+              </g>
+
+              <!-- Bottom Card: Doctor's Instant Email Inbox -->
+              <g id="cinema-mail-card" transform="translate(486, 200)">
+                <rect x="0" y="0" width="366" height="160" rx="18" fill="#0C1528" stroke="#56B4FF" stroke-width="2" />
+                <text x="20" y="28" fill="#56B4FF" font-family="Space Mono, monospace" font-size="11" font-weight="700">DOCTOR INBOX · EMAIL ALERT</text>
+                <rect id="inbox-badge" x="242" y="12" width="104" height="22" rx="11" fill="#F5C45E" />
+                <text id="inbox-badge-txt" x="294" y="27" text-anchor="middle" fill="#060A14" font-family="Space Mono, monospace" font-size="10" font-weight="700">NEW BOOKING</text>
+                <text x="20" y="64" fill="#F4F8FF" font-family="Space Grotesk, sans-serif" font-size="17" font-weight="700">Subject: New OPD Request — Rohit K.</text>
+                <text x="20" y="92" fill="#CBD7EA" font-family="Space Mono, monospace" font-size="12">Symptom : Chronic Migraine</text>
+                <text x="20" y="114" fill="#CBD7EA" font-family="Space Mono, monospace" font-size="12">Slot    : Tomorrow · 5:00 PM</text>
+                <text x="20" y="136" fill="#38E1C6" font-family="Space Mono, monospace" font-size="12">Phone   : +91 98•••• (Tap to call)</text>
+              </g>
+            </svg>
+          </div>
+
+          <div class="pill-row">
+            <span class="pill-mini"><span class="pill-dot"></span>Instant Email Alert</span>
+            <span class="pill-mini"><span class="pill-dot" style="background: var(--sky);"></span>One-Tap WhatsApp</span>
+            <span class="pill-mini"><span class="pill-dot" style="background: var(--gold);"></span>OPD Timings &amp; Map Pin</span>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 5: SEO · AEO · GEO FOR AI RECOMMENDATION -->
+      <!-- SLIDE 5: SEO · AEO · GEO + AI CHAT THEATRE (Dr. Mira: right lane, illuminated) -->
       <section>
-        <div class="sl scrim">
+        <div class="sl zone-r">
           <div class="eyebrow">05 · SEO · AEO · GEO</div>
           <h2 class="h2">Ranked on Google. <em>Recommended by AI.</em></h2>
 
-          <div class="split-visual">
-            <div class="stack-3">
-              <div class="card">
-                <span class="card-num">SEO · Search &amp; Maps</span>
-                <h3>Local Neurology Authority</h3>
-                <p>Verified Google Business Profile + dedicated Ranchi pages for Migraine, Epilepsy, Stroke, and Sciatica queries.</p>
-              </div>
-              <div class="card card-accent">
-                <span class="card-num">AEO · Answer Engine Optimization</span>
-                <h3>Machine-Readable Clinic Facts</h3>
-                <p><code>Physician</code>, <code>MedicalClinic</code> &amp; <code>FAQPage</code> JSON-LD schema + <code>llms.txt</code> so AI answers quote accurate timings and services.</p>
-              </div>
-              <div class="card card-neuro">
-                <span class="card-num">GEO · Generative Engine Visibility</span>
-                <h3>Official AI Hubs &amp; Citations</h3>
-                <p>Aligned business profiles across OpenAI Business Hub, Bing Places/AI, Apple Maps, and medical directories so AI cites you by name.</p>
+          <div class="pipe-strip">
+            <div class="pipe-pill">
+              <b>SEO · GOOGLE SEARCH</b>
+              <span>Ranchi condition pages + Maps</span>
+            </div>
+            <div class="pipe-pill">
+              <b>AEO · ANSWER ENGINES</b>
+              <span>Physician JSON-LD + llms.txt</span>
+            </div>
+            <div class="pipe-pill">
+              <b>GEO · AI CITATIONS</b>
+              <span>OpenAI Hub + Bing AI Sync</span>
+            </div>
+          </div>
+
+          <div class="ai-theatre" id="ai-theatre">
+            <div class="theatre-head">
+              <span class="story-caption" style="margin: 0;">Live AI Recommendation Simulation · Ranchi</span>
+              <div class="mode-pills" role="tablist" aria-label="Before or after AI optimization">
+                <button type="button" class="mode-btn" data-ai-mode="before">Before Setup</button>
+                <button type="button" class="mode-btn is-active" data-ai-mode="after">After AEO + GEO</button>
               </div>
             </div>
 
-            <!-- Interactive 4-Engine AI Verdict Console (Sondri Watch inspired) -->
-            <div class="ai-console" id="ai-console">
-              <div class="console-head">
-                <span class="console-kicker">AI Search Simulation · Ranchi Neurology</span>
-                <div class="mode-pills" role="tablist" aria-label="Before or after AI optimization">
-                  <button type="button" class="mode-btn" data-ai-mode="before">Before Setup</button>
-                  <button type="button" class="mode-btn is-active" data-ai-mode="after">After AEO + GEO</button>
+            <div class="prompt-tabs" role="tablist" aria-label="Sample Ranchi prompts">
+              <button type="button" class="prompt-tab is-active" data-ai-q="0">Q1 · Migraine &amp; Epilepsy</button>
+              <button type="button" class="prompt-tab" data-ai-q="1">Q2 · EEG &amp; Stroke Care</button>
+              <button type="button" class="prompt-tab" data-ai-q="2">Q3 · Timings &amp; Reviews</button>
+            </div>
+
+            <div class="theatre-body">
+              <div class="chat-sim">
+                <div class="chat-user" id="ai-prompt-text">
+                  “Who is the best neurologist for migraine and epilepsy in Ranchi?”
                 </div>
-              </div>
+                <div class="chat-reply" id="ai-chat-reply">
+                  <strong>Recommended: Ranchi Neuro Care (Bariatu Rd)</strong> — Dedicated migraine &amp; epilepsy OPD, verified timings, 4.9★ Google rating &amp; direct appointment link.
+                </div>
 
-              <div class="prompt-tabs" role="tablist" aria-label="Sample Ranchi patient questions">
-                <button type="button" class="prompt-tab is-active" data-ai-q="0">Q1 · Category</button>
-                <button type="button" class="prompt-tab" data-ai-q="1">Q2 · Condition</button>
-                <button type="button" class="prompt-tab" data-ai-q="2">Q3 · Clinic Check</button>
-              </div>
-
-              <div class="prompt-box" id="ai-prompt-text">
-                “Who is the best neurologist for migraine and epilepsy treatment in Ranchi?”
+                <div class="score-bar-row">
+                  <div class="score-ring" aria-label="AI Readiness Score">
+                    <svg viewBox="0 0 62 62">
+                      <circle cx="31" cy="31" r="25" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="5.5" />
+                      <circle
+                        id="ai-ring-arc"
+                        cx="31"
+                        cy="31"
+                        r="25"
+                        fill="none"
+                        stroke="#38E1C6"
+                        stroke-width="5.5"
+                        stroke-linecap="round"
+                        stroke-dasharray="157.1"
+                        stroke-dashoffset="9.4"
+                      />
+                    </svg>
+                    <span class="score-ring-val" id="ai-score-val">94</span>
+                  </div>
+                  <div style="font-size: 13.5px; color: var(--body); line-height: 1.35;">
+                    <strong style="color: var(--ink); display: block;">AI Readiness Score</strong>
+                    <span id="ai-signal-note">Schema JSON-LD · AI Bots · Bing &amp; OpenAI Hubs verified</span>
+                  </div>
+                </div>
               </div>
 
               <div class="engine-grid" id="ai-engine-grid">
-                <div class="engine-cell">
-                  <span class="engine-name">ChatGPT</span>
-                  <span class="verdict-pill is-ok">✓ Cited #1–#2</span>
-                </div>
-                <div class="engine-cell">
-                  <span class="engine-name">Google Gemini</span>
-                  <span class="verdict-pill is-ok">✓ Recommended</span>
-                </div>
-                <div class="engine-cell">
-                  <span class="engine-name">AI Overviews</span>
-                  <span class="verdict-pill is-ok">✓ Clinic &amp; Map</span>
-                </div>
-                <div class="engine-cell">
-                  <span class="engine-name">Perplexity</span>
-                  <span class="verdict-pill is-ok">✓ Source Linked</span>
-                </div>
-              </div>
-
-              <div class="console-foot">
-                <div class="score-ring" aria-label="AI Readiness Score">
-                  <svg viewBox="0 0 72 72">
-                    <circle cx="36" cy="36" r="29" fill="none" stroke="rgba(255,255,255,0.14)" stroke-width="6" />
-                    <circle
-                      id="ai-ring-arc"
-                      cx="36"
-                      cy="36"
-                      r="29"
-                      fill="none"
-                      stroke="#EAB338"
-                      stroke-width="6"
-                      stroke-linecap="round"
-                      stroke-dasharray="182.2"
-                      stroke-dashoffset="14.6"
-                    />
-                  </svg>
-                  <span class="score-ring-val" id="ai-score-val">92</span>
-                </div>
-
-                <div class="signal-rows" id="ai-signal-rows">
-                  <div class="signal-row">
-                    <span>Physician &amp; FAQ Schema</span>
-                    <span class="verdict-pill is-ok">✓ Verified</span>
-                  </div>
-                  <div class="signal-row">
-                    <span>AI Crawler &amp; llms.txt</span>
-                    <span class="verdict-pill is-ok">✓ Allowed</span>
-                  </div>
-                  <div class="signal-row">
-                    <span>Bing &amp; OpenAI Business Hubs</span>
-                    <span class="verdict-pill is-ok">✓ Synced</span>
-                  </div>
-                </div>
+                <div class="engine-cell"><span class="engine-name">ChatGPT</span><span class="verdict-pill is-ok">✓ Cited #1</span></div>
+                <div class="engine-cell"><span class="engine-name">Google Gemini</span><span class="verdict-pill is-ok">✓ Recommended</span></div>
+                <div class="engine-cell"><span class="engine-name">AI Overviews</span><span class="verdict-pill is-ok">✓ Clinic &amp; Map</span></div>
+                <div class="engine-cell"><span class="engine-name">Perplexity</span><span class="verdict-pill is-ok">✓ Source Linked</span></div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 6: MONTHLY AI VISIBILITY WATCH RETAINER -->
+      <!-- SLIDE 6: MONTHLY AI VISIBILITY WATCH (Dr. Mira: left lane, illuminated) -->
       <section>
-        <div class="sl scrim">
+        <div class="sl zone-l">
           <div class="eyebrow">06 · Monthly AI Monitoring Retainer</div>
-          <h2 class="h2">AI answers shift weekly. <em>We monitor &amp; ship fixes.</em></h2>
+          <h2 class="h2">AI answers drift weekly. <em>We watch &amp; fix.</em></h2>
 
           <div class="phase-tabs" role="tablist" aria-label="Monthly AI visibility cycle">
             <button type="button" class="phase-tab" data-phase="0">
-              <span class="pt-num">01 · CHECK</span>
-              <span class="pt-name">Baseline 4 Engines</span>
+              <span class="pt-num">MONTH 0 · CHECK</span>
+              <span class="pt-name">Baseline Audit</span>
             </button>
             <button type="button" class="phase-tab" data-phase="1">
-              <span class="pt-num">02 · FIX</span>
-              <span class="pt-name">Schema &amp; AI Hubs</span>
+              <span class="pt-num">MONTH 1 · FIX</span>
+              <span class="pt-name">Schema &amp; Hubs</span>
             </button>
             <button type="button" class="phase-tab" data-phase="2">
-              <span class="pt-num">03 · STRENGTHEN</span>
-              <span class="pt-name">Condition Pages</span>
+              <span class="pt-num">MONTH 2 · GROW</span>
+              <span class="pt-name">Answer Pages</span>
             </button>
             <button type="button" class="phase-tab is-active" data-phase="3">
-              <span class="pt-num">04 · MEASURE</span>
-              <span class="pt-name">Weekly Drift Watch</span>
+              <span class="pt-num">MONTH 3 · WATCH</span>
+              <span class="pt-name">Weekly Drift Guard</span>
             </button>
           </div>
 
-          <div class="watch-board" id="watch-board">
-            <div class="kpi-4">
-              <div class="kpi-box">
-                <div class="kpi-lbl">Overall Named-Share</div>
-                <div class="kpi-big" id="watch-share">58%</div>
-                <div class="kpi-sub" id="watch-delta">▲ +44% vs Baseline</div>
-              </div>
-              <div class="kpi-box">
-                <div class="kpi-lbl">Weekly Prompt Checks</div>
-                <div class="kpi-big">25 × 4</div>
-                <div class="kpi-sub">400 logged-out runs / mo</div>
-              </div>
-              <div class="kpi-box">
-                <div class="kpi-lbl">Factual Accuracy</div>
-                <div class="kpi-big" id="watch-accuracy">100%</div>
-                <div class="kpi-sub">Timings, Ranchi address &amp; OPD</div>
-              </div>
-              <div class="kpi-box">
-                <div class="kpi-lbl">Shipped This Cycle</div>
-                <div class="kpi-big" style="font-size: 17px; line-height: 1.25; margin-top: 6px;" id="watch-fix-title">
-                  Migraine &amp; Stroke FAQ + Bing AI Sync
+          <div class="watch-board">
+            <div class="watch-top-grid">
+              <div class="kpi-3">
+                <div class="kpi-box">
+                  <div class="kpi-lbl">Named Share</div>
+                  <div class="kpi-big" id="watch-share">58%</div>
+                  <div class="kpi-sub" id="watch-delta">▲ +44% vs M0</div>
                 </div>
-                <div class="kpi-sub" id="watch-fix-tag">Live Monthly Deliverable</div>
+                <div class="kpi-box">
+                  <div class="kpi-lbl">Weekly Runs</div>
+                  <div class="kpi-big">400</div>
+                  <div class="kpi-sub">25 prompts × 4 AI</div>
+                </div>
+                <div class="kpi-box">
+                  <div class="kpi-lbl">Fact Match</div>
+                  <div class="kpi-big" id="watch-accuracy">100%</div>
+                  <div class="kpi-sub">Hours &amp; address</div>
+                </div>
               </div>
+
+              <!-- Animated Growth Trajectory Curve SVG -->
+              <svg id="watch-curve-svg" viewBox="0 0 420 112" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: auto; background: rgba(6,10,20,0.68); border-radius: 12px; border: 1px solid var(--rule-soft);">
+                <line x1="28" y1="88" x2="395" y2="88" stroke="rgba(142,164,196,0.22)" />
+                <text x="18" y="18" fill="#8EA4C4" font-family="Space Mono, monospace" font-size="9.5">AI NAMED-SHARE TRAJECTORY</text>
+                <path
+                  id="watch-curve-path"
+                  d="M36 82 C95 75, 118 68, 152 60 C195 50, 228 42, 268 34 C312 26, 348 21, 386 18"
+                  fill="none"
+                  stroke="#38E1C6"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-dasharray="420"
+                  stroke-dashoffset="0"
+                />
+                <circle cx="36" cy="82" r="4.5" fill="#56B4FF" />
+                <circle cx="152" cy="60" r="4.5" fill="#56B4FF" />
+                <circle cx="268" cy="34" r="4.5" fill="#38E1C6" />
+                <circle id="watch-live-dot" cx="386" cy="18" r="6.5" fill="#F5C45E" stroke="#060A14" stroke-width="2" />
+                <text x="36" y="102" text-anchor="middle" fill="#8EA4C4" font-family="Space Mono, monospace" font-size="9">M0</text>
+                <text x="152" y="102" text-anchor="middle" fill="#8EA4C4" font-family="Space Mono, monospace" font-size="9">M1</text>
+                <text x="268" y="102" text-anchor="middle" fill="#8EA4C4" font-family="Space Mono, monospace" font-size="9">M2</text>
+                <text x="386" y="102" text-anchor="middle" fill="#F5C45E" font-family="Space Mono, monospace" font-size="9" font-weight="700">M3</text>
+              </svg>
             </div>
 
-            <div class="watch-main-grid">
-              <div class="bars-panel">
-                <div class="panel-title">Engine-by-Engine Named Share (Sample Cycle)</div>
+            <div class="watch-bottom-grid">
+              <div class="panel-dark">
+                <div class="panel-ttl">Engine-by-Engine Share (Sample Cycle)</div>
                 <div class="bar-row">
-                  <div class="bar-meta"><span>ChatGPT (Logged Out)</span><span class="bar-pct" id="pct-chatgpt">56%</span></div>
+                  <div class="bar-meta"><span>ChatGPT</span><span class="bar-pct" id="pct-chatgpt">56%</span></div>
                   <div class="bar-track"><div class="bar-fill" id="bar-chatgpt" style="--fill: 0.56;"></div></div>
                 </div>
                 <div class="bar-row">
@@ -476,46 +684,45 @@
                   <div class="bar-track"><div class="bar-fill" id="bar-aio" style="--fill: 0.54;"></div></div>
                 </div>
                 <div class="bar-row">
-                  <div class="bar-meta"><span>Perplexity / AI Mode</span><span class="bar-pct" id="pct-perp">58%</span></div>
+                  <div class="bar-meta"><span>Perplexity</span><span class="bar-pct" id="pct-perp">58%</span></div>
                   <div class="bar-track"><div class="bar-fill" id="bar-perp" style="--fill: 0.58;"></div></div>
                 </div>
               </div>
 
-              <div class="ledger-panel">
-                <div class="panel-title">Sample Frozen Ranchi Patient Prompts</div>
+              <div class="panel-dark">
+                <div class="panel-ttl">Frozen Ranchi Prompt Ledger</div>
                 <table class="ledger-table">
                   <thead>
                     <tr>
-                      <th>Unbranded Patient Question</th>
+                      <th>Unbranded Prompt</th>
                       <th>ChatGPT</th>
                       <th>Gemini</th>
-                      <th>AI Overviews</th>
+                      <th>AIO</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <td>“Best migraine specialist in Ranchi?”</td>
-                      <td><span class="rank-pill">#2 (↑)</span></td>
-                      <td><span class="rank-pill">#1 (↑)</span></td>
+                      <td>“Best migraine doctor Ranchi?”</td>
+                      <td><span class="rank-pill">#2 ↑</span></td>
+                      <td><span class="rank-pill">#1 ↑</span></td>
                       <td><span class="rank-pill">Cited</span></td>
                     </tr>
                     <tr>
-                      <td>“Epilepsy &amp; EEG clinic near Bariatu”</td>
-                      <td><span class="rank-pill">#1 (New)</span></td>
-                      <td><span class="rank-pill">#2 (↑)</span></td>
+                      <td>“Epilepsy &amp; EEG near Bariatu”</td>
+                      <td><span class="rank-pill">#1</span></td>
+                      <td><span class="rank-pill">#2 ↑</span></td>
                       <td><span class="rank-pill">Cited</span></td>
                     </tr>
                     <tr>
-                      <td>“Stroke follow-up neurologist Ranchi”</td>
+                      <td>“Stroke follow-up clinic Ranchi”</td>
                       <td><span class="rank-pill">#3</span></td>
                       <td><span class="rank-pill">#2</span></td>
-                      <td><span class="rank-pill">Map Pack</span></td>
+                      <td><span class="rank-pill">Map</span></td>
                     </tr>
                   </tbody>
                 </table>
-                <div class="cycle-ship">
-                  <span id="watch-cycle-note">✓ Includes monthly PDF diff report + implemented content &amp; schema fix</span>
-                  <span class="mono" style="font-size: 11px;">OPTIONAL RETAINER</span>
+                <div class="ship-stamp" id="watch-cycle-note">
+                  ✓ Shipped: Migraine &amp; Stroke FAQ Schema + Monthly PDF Diff Report
                 </div>
               </div>
             </div>
@@ -523,161 +730,152 @@
         </div>
       </section>
 
-      <!-- SLIDE 7: SMART RECEPTION QR REVIEW BOOSTER -->
+      <!-- SLIDE 7: STORY SCENE #5 — SMART QR REVIEW FILTER CINEMA (Dr. Mira: right lane, celebrating) -->
       <section>
-        <div class="sl scrim">
+        <div class="sl zone-r">
           <div class="eyebrow">07 · Google Reputation Engine</div>
-          <h2 class="h2">Build your first 30+ <em>five-star reviews—safely.</em></h2>
+          <h2 class="h2">Zero to 30+ <em>five-star reviews—safely.</em></h2>
 
-          <div class="split-visual">
-            <div>
-              <div class="card card-neuro" style="margin-bottom: 14px;">
-                <span class="card-num">Reception Standee + Post-Visit WhatsApp</span>
-                <h3>Turn Happy OPD Visits Into Maps Authority</h3>
-                <p>
-                  We print a custom reception QR standee and give your staff a 1-tap post-visit WhatsApp link (getting 3–4× more reviews than passive desk cards).
-                </p>
-              </div>
-              <div class="illus-frame wide">
-                <img
-                  src="assets/illus-review-qr.svg"
-                  alt="Clinic reception counter QR standee radiating five gold stars toward a map pin"
-                  width="800"
-                  height="500"
-                />
-                <div class="frame-cap">
-                  <span>Ready-to-Print Reception QR Standee</span>
-                  <span class="cap-tag">Included at Launch</span>
-                </div>
-              </div>
+          <div class="story-stage">
+            <div class="story-head">
+              <span class="story-caption" id="qr-caption">Laser scans reception QR → 5★ lifts Maps rank, 1–3★ alerts clinic privately</span>
+              <span class="story-tag" id="qr-rating-tag">4.9 ★ · +34 REVIEWS</span>
             </div>
+            <svg id="qr-cinema-svg" class="story-svg" viewBox="0 0 880 390" xmlns="http://www.w3.org/2000/svg">
+              <!-- Reception Standee (Left) -->
+              <rect x="28" y="302" width="230" height="24" rx="8" fill="#132544" stroke="#56B4FF" stroke-opacity="0.4" />
+              <g id="qr-standee">
+                <rect x="64" y="88" width="158" height="214" rx="18" fill="#0C1528" stroke="#38E1C6" stroke-width="2.2" />
+                <rect x="82" y="108" width="122" height="122" rx="12" fill="#F4F8FF" />
+                <!-- QR Geometric Matrix -->
+                <rect x="94" y="120" width="32" height="32" rx="5" fill="none" stroke="#060A14" stroke-width="5" />
+                <rect x="104" y="130" width="12" height="12" fill="#060A14" />
+                <rect x="160" y="120" width="32" height="32" rx="5" fill="none" stroke="#060A14" stroke-width="5" />
+                <rect x="170" y="130" width="12" height="12" fill="#1363B8" />
+                <rect x="94" y="186" width="32" height="32" rx="5" fill="none" stroke="#060A14" stroke-width="5" />
+                <rect x="104" y="196" width="12" height="12" fill="#060A14" />
+                <rect x="136" y="160" width="20" height="20" rx="4" fill="#F5C45E" />
+                <rect x="164" y="164" width="24" height="14" rx="3" fill="#38E1C6" />
+                <rect x="138" y="192" width="22" height="24" rx="4" fill="#060A14" />
+                <rect x="168" y="192" width="22" height="22" rx="4" fill="#1363B8" />
+                <!-- Laser Scan Beam -->
+                <rect id="qr-scan-beam" x="80" y="114" width="126" height="4" rx="2" fill="#38E1C6" />
+                <text x="143" y="264" text-anchor="middle" fill="#F5C45E" font-family="Space Mono, monospace" font-size="11.5" font-weight="700">SCAN AFTER OPD</text>
+                <text x="143" y="284" text-anchor="middle" fill="#8EA4C4" font-family="Space Mono, monospace" font-size="9.5">or 1-Tap WhatsApp Link</text>
+              </g>
 
-            <div class="story-stage">
-              <div class="story-caption" id="review-caption">4–5★ flows to Google Maps · 1–3★ alerts clinic privately</div>
-              <svg id="review-router-svg" class="story-svg" viewBox="0 0 520 330" xmlns="http://www.w3.org/2000/svg">
-                <!-- QR Standee Left -->
-                <g id="qr-node">
-                  <rect x="16" y="112" width="114" height="106" rx="16" fill="#0D2239" />
-                  <rect x="34" y="128" width="78" height="62" rx="8" fill="#FCFEFF" />
-                  <!-- Abstract QR blocks -->
-                  <rect x="44" y="137" width="18" height="18" rx="3" fill="#0D2239" />
-                  <rect x="84" y="137" width="18" height="18" rx="3" fill="#0D2239" />
-                  <rect x="44" y="163" width="18" height="18" rx="3" fill="#0D2239" />
-                  <rect x="68" y="150" width="12" height="12" rx="2" fill="#1363B8" />
-                  <rect x="86" y="165" width="14" height="14" rx="2" fill="#186A4D" />
-                  <text x="73" y="206" text-anchor="middle" fill="#EAB338" font-family="Space Mono, monospace" font-size="10" font-weight="700">SCAN QR</text>
-                </g>
+              <!-- Routing Arcs -->
+              <path d="M222 170 C340 170, 385 92, 520 92" stroke="#38E1C6" stroke-opacity="0.45" stroke-width="2.5" stroke-dasharray="6 6" fill="none" />
+              <path d="M222 222 C340 222, 385 288, 520 288" stroke="#F5C45E" stroke-opacity="0.45" stroke-width="2.5" stroke-dasharray="6 6" fill="none" />
 
-                <!-- Curved Routing Paths -->
-                <path d="M130 150 C205 150, 225 76, 326 76" stroke="#186A4D" stroke-opacity="0.4" stroke-width="2.5" stroke-dasharray="5 5" fill="none" />
-                <path d="M130 182 C205 182, 225 248, 326 248" stroke="#9E670B" stroke-opacity="0.4" stroke-width="2.5" stroke-dasharray="5 5" fill="none" />
+              <!-- Moving Packets -->
+              <g id="qr-star-pkt" transform="translate(240, 156)">
+                <rect x="0" y="0" width="76" height="28" rx="14" fill="#F5C45E" />
+                <text x="38" y="18.5" text-anchor="middle" fill="#060A14" font-family="Space Mono, monospace" font-size="11.5" font-weight="700">5 ★</text>
+              </g>
+              <g id="qr-priv-pkt" transform="translate(240, 208)">
+                <rect x="0" y="0" width="76" height="28" rx="14" fill="#0C1528" stroke="#F5C45E" stroke-width="1.8" />
+                <text x="38" y="18.5" text-anchor="middle" fill="#F5C45E" font-family="Space Mono, monospace" font-size="11.5" font-weight="700">1–3 ★</text>
+              </g>
 
-                <!-- Moving Star Packet (Upper) -->
-                <g id="star-packet" transform="translate(140, 136)">
-                  <rect x="0" y="0" width="66" height="26" rx="13" fill="#EAB338" stroke="#0D2239" stroke-width="1.5" />
-                  <text x="33" y="17" text-anchor="middle" fill="#0D2239" font-family="Space Mono, monospace" font-size="10.5" font-weight="700">4–5 ★</text>
-                </g>
+              <!-- Top Right: Google Maps Growth Card -->
+              <g transform="translate(520, 34)">
+                <rect x="0" y="0" width="330" height="132" rx="18" fill="#0C1528" stroke="#38E1C6" stroke-width="2" />
+                <text x="22" y="32" fill="#38E1C6" font-family="Space Mono, monospace" font-size="11" font-weight="700">HAPPY PATIENT (4–5 ★)</text>
+                <text x="22" y="64" fill="#F4F8FF" font-family="Space Grotesk, sans-serif" font-size="21" font-weight="700">Google Maps Review</text>
+                <rect x="22" y="80" width="234" height="32" rx="16" fill="rgba(56,225,198,0.14)" stroke="rgba(56,225,198,0.35)" />
+                <text x="139" y="101" text-anchor="middle" fill="#F5C45E" font-family="Space Mono, monospace" font-size="12" font-weight="700">★★★★★  4.9 · TOP-3 MAPS</text>
+              </g>
 
-                <!-- Moving Feedback Packet (Lower) -->
-                <g id="priv-packet" transform="translate(140, 170)">
-                  <rect x="0" y="0" width="66" height="26" rx="13" fill="#FCFEFF" stroke="#9E670B" stroke-width="2" />
-                  <text x="33" y="17" text-anchor="middle" fill="#9E670B" font-family="Space Mono, monospace" font-size="10.5" font-weight="700">1–3 ★</text>
-                </g>
+              <!-- Bottom Right: Private Clinic Shield -->
+              <g transform="translate(520, 220)">
+                <rect x="0" y="0" width="330" height="132" rx="18" fill="#0C1528" stroke="#F5C45E" stroke-opacity="0.7" stroke-width="2" />
+                <text x="22" y="32" fill="#F5C45E" font-family="Space Mono, monospace" font-size="11" font-weight="700">NEEDS CARE (1–3 ★)</text>
+                <text x="22" y="64" fill="#F4F8FF" font-family="Space Grotesk, sans-serif" font-size="21" font-weight="700">Private Clinic Inbox</text>
+                <text x="22" y="90" fill="#CBD7EA" font-family="Space Grotesk, sans-serif" font-size="14.5">Emailed privately so you fix issues fast</text>
+                <text x="22" y="112" fill="#8EA4C4" font-family="Space Mono, monospace" font-size="10.5">+ policy-safe optional public link</text>
+              </g>
+            </svg>
+          </div>
 
-                <!-- Upper Destination: Google Maps -->
-                <g id="gmaps-box">
-                  <rect x="326" y="30" width="178" height="92" rx="16" fill="#FCFEFF" stroke="#186A4D" stroke-width="2" />
-                  <text x="344" y="56" fill="#186A4D" font-family="Space Mono, monospace" font-size="10.5" font-weight="700">HAPPY PATIENT</text>
-                  <text x="344" y="79" fill="#0D2239" font-family="Space Grotesk, sans-serif" font-size="15" font-weight="700">Google Maps Review</text>
-                  <rect x="344" y="90" width="136" height="22" rx="11" fill="#186A4D" fill-opacity="0.12" />
-                  <text id="gmaps-score" x="412" y="105" text-anchor="middle" fill="#186A4D" font-family="Space Mono, monospace" font-size="10.5" font-weight="700">4.9 ★ · +30 REVIEWS</text>
-                </g>
-
-                <!-- Lower Destination: Private Feedback -->
-                <g id="private-box">
-                  <rect x="326" y="200" width="178" height="96" rx="16" fill="#FCFEFF" stroke="#9E670B" stroke-width="2" />
-                  <text x="344" y="226" fill="#9E670B" font-family="Space Mono, monospace" font-size="10.5" font-weight="700">NEEDS ATTENTION</text>
-                  <text x="344" y="249" fill="#0D2239" font-family="Space Grotesk, sans-serif" font-size="15" font-weight="700">Private Clinic Alert</text>
-                  <text x="344" y="269" fill="#4D6277" font-family="Space Mono, monospace" font-size="9.5">Emailed directly to fix</text>
-                  <text x="344" y="283" fill="#4D6277" font-family="Space Mono, monospace" font-size="9.5">+ policy-safe Google link</text>
-                </g>
-              </svg>
-            </div>
+          <div class="pill-row">
+            <span class="pill-mini"><span class="pill-dot" style="background: var(--gold);"></span>Print-Ready Reception Standee Included</span>
+            <span class="pill-mini"><span class="pill-dot"></span>Post-Visit WhatsApp Link (3–4× More Reviews)</span>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 8: GOOGLE BUSINESS PROFILE & TRANSPARENT GOOGLE ADS -->
+      <!-- SLIDE 8: STORY SCENE #6 — ORGANIC MAPS + GLASS-WALLET GOOGLE ADS (Dr. Mira: left lane, leading) -->
       <section>
-        <div class="sl scrim">
+        <div class="sl zone-l">
           <div class="eyebrow">08 · Google Maps &amp; Paid Growth</div>
-          <h2 class="h2">Own Maps organically. <em>Scale with transparent Ads.</em></h2>
+          <h2 class="h2">Own Maps organically. <em>Zero markup on Ads.</em></h2>
 
-          <div class="split-visual">
-            <div class="stack-3">
-              <div class="card card-accent">
-                <span class="card-num">Included at Launch · Organic Maps</span>
-                <h3>Google Business Profile Setup</h3>
-                <p>
-                  Complete verification, primary &amp; secondary Neurology categories, Ranchi locality tags,
-                  consultation hours, services list, and tracked Call / WhatsApp / Website links.
-                </p>
-              </div>
-
-              <div class="card">
-                <span class="card-num">Optional Phase 2 · When You Want More Volume</span>
-                <h3>Google Search Ads (100% Direct Spend)</h3>
-                <p>
-                  Target urgent local searches like <em>“neurologist in Ranchi”</em> or <em>“migraine specialist near me”</em>.
-                  Ad budget goes straight from your own Google account/card—zero markup, and you can review every rupee and every call.
-                </p>
-              </div>
+          <div class="story-stage">
+            <div class="story-head">
+              <span class="story-caption">Glass-Wallet Ads: money flows straight from your Google account to patient calls</span>
+              <span class="story-tag">100% Auditable</span>
             </div>
+            <svg id="ads-pipeline-svg" class="story-svg" viewBox="0 0 880 340" xmlns="http://www.w3.org/2000/svg">
+              <!-- Lane 1: Organic GBP (Free 24/7) -->
+              <rect x="24" y="22" width="832" height="106" rx="16" fill="rgba(56,225,198,0.06)" stroke="#38E1C6" stroke-opacity="0.4" stroke-width="1.6" />
+              <text x="46" y="50" fill="#38E1C6" font-family="Space Mono, monospace" font-size="11.5" font-weight="700">LANE 1 · INCLUDED AT LAUNCH · ORGANIC GOOGLE MAPS</text>
+              <text x="46" y="80" fill="#F4F8FF" font-family="Space Grotesk, sans-serif" font-size="20" font-weight="700">Verified Neurology GBP · Ranchi Local Pack</text>
+              <text x="46" y="106" fill="#CBD7EA" font-family="Space Grotesk, sans-serif" font-size="14.5">Categories, OPD hours, services, photos &amp; tracked Call / WhatsApp links</text>
+              <rect x="656" y="48" width="174" height="52" rx="26" fill="#38E1C6" fill-opacity="0.16" stroke="#38E1C6" />
+              <text x="743" y="79" text-anchor="middle" fill="#38E1C6" font-family="Space Mono, monospace" font-size="12" font-weight="700">FREE ORGANIC CALLS</text>
 
-            <div>
-              <div class="illus-frame">
-                <img
-                  src="assets/illus-ai-radar.jpg"
-                  alt="Editorial radar constellation linking Google Maps, AI search, and verified clinic nodes"
-                  width="1200"
-                  height="900"
-                />
-                <div class="frame-cap">
-                  <span>Maps + AI + Search Attribution</span>
-                  <span class="cap-tag">100% Auditable</span>
-                </div>
-              </div>
+              <!-- Lane 2: Transparent Google Ads Pipeline -->
+              <text x="28" y="164" fill="#F5C45E" font-family="Space Mono, monospace" font-size="11.5" font-weight="700">LANE 2 · OPTIONAL PHASE 2 · 100% TRANSPARENT GOOGLE SEARCH ADS</text>
 
-              <div class="metric-strip">
-                <div class="metric-box">
-                  <div class="num">₹0</div>
-                  <div class="lbl">Ad Spend Markup</div>
-                </div>
-                <div class="metric-box">
-                  <div class="num">100%</div>
-                  <div class="lbl">Your Own Ad Account</div>
-                </div>
-                <div class="metric-box">
-                  <div class="num">Full</div>
-                  <div class="lbl">Keyword &amp; Lead Review</div>
-                </div>
-              </div>
-            </div>
+              <rect x="24" y="184" width="224" height="128" rx="16" fill="#0C1528" stroke="#F5C45E" stroke-width="1.8" />
+              <text x="44" y="218" fill="#F5C45E" font-family="Space Mono, monospace" font-size="11" font-weight="700">DOCTOR ACCOUNT</text>
+              <text x="44" y="246" fill="#F4F8FF" font-family="Space Grotesk, sans-serif" font-size="18" font-weight="700">Your Card / Billing</text>
+              <text x="44" y="274" fill="#8EA4C4" font-family="Space Grotesk, sans-serif" font-size="14">Full admin access &amp; pause anytime</text>
+
+              <!-- Glass Window (Middle) -->
+              <rect x="318" y="184" width="234" height="128" rx="16" fill="rgba(86,180,255,0.09)" stroke="#56B4FF" stroke-width="1.8" stroke-dasharray="6 4" />
+              <text x="435" y="220" text-anchor="middle" fill="#56B4FF" font-family="Space Mono, monospace" font-size="11.5" font-weight="700">₹0 MARKUP GLASS TUBE</text>
+              <text x="435" y="250" text-anchor="middle" fill="#F4F8FF" font-family="Space Grotesk, sans-serif" font-size="17" font-weight="700">Paid Direct to Google</text>
+              <text x="435" y="276" text-anchor="middle" fill="#CBD7EA" font-family="Space Mono, monospace" font-size="11">Review every click &amp; ₹</text>
+
+              <!-- Destination: Booked Calls -->
+              <rect x="622" y="184" width="234" height="128" rx="16" fill="#0C1528" stroke="#38E1C6" stroke-width="2" />
+              <text x="642" y="218" fill="#38E1C6" font-family="Space Mono, monospace" font-size="11" font-weight="700">HIGH-INTENT SEARCH</text>
+              <text x="642" y="246" fill="#F4F8FF" font-family="Space Grotesk, sans-serif" font-size="18" font-weight="700">Ranchi OPD Calls ✓</text>
+              <text x="642" y="274" fill="#CBD7EA" font-family="Space Grotesk, sans-serif" font-size="14">“Neurologist near me Ranchi”</text>
+
+              <!-- Animated Flowing Rupee Tokens -->
+              <g id="rupee-tok-1" transform="translate(260, 232)">
+                <circle cx="14" cy="14" r="14" fill="#F5C45E" />
+                <text x="14" y="19" text-anchor="middle" fill="#060A14" font-family="Space Mono, monospace" font-size="14" font-weight="700">₹</text>
+              </g>
+              <g id="rupee-tok-2" transform="translate(566, 232)">
+                <circle cx="14" cy="14" r="14" fill="#38E1C6" />
+                <text x="14" y="19" text-anchor="middle" fill="#060A14" font-family="Space Mono, monospace" font-size="13" font-weight="700">✓</text>
+              </g>
+            </svg>
+          </div>
+
+          <div class="metric-strip">
+            <div class="metric-box"><div class="num">₹0</div><div class="lbl">Ad Spend Markup</div></div>
+            <div class="metric-box"><div class="num">100%</div><div class="lbl">Your Own Google Account</div></div>
+            <div class="metric-box"><div class="num">Full</div><div class="lbl">Keyword &amp; Lead Review</div></div>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 9: LAUNCH ROADMAP & ENGAGEMENT OPTIONS -->
+      <!-- SLIDE 9: LAUNCH ROADMAP & ENGAGEMENT SCOPE (Dr. Mira: right lane, leading) -->
       <section>
-        <div class="sl scrim">
-          <div class="eyebrow">09 · Launch Roadmap &amp; Engagement</div>
+        <div class="sl zone-r">
+          <div class="eyebrow">09 · Launch Roadmap &amp; Scope</div>
           <h2 class="h2">Zero risk upfront. <em>Live in days.</em></h2>
 
           <div class="launch-track-wrap">
             <div class="launch-highway" aria-hidden="true">
               <svg id="launch-beacon" viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="17" cy="17" r="14" fill="#1363B8" stroke="#FCFEFF" stroke-width="3" />
-                <circle cx="17" cy="17" r="5" fill="#EAB338" />
+                <circle cx="17" cy="17" r="14" fill="#38E1C6" stroke="#060A14" stroke-width="3" />
+                <circle cx="17" cy="17" r="5" fill="#F5C45E" />
               </svg>
             </div>
 
@@ -685,22 +883,22 @@
               <div class="gate-card">
                 <span class="gate-badge">GATE 01 · 48 HRS</span>
                 <h3>Free Custom Demo</h3>
-                <p>Working clinic preview tailored to your Ranchi practice before paying a rupee.</p>
+                <p>Interactive clinic preview built before paying a single rupee.</p>
               </div>
               <div class="gate-card">
                 <span class="gate-badge">GATE 02 · WEEK 1</span>
-                <h3>Website &amp; Alerts Live</h3>
-                <p>Custom domain, WhatsApp chat, booking email alerts &amp; Google Business Profile.</p>
+                <h3>Site &amp; Alerts Live</h3>
+                <p>Domain, WhatsApp chat, booking email alerts &amp; Google Maps.</p>
               </div>
               <div class="gate-card">
                 <span class="gate-badge">GATE 03 · WEEK 2</span>
                 <h3>AEO, GEO &amp; QR Kit</h3>
-                <p>Schema JSON-LD, AI hubs (Bing &amp; OpenAI) and print-ready reception QR standee.</p>
+                <p>Schema JSON-LD, Bing/OpenAI hubs &amp; reception QR standee.</p>
               </div>
               <div class="gate-card">
                 <span class="gate-badge">GATE 04 · ONGOING</span>
                 <h3>AI Watch &amp; Ads</h3>
-                <p>Optional weekly 4-engine monitoring, monthly fixes &amp; transparent Google Ads.</p>
+                <p>Weekly 4-engine tracking, monthly fixes &amp; transparent Ads.</p>
               </div>
             </div>
           </div>
@@ -708,57 +906,65 @@
           <div class="grid-3">
             <div class="card">
               <span class="card-num">01 · One-Time Launch</span>
-              <h3>Clinic Digital Foundation</h3>
-              <p>Website, WhatsApp + email booking, GBP setup, SEO/AEO/GEO core &amp; QR review kit.</p>
+              <h3>Digital Foundation</h3>
+              <p>Clinic website, WhatsApp + email booking, GBP, AEO/GEO core &amp; QR kit.</p>
               <!-- Optional pricing display: ₹15,000 – ₹20,000 one-time after demo approval -->
               <span class="scope-badge">₹0 UNTIL DEMO APPROVED</span>
             </div>
 
-            <div class="card card-neuro">
+            <div class="card card-cyan">
               <span class="card-num">02 · Optional Retainer</span>
-              <h3>Care + AI Visibility Watch</h3>
-              <p>Hosting &amp; timing updates, plus weekly ChatGPT/Gemini/Google AI tracking &amp; monthly fixes.</p>
-              <!-- Optional pricing display: Care ₹1,500–₹2,500/mo · AI Watch Add-on -->
+              <h3>Care + AI Watch</h3>
+              <p>Hosting &amp; updates, plus weekly AI recommendation tracking &amp; monthly fixes.</p>
+              <!-- Optional pricing display: Care + AI Watch monthly options -->
               <span class="scope-badge">FLEXIBLE MONTHLY · NO LOCK-IN</span>
             </div>
 
-            <div class="card card-accent">
+            <div class="card card-gold">
               <span class="card-num">03 · Optional Phase 2</span>
-              <h3>Transparent Google Ads</h3>
-              <p>Local Ranchi search campaigns when you are ready to scale daily OPD appointments.</p>
+              <h3>Transparent Ads</h3>
+              <p>Local Google Search Ads when ready to scale daily Ranchi OPD flow.</p>
               <!-- Optional pricing display: Flat management fee + direct Google spend -->
-              <span class="scope-badge">DIRECT SPEND · FULL VISIBILITY</span>
+              <span class="scope-badge">DIRECT AD SPEND · FULL REVIEW</span>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- SLIDE 10: START YOUR FREE 48H DEMO -->
+      <!-- SLIDE 10: START YOUR FREE 48-HOUR DEMO (Dr. Mira: left lane, inviting) -->
       <section>
-        <div class="sl scrim">
-          <div class="eyebrow">10 · Next Steps</div>
-          <h2 class="h2">See your clinic demo <em>before you pay anything.</em></h2>
-          <p class="lede">
-            Share five quick details below and we will build a tailored preview for your Ranchi neuro clinic within 48 hours.
-          </p>
+        <div class="sl zone-l">
+          <div class="eyebrow">10 · Start Your Free Preview</div>
+          <h2 class="h2">See your clinic live <em>before paying a rupee.</em></h2>
 
-          <div class="split-visual">
-            <div class="card">
-              <span class="card-num">What We Need to Build Your Free Demo</span>
-              <h3>5 Quick Clinic Details</h3>
-              <ol class="check-list">
-                <li><span class="check-num">1</span><span><strong>Doctor Name, Degrees &amp; Photo</strong> (headshot for hero &amp; bio)</span></li>
-                <li><span class="check-num">2</span><span><strong>Clinic Name &amp; Ranchi Area / Landmark</strong></span></li>
-                <li><span class="check-num">3</span><span><strong>OPD Timings &amp; Clinic WhatsApp / Phone</strong></span></li>
-                <li><span class="check-num">4</span><span><strong>Top 5–6 Neuro Conditions</strong> (e.g., Migraine, Epilepsy, Stroke, Spine)</span></li>
-                <li><span class="check-num">5</span><span><strong>Email Address</strong> where patient booking alerts should arrive</span></li>
-              </ol>
+          <div class="cta-split">
+            <div>
+              <div class="art-frame wide">
+                <img
+                  src="assets/art-launch-clinic.jpg"
+                  alt="Midnight clinic reception desk with warm glow and cyan confirmed appointment"
+                  width="1200"
+                  height="800"
+                />
+                <div class="art-cap">
+                  <span>48-Hour Custom Preview</span>
+                  <span class="tag">5 Quick Inputs</span>
+                </div>
+              </div>
+
+              <div class="intake-chips">
+                <span class="intake-chip"><b>1</b>Name, Degrees &amp; Photo</span>
+                <span class="intake-chip"><b>2</b>Clinic Name &amp; Ranchi Area</span>
+                <span class="intake-chip"><b>3</b>OPD Timings &amp; Phone</span>
+                <span class="intake-chip"><b>4</b>Top 5 Neuro Conditions</span>
+                <span class="intake-chip"><b>5</b>Booking Alert Email</span>
+              </div>
             </div>
 
-            <div class="card card-accent">
-              <span class="card-num">Ready When You Are</span>
-              <h3>Start Your Free 48-Hour Preview</h3>
-              <p>Direct communication—reach out on WhatsApp, call, or email to send your details.</p>
+            <div class="card card-cyan">
+              <span class="card-num">Direct Contact · Zero Upfront Cost</span>
+              <h3>Request Your Custom Demo</h3>
+              <p>Send those five clinic details on WhatsApp, call, or email to receive your preview link in 48 hours.</p>
 
               <div class="cta-stack">
                 <a
@@ -783,19 +989,17 @@
 
                 <a
                   class="cta-btn cta-email"
-                  href="mailto:contact@docscale.in?subject=Neuro%20Clinic%20Digital%20Launch%20Demo"
+                  href="mailto:zeeshan.official@gmail.com?subject=Neuro%20Clinic%20Digital%20Launch%20Demo"
                   data-bind-href="partnerEmailHref"
                 >
                   <span>Email Clinic Details</span>
-                  <span class="cta-meta" data-bind="partnerEmail">contact@docscale.in</span>
+                  <span class="cta-meta" data-bind="partnerEmail">zeeshan.official@gmail.com</span>
                 </a>
               </div>
 
               <div class="cta-util-row">
                 <a href="?print-pdf" target="_blank" rel="noopener">Export PDF (?print-pdf) ↓</a>
-                <a href="https://docscale.io" target="_blank" rel="noopener noreferrer" data-bind-href="partnerSite">
-                  <span data-bind="partnerSiteLabel">docscale.io</span> ↗
-                </a>
+                <span data-bind="partnerAttribution">Prepared with DocScale</span>
               </div>
             </div>
           </div>

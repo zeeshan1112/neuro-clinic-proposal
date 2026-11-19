@@ -1,10 +1,10 @@
 /**
- * Crisp Topographical Bayer-Dithered WebGL Background
- * Pixelated 4x4 ordered dithering over layered topographical ridges
- * quantized into the DocScale + Neurology palette (#F4F7FA -> #1363B8 -> #0D2239).
- * Respects prefers-reduced-motion (renders 1 static frame) and exposes pause/resume controls.
+ * Original 8x8 Bayer Ordered Dithering WebGL Shader — Synaptic Contour & Calm EEG Field
+ * Quantized into the Midnight Clinical DocScale palette:
+ *   #060A14 (void) -> #0B1427 -> #132544 -> #1D4E7A -> #38E1C6 (synaptic cyan) / #F5C45E (warm gold via u_warm)
+ * Respects prefers-reduced-motion: reduce (renders 1 static frame) and exposes pause/resume controls.
  */
-(function initBayerBackground() {
+(function initBayerNeuralBackground() {
   const canvas = document.getElementById("bayer-bg");
   if (!canvas || window.location.search.includes("print-pdf")) return;
 
@@ -24,6 +24,7 @@
     uniform float u_time;
     uniform vec2 u_mouse;
     uniform float u_slide;
+    uniform float u_warm;
 
     float hash(vec2 p) {
       return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
@@ -38,17 +39,6 @@
         mix(hash(i + vec2(0.0, 1.0)), hash(i + vec2(1.0, 1.0)), u.x),
         u.y
       );
-    }
-
-    float fbm(vec2 p) {
-      float v = 0.0;
-      float a = 0.5;
-      for (int i = 0; i < 4; i++) {
-        v += a * noise(p);
-        p *= 2.04;
-        a *= 0.5;
-      }
-      return v;
     }
 
     float bayer4(vec2 pos) {
@@ -73,45 +63,60 @@
       return  5.0 / 16.0;
     }
 
+    float bayer8(vec2 pos) {
+      float coarse = bayer4(floor(pos * 0.5));
+      float fine = bayer4(pos);
+      return (coarse + fine * 0.25) / 1.25;
+    }
+
     void main() {
       vec2 uv = gl_FragCoord.xy / u_resolution.xy;
-      float t = u_time * 0.065;
-      float pan = u_slide * 0.34 + (u_mouse.x - 0.5) * 0.10;
+      float aspect = u_resolution.x / max(u_resolution.y, 1.0);
+      vec2 p = vec2((uv.x - 0.5) * aspect, uv.y - 0.5);
 
-      // Three layered topographical neural contour ridges
-      float ridge1 = 0.28 + 0.14 * fbm(vec2(uv.x * 2.2 + pan + t, 1.3));
-      float ridge2 = 0.44 + 0.15 * fbm(vec2(uv.x * 3.1 - pan * 0.6 - t * 0.7, 4.7));
-      float ridge3 = 0.60 + 0.13 * fbm(vec2(uv.x * 4.4 + pan * 0.4 + t * 0.4, 8.2));
+      float t = u_time * 0.22;
+      float shift = u_slide * 0.28;
 
-      float val = 0.05;
-      val += (1.0 - uv.y) * 0.16;
+      // Two synaptic interference nuclei + calm horizontal EEG harmonic ribbons
+      vec2 hubA = vec2(-0.42 + sin(shift + t * 0.25) * 0.14, 0.10 + cos(t * 0.19) * 0.08);
+      vec2 hubB = vec2(0.42 + cos(shift * 0.7 - t * 0.21) * 0.14, -0.14 + sin(t * 0.23) * 0.08);
 
-      float d1 = uv.y - ridge1;
-      float d2 = uv.y - ridge2;
-      float d3 = uv.y - ridge3;
+      float rA = length(p - hubA);
+      float rB = length(p - hubB);
 
-      if (d3 < 0.0) val = max(val, 0.28 + exp(d3 * 10.0) * 0.34);
-      if (d2 < 0.0) val = max(val, 0.35 + exp(d2 * 14.0) * 0.48);
-      if (d1 < 0.0) val = max(val, 0.22 + exp(d1 * 18.0) * 0.64);
+      float ringA = 0.5 + 0.5 * sin(rA * 18.0 - t * 1.4 + noise(p * 3.0 + shift) * 1.6);
+      float ringB = 0.5 + 0.5 * sin(rB * 15.0 + t * 1.1 - noise(p * 2.5 - t * 0.2) * 1.4);
 
-      float mDist = length(uv - vec2(u_mouse.x, 1.0 - u_mouse.y));
-      val += exp(-mDist * 6.0) * 0.13;
-      val = clamp(val, 0.0, 1.0);
+      // Calm horizontal EEG waveform contour bands
+      float eegY = p.y * 5.2 + sin(p.x * 4.5 + shift + t * 0.6) * 0.42 + noise(p * 2.8 + vec2(t * 0.2, 0.0)) * 0.65;
+      float contour = smoothstep(0.45, 0.98, abs(sin(eegY * 3.14159)));
 
-      float threshold = bayer4(floor(gl_FragCoord.xy)) - 0.5;
-      float q = clamp(val + threshold * 0.24, 0.0, 1.0);
+      // Pointer synaptic glow
+      vec2 mPos = vec2((u_mouse.x - 0.5) * aspect, (1.0 - u_mouse.y) - 0.5);
+      float mGlow = exp(-length(p - mPos) * 4.2) * 0.34;
 
-      vec3 c0 = vec3(0.957, 0.969, 0.980); // #F4F7FA alabaster paper
-      vec3 c1 = vec3(0.898, 0.929, 0.961); // #E5EDF5 soft clinical wash
-      vec3 c2 = vec3(0.773, 0.827, 0.878); // #C5D3E0 rule blue-gray
-      vec3 c3 = vec3(0.075, 0.388, 0.722); // #1363B8 DocScale cobalt crests
-      vec3 c4 = vec3(0.051, 0.133, 0.224); // #0D2239 deep navy peaks
+      // Combine field with radial edge fade so center stays deep and calm
+      float radial = exp(-dot(p, p) * 1.05);
+      float field = (ringA * 0.32 + ringB * 0.28 + contour * 0.24) * (0.45 + 0.55 * radial) + mGlow;
+      field = clamp(field * 0.92, 0.0, 1.0);
+
+      // 8x8 Bayer ordered dithering
+      float threshold = bayer8(floor(gl_FragCoord.xy)) - 0.5;
+      float q = clamp(field + threshold * 0.26, 0.0, 1.0);
+
+      vec3 c0 = vec3(0.024, 0.039, 0.078); // #060A14 bg-void
+      vec3 c1 = vec3(0.043, 0.078, 0.153); // #0B1427
+      vec3 c2 = vec3(0.075, 0.145, 0.267); // #132544
+      vec3 c3 = vec3(0.114, 0.306, 0.478); // #1D4E7A
+      vec3 cMint = vec3(0.220, 0.882, 0.776); // #38E1C6 synaptic cyan
+      vec3 cGold = vec3(0.961, 0.769, 0.369); // #F5C45E warm champagne gold
+      vec3 c4 = mix(cMint, cGold, clamp(u_warm, 0.0, 1.0));
 
       vec3 col = c0;
-      if (q > 0.27) col = c1;
-      if (q > 0.47) col = c2;
+      if (q > 0.25) col = c1;
+      if (q > 0.46) col = c2;
       if (q > 0.68) col = c3;
-      if (q > 0.86) col = c4;
+      if (q > 0.87) col = mix(c3, c4, 0.65);
 
       gl_FragColor = vec4(col, 1.0);
     }
@@ -154,6 +159,7 @@
   const uTime = gl.getUniformLocation(prog, "u_time");
   const uMouse = gl.getUniformLocation(prog, "u_mouse");
   const uSlide = gl.getUniformLocation(prog, "u_slide");
+  const uWarm = gl.getUniformLocation(prog, "u_warm");
 
   const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -164,6 +170,8 @@
     tmy: 0.5,
     slide: 0,
     tslide: 0,
+    warm: 0.1,
+    twarm: 0.1,
     paused: prefersReduced,
     elapsed: 0,
     lastNow: null,
@@ -175,6 +183,7 @@
     gl.uniform1f(uTime, timeSec);
     gl.uniform2f(uMouse, state.mx, state.my);
     gl.uniform1f(uSlide, state.slide);
+    gl.uniform1f(uWarm, state.warm);
     gl.drawArrays(gl.TRIANGLES, 0, 6);
   }
 
@@ -206,15 +215,18 @@
     state.mx += (state.tmx - state.mx) * 0.05;
     state.my += (state.tmy - state.my) * 0.05;
     state.slide += (state.tslide - state.slide) * 0.08;
+    state.warm += (state.twarm - state.warm) * 0.06;
 
     drawFrame(state.elapsed);
     state.rafId = requestAnimationFrame(frame);
   }
 
-  function setSlide(idx) {
+  function setSlide(idx, warmVal = 0.1) {
     state.tslide = idx;
+    state.twarm = warmVal;
     if (state.paused) {
       state.slide = idx;
+      state.warm = warmVal;
       drawFrame(state.elapsed);
     }
   }
