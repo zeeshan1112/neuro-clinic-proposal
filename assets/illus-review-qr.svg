@@ -1,0 +1,144 @@
+<svg viewBox="0 0 800 500" width="800" height="500" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="counterGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#DCE6EF" />
+      <stop offset="50%" stop-color="#EBF2F8" />
+      <stop offset="100%" stop-color="#DCE6EF" />
+    </linearGradient>
+    <linearGradient id="standeeGlass" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FCFEFF" />
+      <stop offset="100%" stop-color="#EDF3F9" />
+    </linearGradient>
+    <linearGradient id="shadowGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1363B8" stop-opacity="0.22" />
+      <stop offset="100%" stop-color="#1363B8" stop-opacity="0.03" />
+    </linearGradient>
+  </defs>
+
+  <!-- Alabaster Paper Backdrop -->
+  <rect width="800" height="500" fill="#F4F7FA" />
+
+  <!-- Subtle Topographic Contour Arcs -->
+  <g fill="none" stroke="#DCE6EF" stroke-width="1.6">
+    <path d="M-40 120 C120 40, 260 150, 410 75 C560 0, 690 85, 840 30" />
+    <path d="M-40 155 C135 80, 270 185, 425 110 C570 38, 700 115, 840 68" />
+    <path d="M-30 340 C150 285, 290 365, 480 315 C640 272, 725 320, 840 290" />
+    <path d="M510 -20 C590 70, 690 120, 820 150" />
+    <path d="M555 -20 C625 55, 710 95, 820 120" />
+  </g>
+
+  <!-- Clinic Reception Counter Surface -->
+  <rect x="85" y="388" width="630" height="44" rx="8" fill="url(#counterGrad)" stroke="#0D2239" stroke-width="2.5" />
+  <line x1="56" y1="388" x2="744" y2="388" stroke="#0D2239" stroke-width="3" stroke-linecap="round" />
+  <line x1="115" y1="408" x2="215" y2="408" stroke="#C5D3E0" stroke-width="2" stroke-linecap="round" />
+
+  <!-- Cast Shadow from Standee -->
+  <polygon points="355,388 492,388 575,355 430,355" fill="url(#shadowGrad)" />
+
+  <!-- Standee Weighted Base -->
+  <path d="M225 362 L395 362 L408 388 L212 388 Z" fill="#1363B8" stroke="#0D2239" stroke-width="2.5" stroke-linejoin="round" />
+  <rect x="234" y="352" width="152" height="12" rx="4" fill="#0D2239" />
+
+  <!-- Frosted Acrylic Tabletop Standee Frame -->
+  <rect x="206" y="128" width="208" height="226" rx="18" fill="#1363B8" fill-opacity="0.14" transform="translate(8,-6)" />
+  <rect x="206" y="128" width="208" height="226" rx="18" fill="url(#standeeGlass)" stroke="#0D2239" stroke-width="3" />
+  <rect x="220" y="142" width="180" height="198" rx="12" fill="#FCFEFF" stroke="#C5D3E0" stroke-width="1.5" />
+
+  <!-- Decorative Header Bar on Standee (Zero Text) -->
+  <rect x="242" y="156" width="84" height="10" rx="5" fill="#1363B8" />
+  <circle cx="372" cy="161" r="6" fill="#186A4D" />
+
+  <!-- Crisp Geometric QR Code Matrix -->
+  <g transform="translate(242, 180)">
+    <!-- Top-left Finder -->
+    <rect x="0" y="0" width="40" height="40" rx="6" fill="none" stroke="#0D2239" stroke-width="5" />
+    <rect x="11" y="11" width="18" height="18" rx="3" fill="#0D2239" />
+
+    <!-- Top-right Finder -->
+    <rect x="96" y="0" width="40" height="40" rx="6" fill="none" stroke="#0D2239" stroke-width="5" />
+    <rect x="107" y="11" width="18" height="18" rx="3" fill="#1363B8" />
+
+    <!-- Bottom-left Finder -->
+    <rect x="0" y="96" width="40" height="40" rx="6" fill="none" stroke="#0D2239" stroke-width="5" />
+    <rect x="11" y="107" width="18" height="18" rx="3" fill="#0D2239" />
+
+    <!-- Inner QR Geometric Blocks -->
+    <rect x="54" y="2" width="12" height="12" rx="2.5" fill="#0D2239" />
+    <rect x="72" y="2" width="12" height="12" rx="2.5" fill="#1363B8" />
+    <rect x="54" y="20" width="12" height="12" rx="2.5" fill="#186A4D" />
+    <rect x="72" y="24" width="12" height="12" rx="2.5" fill="#0D2239" />
+
+    <rect x="2" y="54" width="14" height="14" rx="2.5" fill="#1363B8" />
+    <rect x="22" y="54" width="14" height="14" rx="2.5" fill="#0D2239" />
+    <rect x="6" y="74" width="12" height="12" rx="2.5" fill="#0D2239" />
+    <rect x="24" y="74" width="12" height="12" rx="2.5" fill="#186A4D" />
+
+    <!-- Center Cobalt Emblem -->
+    <rect x="50" y="50" width="36" height="36" rx="8" fill="#EAB338" stroke="#0D2239" stroke-width="2.5" />
+    <polygon points="68,58 71,65 78,65 72.5,69.5 74.5,76.5 68,72.2 61.5,76.5 63.5,69.5 58,65 65,65" fill="#0D2239" />
+
+    <rect x="98" y="54" width="14" height="14" rx="2.5" fill="#0D2239" />
+    <rect x="118" y="54" width="16" height="14" rx="2.5" fill="#186A4D" />
+    <rect x="98" y="74" width="14" height="14" rx="2.5" fill="#1363B8" />
+    <rect x="120" y="74" width="14" height="14" rx="2.5" fill="#0D2239" />
+
+    <rect x="54" y="96" width="14" height="14" rx="2.5" fill="#0D2239" />
+    <rect x="74" y="96" width="12" height="14" rx="2.5" fill="#1363B8" />
+    <rect x="54" y="116" width="12" height="14" rx="2.5" fill="#186A4D" />
+    <rect x="72" y="116" width="14" height="14" rx="2.5" fill="#0D2239" />
+    <rect x="96" y="96" width="16" height="16" rx="3" fill="#1363B8" />
+    <rect x="118" y="98" width="16" height="14" rx="2.5" fill="#0D2239" />
+    <rect x="98" y="118" width="14" height="16" rx="2.5" fill="#0D2239" />
+    <rect x="118" y="118" width="16" height="16" rx="3" fill="#186A4D" />
+  </g>
+
+  <!-- Dotted Signal Arcs Radiating Toward Map Pin -->
+  <g fill="none" stroke="#1363B8" stroke-width="2.2" stroke-dasharray="6 7" stroke-linecap="round">
+    <path d="M350 128 C375 72, 470 58, 566 116" />
+    <path d="M414 218 C465 204, 515 190, 560 158" />
+    <path d="M396 290 C475 280, 540 245, 586 196" />
+  </g>
+
+  <!-- Floating Emerald Map Pin Landmark (Right) -->
+  <g transform="translate(602, 138)">
+    <!-- Concentric Signal Halos -->
+    <circle cx="0" cy="-8" r="76" fill="#186A4D" fill-opacity="0.06" stroke="#186A4D" stroke-opacity="0.25" stroke-width="1.5" />
+    <circle cx="0" cy="-8" r="54" fill="#186A4D" fill-opacity="0.08" stroke="#186A4D" stroke-opacity="0.4" stroke-width="1.5" />
+    <!-- Ground Shadow Ring -->
+    <ellipse cx="0" cy="76" rx="34" ry="8" fill="#186A4D" fill-opacity="0.18" />
+    <!-- Pin Silhouette -->
+    <path
+      d="M0 -56 C-26 -56 -46 -36 -46 -10 C-46 22 0 64 0 64 C0 64 46 22 46 -10 C46 -36 26 -56 0 -56 Z"
+      fill="#186A4D"
+      stroke="#0D2239"
+      stroke-width="3"
+      stroke-linejoin="round"
+    />
+    <circle cx="0" cy="-12" r="18" fill="#FCFEFF" stroke="#0D2239" stroke-width="2.5" />
+    <!-- Medical Plus Inside Pin -->
+    <rect x="-3.5" y="-21" width="7" height="18" rx="2" fill="#186A4D" />
+    <rect x="-9" y="-15.5" width="18" height="7" rx="2" fill="#186A4D" />
+  </g>
+
+  <!-- Five Crisp Gold Stars Radiating Along Arcs -->
+  <g fill="#EAB338" stroke="#0D2239" stroke-width="2" stroke-linejoin="round">
+    <!-- Star 1 (Top Left Arc) -->
+    <polygon points="348,66 353,78 366,79 356,87 359,100 348,93 337,100 340,87 330,79 343,78" />
+    <!-- Star 2 (Top Center Peak) -->
+    <polygon points="444,38 450,53 466,54 453,64 457,80 444,71 431,80 435,64 422,54 438,53" />
+    <!-- Star 3 (Upper Right) -->
+    <polygon points="528,72 533,83 545,84 536,92 539,104 528,97 517,104 520,92 511,84 523,83" />
+    <!-- Star 4 (Mid Arc) -->
+    <polygon points="494,174 499,186 512,187 502,195 505,208 494,201 483,208 486,195 476,187 489,186" />
+    <!-- Star 5 (Lower Right Accent) -->
+    <polygon points="538,248 542,258 553,259 545,266 547,277 538,271 529,277 531,266 523,259 534,258" />
+  </g>
+
+  <!-- Minimal Geometric Sparkles -->
+  <g fill="#1363B8">
+    <circle cx="388" cy="110" r="4" />
+    <circle cx="486" cy="126" r="3.5" />
+    <circle cx="468" cy="242" r="4" fill="#186A4D" />
+    <circle cx="678" cy="242" r="4.5" fill="#EAB338" />
+  </g>
+</svg>
