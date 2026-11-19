@@ -2,11 +2,12 @@
  * Original 8x8 Bayer Ordered Dithering WebGL Shader — Synaptic Contour & Calm EEG Field
  * Quantized into the Midnight Clinical DocScale palette:
  *   #060A14 (void) -> #0B1427 -> #132544 -> #1D4E7A -> #38E1C6 (synaptic cyan) / #F5C45E (warm gold via u_warm)
+ * Features pointer synaptic lantern + click/tap expanding neural ripple wave (u_click).
  * Respects prefers-reduced-motion: reduce (renders 1 static frame) and exposes pause/resume controls.
  */
 (function initBayerNeuralBackground() {
   const canvas = document.getElementById("bayer-bg");
-  if (!canvas || window.location.search.includes("print-pdf")) return;
+  if (!canvas) return;
 
   const gl = canvas.getContext("webgl", { alpha: false, antialias: false });
   if (!gl) return;
@@ -25,6 +26,7 @@
     uniform vec2 u_mouse;
     uniform float u_slide;
     uniform float u_warm;
+    uniform float u_click;
 
     float hash(vec2 p) {
       return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
@@ -91,13 +93,16 @@
       float eegY = p.y * 5.2 + sin(p.x * 4.5 + shift + t * 0.6) * 0.42 + noise(p * 2.8 + vec2(t * 0.2, 0.0)) * 0.65;
       float contour = smoothstep(0.45, 0.98, abs(sin(eegY * 3.14159)));
 
-      // Pointer synaptic glow
+      // Pointer synaptic lantern + expanding click/tap pulse ring
       vec2 mPos = vec2((u_mouse.x - 0.5) * aspect, (1.0 - u_mouse.y) - 0.5);
-      float mGlow = exp(-length(p - mPos) * 4.2) * 0.34;
+      float distM = length(p - mPos);
+      float mGlow = exp(-distM * 4.2) * 0.34;
+      float clickRing = u_click * 0.85;
+      float clickWave = 0.38 * exp(-pow((distM - clickRing) * 20.0, 2.0)) * exp(-u_click * 1.35);
 
       // Combine field with radial edge fade so center stays deep and calm
       float radial = exp(-dot(p, p) * 1.05);
-      float field = (ringA * 0.32 + ringB * 0.28 + contour * 0.24) * (0.45 + 0.55 * radial) + mGlow;
+      float field = (ringA * 0.32 + ringB * 0.28 + contour * 0.24) * (0.45 + 0.55 * radial) + mGlow + clickWave;
       field = clamp(field * 0.92, 0.0, 1.0);
 
       // 8x8 Bayer ordered dithering
@@ -160,6 +165,7 @@
   const uMouse = gl.getUniformLocation(prog, "u_mouse");
   const uSlide = gl.getUniformLocation(prog, "u_slide");
   const uWarm = gl.getUniformLocation(prog, "u_warm");
+  const uClick = gl.getUniformLocation(prog, "u_click");
 
   const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -172,6 +178,7 @@
     tslide: 0,
     warm: 0.1,
     twarm: 0.1,
+    click: 99,
     paused: prefersReduced,
     elapsed: 0,
     lastNow: null,
@@ -184,6 +191,7 @@
     gl.uniform2f(uMouse, state.mx, state.my);
     gl.uniform1f(uSlide, state.slide);
     gl.uniform1f(uWarm, state.warm);
+    gl.uniform1f(uClick, state.click);
     gl.drawArrays(gl.TRIANGLES, 0, 6);
   }
 
@@ -200,6 +208,14 @@
     state.tmy = e.clientY / Math.max(window.innerHeight, 1);
   });
 
+  window.addEventListener("pointerdown", (e) => {
+    state.tmx = e.clientX / Math.max(window.innerWidth, 1);
+    state.tmy = e.clientY / Math.max(window.innerHeight, 1);
+    state.mx = state.tmx;
+    state.my = state.tmy;
+    state.click = 0;
+  });
+
   window.addEventListener("resize", resize);
   resize();
 
@@ -209,11 +225,13 @@
       return;
     }
     if (state.lastNow !== null) {
-      state.elapsed += Math.min((now - state.lastNow) * 0.001, 0.1);
+      const dt = Math.min((now - state.lastNow) * 0.001, 0.1);
+      state.elapsed += dt;
+      state.click += dt;
     }
     state.lastNow = now;
-    state.mx += (state.tmx - state.mx) * 0.05;
-    state.my += (state.tmy - state.my) * 0.05;
+    state.mx += (state.tmx - state.mx) * 0.06;
+    state.my += (state.tmy - state.my) * 0.06;
     state.slide += (state.tslide - state.slide) * 0.08;
     state.warm += (state.twarm - state.warm) * 0.06;
 
@@ -224,6 +242,7 @@
   function setSlide(idx, warmVal = 0.1) {
     state.tslide = idx;
     state.twarm = warmVal;
+    state.click = 0.05;
     if (state.paused) {
       state.slide = idx;
       state.warm = warmVal;

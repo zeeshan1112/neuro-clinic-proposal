@@ -1,15 +1,10 @@
 /**
- * V3 Story-Driven Deck Engine
- * - Reveal.js 5.1.0 (1600x900) + GSAP 3.12.5
+ * V4 Story-Driven Deck Engine
+ * - Reveal.js 5.1.0 (1600x900) + GSAP 3.12.5 + WebGL 8x8 Bayer Dithering
  * - Never leaves elements at opacity: 0 (uses clearProps + instant reset)
- * - Evolving Dr. Mira guide + TripVan-inspired confetti bursts + 4-platform icons
+ * - Evolving Dr. Mira guide with pointer-tracking pupils + TripVan-inspired confetti & story timelines
  */
-(function initDeckV3() {
-  const isPrint = window.location.search.includes("print-pdf");
-  if (isPrint) {
-    document.documentElement.classList.add("print-pdf");
-  }
-
+(function initDeckV4() {
   const isMobileViewport = () => window.innerWidth <= 900;
   let lastMobileState = isMobileViewport();
 
@@ -33,7 +28,6 @@
     center: false,
     transition: "fade",
     transitionSpeed: "default",
-    pdfSeparateFragments: false,
   });
 
   const SLIDE_STAGE = [
@@ -41,25 +35,25 @@
       label: "01 Intro",
       x: 1315, y: 472, flip: 1, bx: 1272, by: 298, tail: "64%",
       state: "planning", warm: 0.10,
-      line: "Welcome Dr. Shiwangi! Let’s map how we help launch your Ranchi neuro clinic.",
+      line: "Welcome Dr. Shiwangi! First, we build a free 48-hour demo of your clinic website.",
     },
     {
-      label: "02 How We Help",
+      label: "02 Partner",
       x: 52, y: 472, flip: -1, bx: 32, by: 298, tail: "32%",
       state: "planning", warm: 0.08,
-      line: "You focus on neurology and patient care; we build your entire digital patient funnel.",
+      line: "You focus on neurology in-clinic; we run your entire digital patient discovery funnel.",
     },
     {
       label: "03 Offerings",
       x: 1315, y: 472, flip: 1, bx: 1272, by: 298, tail: "64%",
       state: "planning", warm: 0.16,
-      line: "Clear menu: One-Time Clinic Launch upfront, plus optional Monthly AI Watch & Analytics.",
+      line: "Stage 1 launches your digital clinic; Stage 2 maintains your site, adds 2 free blogs/mo & tracks data.",
     },
     {
       label: "04 Website",
       x: 52, y: 472, flip: -1, bx: 32, by: 298, tail: "32%",
       state: "connected", warm: 0.14,
-      line: "One mobile tap opens pre-filled WhatsApp chat AND emails full patient details to you.",
+      line: "Your mobile-friendly website opens pre-filled WhatsApp chat AND emails booking alerts instantly.",
     },
     {
       label: "05 AI Search",
@@ -68,42 +62,42 @@
       line: "Structured Physician schema + hubs teach ChatGPT, Gemini & Google AI Mode to recommend you.",
     },
     {
-      label: "06 GBP & Ads",
+      label: "06 Google Maps",
       x: 52, y: 472, flip: -1, bx: 32, by: 298, tail: "32%",
       state: "leading", warm: 0.36,
-      line: "GBP puts you on Maps free; Google Ads spend comes from your own card with full review access.",
+      line: "Google Business Profile puts you on Google Maps; optional Google Ads pay direct from your card.",
     },
     {
       label: "07 QR Reviews",
       x: 1315, y: 472, flip: 1, bx: 1272, by: 298, tail: "64%",
       state: "celebrating", warm: 0.62,
-      line: "Happy patients boost your 5★ Maps rating; 1–3★ alerts stay private so you fix issues fast!",
+      line: "Patients scan your reception QR: 5★ boosts Google Business Profile, 1–3★ comes privately to you!",
     },
     {
       label: "08 One-Time",
       x: 52, y: 472, flip: -1, bx: 32, by: 298, tail: "32%",
       state: "leading", warm: 0.28,
-      line: "Everything in your One-Time Launch Setup—with ₹0 charged until your 48h demo is approved.",
+      line: "You preview your mobile-friendly website demo first at ₹0 before starting the One-Time Launch Setup.",
     },
     {
       label: "09 Monthly",
       x: 1315, y: 472, flip: 1, bx: 1272, by: 298, tail: "64%",
-      state: "illuminated", warm: 0.30,
-      line: "Monthly Retainer pairs weekly 4-engine AI monitoring with Google Site Analytics & ongoing care.",
+      state: "illuminated", warm: 0.32,
+      line: "Monthly Care includes website maintenance, 2 free medical blogs/month & monthly improvement data.",
     },
     {
       label: "10 Start",
       x: 52, y: 472, flip: -1, bx: 32, by: 298, tail: "32%",
       state: "inviting", warm: 0.68,
-      line: "Share 5 quick details on WhatsApp and review your custom preview before paying a rupee!",
+      line: "Share 5 quick details on WhatsApp and preview your custom clinic website demo at ₹0!",
     },
   ];
 
   const BONUS_TIPS = [
-    "85%+ of Tier-2 clinic searches happen on 4G mobile—fast sites double WhatsApp consultations.",
-    "Getting your first 20–30 five-star Maps reviews is the fastest Day-1 ranking lever in Ranchi.",
-    "Google Analytics (GA4) lets you see exact visitor counts, Maps clicks & WhatsApp taps monthly.",
-    "Schema JSON-LD + Bing/OpenAI hubs prevent AI tools from quoting outdated hospital hours.",
+    "85%+ of Ranchi clinic searches happen on mobile phones—a mobile-friendly site doubles WhatsApp bookings.",
+    "Google Business Profile is your official Google Maps clinic card showing OPD hours, directions & 5★ reviews.",
+    "Publishing 2 fresh neurology blogs every month steadily compounds both Google SEO and ChatGPT/Gemini citations.",
+    "Your monthly improvement report shows exact Google Analytics (GA4) visitors, phone calls, and WhatsApp taps.",
   ];
   let bonusIdx = 0;
 
@@ -162,7 +156,7 @@
 
   // ── Motion State ──────────────────────────────────────────────────────
   const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  let motionPaused = prefersReduced || isPrint;
+  let motionPaused = prefersReduced;
   const motionToggleBtn = document.getElementById("motion-toggle");
 
   function syncMotionButton() {
@@ -177,6 +171,7 @@
   const doctorWrap = document.getElementById("doctor-wrap");
   const doctorFlip = document.getElementById("doctor-flip");
   const docBody = document.getElementById("doc-body");
+  const docHead = document.getElementById("doc-head");
   const docPupils = document.getElementById("doc-pupils");
   const docArmWave = document.getElementById("doc-arm-wave");
   const bubble = document.getElementById("bubble");
@@ -222,10 +217,29 @@
     Object.entries(PROPS).forEach(([k, el]) => {
       if (el) el.setAttribute("opacity", activeProps.includes(k) ? "1" : "0");
     });
+
+    if (!motionPaused && typeof gsap !== "undefined" && docHead) {
+      gsap.fromTo(
+        docHead,
+        { rotation: stateName === "celebrating" ? -6 : 3, transformOrigin: "120px 110px" },
+        { rotation: 0, duration: 0.45, ease: "back.out(2)" }
+      );
+    }
   }
 
+  // Pointer-tracking pupils (TripVan-inspired character life)
+  window.addEventListener("pointermove", (e) => {
+    if (motionPaused || typeof gsap === "undefined" || !doctorWrap || !docPupils || isMobileViewport()) return;
+    const rect = doctorWrap.getBoundingClientRect();
+    const cx = rect.left + rect.width * 0.5;
+    const cy = rect.top + rect.height * 0.28;
+    const dx = gsap.utils.clamp(-2.3, 2.3, (e.clientX - cx) / 140);
+    const dy = gsap.utils.clamp(-1.8, 1.8, (e.clientY - cy) / 140);
+    gsap.to(docPupils, { x: dx, y: dy, duration: 0.25, overwrite: "auto" });
+  });
+
   function confettiBurst(cx, cy) {
-    if (!stageEl || isPrint || motionPaused || typeof gsap === "undefined" || isMobileViewport()) return;
+    if (!stageEl || motionPaused || typeof gsap === "undefined" || isMobileViewport()) return;
     const colors = ["#F5C45E", "#38E1C6", "#56B4FF", "#F4F8FF"];
     for (let i = 0; i < 18; i++) {
       const dot = document.createElement("div");
@@ -257,7 +271,7 @@
 
   function startAmbientDoctor() {
     stopAmbientDoctor();
-    if (isPrint || motionPaused || typeof gsap === "undefined") return;
+    if (motionPaused || typeof gsap === "undefined") return;
 
     if (docBody) {
       ambientTls.push(
@@ -292,7 +306,7 @@
   }
 
   function waveDoctor() {
-    if (isPrint || motionPaused || typeof gsap === "undefined") return;
+    if (motionPaused || typeof gsap === "undefined") return;
     if (docArmWave) {
       gsap.fromTo(
         docArmWave,
@@ -389,7 +403,7 @@
       },
       after: {
         score: 96,
-        reply: "Ranchi Neuro Care · Verified Bariatu OPD hours, specialist credentials, 4.9★ Google reviews & instant booking link.",
+        reply: "Ranchi Neuro Care · Verified Bariatu OPD hours, specialist credentials, 4.9★ Google Business Profile reviews & instant booking link.",
         signalNote: "100% factual accuracy synced across Google, Bing & OpenAI",
         engines: [
           { icon: "ico-chatgpt", name: "ChatGPT", val: "✓ Exact OPD", state: "ok" },
@@ -445,7 +459,7 @@
     const offset = circumference - (data.score / 100) * circumference;
     if (aiRingArc && aiScoreValEl) {
       aiRingArc.setAttribute("stroke", aiMode === "before" ? "#FF6B6B" : "#38E1C6");
-      if (animateRing && typeof gsap !== "undefined" && !motionPaused && !isPrint) {
+      if (animateRing && typeof gsap !== "undefined" && !motionPaused) {
         gsap.to(aiRingArc, { strokeDashoffset: offset, duration: 0.55, ease: "power2.out" });
         const obj = { val: Number(aiScoreValEl.textContent) || 0 };
         gsap.to(obj, {
@@ -478,27 +492,71 @@
     })
   );
 
-  // ── Slide 9: Monthly Watch Control Room ───────────────────────────────
+  // ── Slide 9: Monthly Retainer Improvement Data + 2 Free Blogs/Month ───
   const WATCH_PHASES = [
     {
-      share: "14%", delta: "M0 Baseline", accuracy: "62%",
-      note: "✓ Baseline logged across 25 Ranchi prompts × 4 AI engines",
-      chatgpt: 12, gemini: 18, aio: 11, dash: 290, dotX: 36, dotY: 66,
+      visitors: "180",
+      visDelta: "M0 Launch Baseline",
+      calls: "18",
+      callDelta: "Initial OPD taps",
+      maps: "35",
+      share: "14%",
+      delta: "M0 Baseline",
+      note: "✓ M0 Launch: GA4 analytics installed + baseline across 25 Ranchi prompts",
+      chatgpt: 12, gemini: 18, aio: 11, dash: 365, dotX: 36, dotY: 62,
+      blogBadge: "BLOG QUEUE READY",
+      blog1Title: "Blog #1: 5 Early Stroke Warning Signs Every Family Should Know",
+      blog1Status: "Scheduled M1",
+      blog2Title: "Blog #2: When Recurring Migraines Need an EEG Consultation",
+      blog2Status: "Scheduled M1",
     },
     {
-      share: "29%", delta: "▲ +15% vs M0", accuracy: "100%",
-      note: "✓ Shipped M1: Physician JSON-LD + Bing AI & OpenAI Hubs",
-      chatgpt: 28, gemini: 34, aio: 25, dash: 195, dotX: 152, dotY: 46,
+      visitors: "460",
+      visDelta: "▲ +155% vs M0",
+      calls: "52",
+      callDelta: "▲ 2.8× patient taps",
+      maps: "90",
+      share: "29%",
+      delta: "▲ +15% vs M0",
+      note: "✓ M1 Report: 460 GA4 visitors · 52 WhatsApp/Call taps · 2 free blogs published",
+      chatgpt: 28, gemini: 34, aio: 25, dash: 245, dotX: 152, dotY: 43,
+      blogBadge: "2 FREE BLOGS PUBLISHED · M1",
+      blog1Title: "Blog #1: 5 Early Stroke Warning Signs Every Family Should Know",
+      blog1Status: "Published ✓",
+      blog2Title: "Blog #2: When Recurring Migraines Need an EEG Consultation",
+      blog2Status: "Published ✓",
     },
     {
-      share: "46%", delta: "▲ +32% vs M0", accuracy: "100%",
-      note: "✓ Shipped M2: Migraine, Epilepsy & Stroke FAQ pages",
-      chatgpt: 44, gemini: 52, aio: 42, dash: 95, dotX: 268, dotY: 25,
+      visitors: "890",
+      visDelta: "▲ +394% vs M0",
+      calls: "104",
+      callDelta: "▲ 5.7× patient taps",
+      maps: "175",
+      share: "46%",
+      delta: "▲ +32% vs M0",
+      note: "✓ M2 Report: 890 GA4 visitors · 104 WhatsApp/Call taps · 4 free blogs live",
+      chatgpt: 44, gemini: 52, aio: 42, dash: 122, dotX: 268, dotY: 23,
+      blogBadge: "4 FREE BLOGS PUBLISHED · M2",
+      blog1Title: "Blog #3: Epilepsy & Seizure First-Aid Guide for Ranchi Families",
+      blog1Status: "Published ✓",
+      blog2Title: "Blog #4: Cervical Spondylosis & Nerve Pain Treatment Options",
+      blog2Status: "Published ✓",
     },
     {
-      share: "58%", delta: "▲ +44% vs M0", accuracy: "100%",
-      note: "✓ Monthly PDF report + shipped content & schema fix",
-      chatgpt: 56, gemini: 64, aio: 54, dash: 0, dotX: 386, dotY: 14,
+      visitors: "1,420",
+      visDelta: "▲ +688% vs M0",
+      calls: "165",
+      callDelta: "▲ 9.1× patient taps",
+      maps: "280",
+      share: "58%",
+      delta: "▲ +44% vs M0",
+      note: "✓ M3 Improvement Report: 1,420 GA4 visitors · 165 patient taps · 6 blogs live",
+      chatgpt: 56, gemini: 64, aio: 54, dash: 0, dotX: 386, dotY: 12,
+      blogBadge: "6 FREE BLOGS LIVE BY M3",
+      blog1Title: "Blog #5: Post-Stroke Neuro Rehabilitation & Follow-Up Timeline",
+      blog1Status: "SEO + AI Indexed ✓",
+      blog2Title: "Blog #6: Vertigo vs. Neurological Dizziness — When to Visit OPD",
+      blog2Status: "SEO + AI Indexed ✓",
     },
   ];
 
@@ -509,20 +567,44 @@
     const p = WATCH_PHASES[idx] || WATCH_PHASES[3];
     phaseBtns.forEach((b) => b.classList.toggle("is-active", Number(b.dataset.phase) === idx));
 
+    const elVisitors = document.getElementById("watch-visitors");
+    const elVisDelta = document.getElementById("watch-vis-delta");
+    const elCalls = document.getElementById("watch-calls");
+    const elCallDelta = document.getElementById("watch-call-delta");
+    const elMaps = document.getElementById("watch-maps");
     const elShare = document.getElementById("watch-share");
     const elDelta = document.getElementById("watch-delta");
-    const elAcc = document.getElementById("watch-accuracy");
     const elNote = document.getElementById("watch-cycle-note");
     const curvePath = document.getElementById("watch-curve-path");
     const liveDot = document.getElementById("watch-live-dot");
 
+    if (elVisitors) elVisitors.textContent = p.visitors;
+    if (elVisDelta) elVisDelta.textContent = p.visDelta;
+    if (elCalls) elCalls.textContent = p.calls;
+    if (elCallDelta) elCallDelta.textContent = p.callDelta;
+    if (elMaps) elMaps.textContent = p.maps;
     if (elShare) elShare.textContent = p.share;
     if (elDelta) elDelta.textContent = p.delta;
-    if (elAcc) elAcc.textContent = p.accuracy;
     if (elNote) elNote.textContent = p.note;
 
+    const elBlogBadge = document.getElementById("blog-month-badge");
+    const elBlogTitle1 = document.getElementById("blog-title-1");
+    const elBlogStatus1 = document.getElementById("blog-status-1");
+    const elBlogTitle2 = document.getElementById("blog-title-2");
+    const elBlogStatus2 = document.getElementById("blog-status-2");
+    const elBlogItem1 = document.getElementById("blog-item-1");
+    const elBlogItem2 = document.getElementById("blog-item-2");
+
+    if (elBlogBadge) elBlogBadge.textContent = p.blogBadge;
+    if (elBlogTitle1) elBlogTitle1.textContent = p.blog1Title;
+    if (elBlogStatus1) elBlogStatus1.textContent = p.blog1Status;
+    if (elBlogTitle2) elBlogTitle2.textContent = p.blog2Title;
+    if (elBlogStatus2) elBlogStatus2.textContent = p.blog2Status;
+    if (elBlogItem1) elBlogItem1.classList.toggle("is-live", idx > 0);
+    if (elBlogItem2) elBlogItem2.classList.toggle("is-live", idx > 0);
+
     if (curvePath && liveDot) {
-      if (typeof gsap !== "undefined" && !motionPaused && !isPrint) {
+      if (typeof gsap !== "undefined" && !motionPaused) {
         gsap.to(curvePath, { strokeDashoffset: p.dash, duration: 0.55, ease: "power2.out" });
         gsap.to(liveDot, { attr: { cx: p.dotX, cy: p.dotY }, duration: 0.55, ease: "power2.out" });
       } else {
@@ -571,14 +653,14 @@
   function forceSlideVisible(slide) {
     if (!slide || typeof gsap === "undefined") return;
     const all = slide.querySelectorAll(
-      ".eyebrow, .hero-title, .h2, .tagline, .lede, .quote-bar, .chip, .card, .pipe-pill, .plat-card, .pill-mini, .story-stage, .ai-theatre, .art-frame, .gate-card, .intake-chip, .commercial, .tile"
+      ".eyebrow, .hero-title, .h2, .tagline, .lede, .quote-bar, .chip, .card, .p-step, .plat-card, .pill-mini, .story-stage, .ai-theatre, .art-frame, .gate-card, .intake-chip, .commercial, .tile"
     );
     gsap.set(all, { opacity: 1, clearProps: "transform" });
   }
 
   function runSlideStoryAnimations(slide, index) {
     killStoryAnimations();
-    if (!slide || isPrint || motionPaused || typeof gsap === "undefined") {
+    if (!slide || motionPaused || typeof gsap === "undefined") {
       if (index === 8) setWatchPhase(3);
       if (index === 9) slide?.querySelectorAll(".gate-card").forEach((c) => c.classList.add("lit"));
       return;
@@ -595,7 +677,22 @@
       }
     }
 
-    // Slide 4: Website Booking Cinema (WhatsApp + Email)
+    // Slide 2: Animated 4-Step Ranchi Patient Funnel
+    if (index === 1) {
+      const steps = slide.querySelectorAll(".p-step");
+      if (steps.length) {
+        activeLoopTl = gsap.timeline({ repeat: -1, repeatDelay: 0.4 });
+        steps.forEach((step, idx) => {
+          activeLoopTl
+            .call(() => {
+              steps.forEach((s, j) => s.classList.toggle("is-lit", j === idx));
+            })
+            .to({}, { duration: 1.05 });
+        });
+      }
+    }
+
+    // Slide 4: Mobile-Friendly Website Booking Cinema (Desktop + Mobile + WhatsApp + Email)
     if (index === 3) {
       const btn = slide.querySelector("#phone-submit-btn");
       const waPkt = slide.querySelector("#cinema-wa-pkt");
@@ -611,10 +708,10 @@
             if (badgeTxt) badgeTxt.textContent = "NEW BOOKING";
           })
           .to(btn, { opacity: 0.65, duration: 0.16, yoyo: true, repeat: 1 })
-          .set(waPkt, { x: 274, y: 122, opacity: 1 })
-          .set(mailPkt, { x: 274, y: 230, opacity: 1 })
-          .to(waPkt, { x: 406, y: 78, duration: 0.95, ease: "power2.inOut" }, "send")
-          .to(mailPkt, { x: 406, y: 260, duration: 0.95, ease: "power2.inOut" }, "send")
+          .set(waPkt, { x: 336, y: 122, opacity: 1 })
+          .set(mailPkt, { x: 336, y: 230, opacity: 1 })
+          .to(waPkt, { x: 416, y: 78, duration: 0.95, ease: "power2.inOut" }, "send")
+          .to(mailPkt, { x: 416, y: 260, duration: 0.95, ease: "power2.inOut" }, "send")
           .call(() => {
             if (badge) badge.setAttribute("fill", "#38E1C6");
             if (badgeTxt) badgeTxt.textContent = "ALERT SENT ✓";
@@ -639,13 +736,22 @@
       }
     }
 
-    // Slide 6: Glass-Wallet Ads Rupee Stream (Cleanly between card borders)
+    // Slide 6: Google Business Profile Action Cycler + Glass-Wallet Ads Rupee Stream
     if (index === 5) {
       const r1 = slide.querySelector("#rupee-tok-1");
       const r2 = slide.querySelector("#rupee-tok-2");
+      const gbpPills = slide.querySelectorAll("#gbp-actions .gbp-act-pill");
+      let pillStep = 0;
+
       if (r1 && r2) {
         activeLoopTl = gsap.timeline({ repeat: -1, repeatDelay: 0.45 });
         activeLoopTl
+          .call(() => {
+            if (gbpPills.length) {
+              gbpPills.forEach((p, idx) => p.classList.toggle("is-pulsing", idx === pillStep % gbpPills.length));
+              pillStep++;
+            }
+          })
           .fromTo(r1, { x: 134, opacity: 0 }, { x: 142, opacity: 1, duration: 0.55, ease: "power2.out" })
           .to(r1, { opacity: 0, duration: 0.2 })
           .fromTo(r2, { x: 296, opacity: 0 }, { x: 304, opacity: 1, duration: 0.55, ease: "power2.out" }, "-=0.2")
@@ -653,7 +759,7 @@
       }
     }
 
-    // Slide 7: Smart QR Laser Scan + Confetti Burst
+    // Slide 7: Realistic 21x21 QR Laser Scan + Confetti Burst
     if (index === 6) {
       const beam = slide.querySelector("#qr-scan-beam");
       const starPkt = slide.querySelector("#qr-star-pkt");
@@ -662,18 +768,18 @@
       if (beam && starPkt && privPkt) {
         activeLoopTl = gsap.timeline({ repeat: -1, repeatDelay: 0.8 });
         activeLoopTl
-          .fromTo(beam, { y: 0 }, { y: 108, duration: 0.65, yoyo: true, repeat: 1, ease: "sine.inOut" })
-          .set(starPkt, { x: 240, y: 146, opacity: 1 })
-          .set(privPkt, { x: 240, y: 198, opacity: 0.25 })
+          .fromTo(beam, { y: 0 }, { y: 116, duration: 0.65, yoyo: true, repeat: 1, ease: "sine.inOut" })
+          .set(starPkt, { x: 242, y: 142, opacity: 1 })
+          .set(privPkt, { x: 242, y: 198, opacity: 0.25 })
           .to(starPkt, { x: 428, y: 74, duration: 1.0, ease: "power2.inOut" })
           .to(starPkt, { opacity: 0.2, duration: 0.25 })
-          .set(privPkt, { x: 240, y: 198, opacity: 1 })
+          .set(privPkt, { x: 242, y: 198, opacity: 1 })
           .to(privPkt, { x: 428, y: 264, duration: 1.0, ease: "power2.inOut" })
           .to(privPkt, { opacity: 0.2, duration: 0.25, delay: 0.45 });
       }
     }
 
-    // Slide 9: Monthly AI Watch Trajectory Stepper
+    // Slide 9: Monthly Improvement Data + 2 Free Blogs/Month Stepper
     if (index === 8) {
       if (!watchUserInteracted) {
         setWatchPhase(0);
@@ -734,7 +840,7 @@
     setDoctorState(cfg.state);
 
     if (doctorWrap && doctorFlip) {
-      if (!motionPaused && !isPrint && typeof gsap !== "undefined") {
+      if (!motionPaused && typeof gsap !== "undefined") {
         gsap.to(doctorWrap, { x: cfg.x, y: cfg.y, duration: 0.72, ease: "power3.out" });
         gsap.to(doctorFlip, { scaleX: cfg.flip, duration: 0.32, ease: "power2.out" });
       } else {
@@ -748,7 +854,7 @@
       bubble.style.left = cfg.bx + "px";
       bubble.style.top = cfg.by + "px";
       bubbleText.textContent = cfg.line;
-      if (!motionPaused && !isPrint && typeof gsap !== "undefined") {
+      if (!motionPaused && typeof gsap !== "undefined") {
         gsap.killTweensOf(bubble);
         gsap.fromTo(
           bubble,
@@ -768,7 +874,7 @@
 
     const pct = (clamped / (SLIDE_STAGE.length - 1)) * 100;
     if (railToken) {
-      if (!motionPaused && !isPrint && typeof gsap !== "undefined") {
+      if (!motionPaused && typeof gsap !== "undefined") {
         gsap.to(railToken, { left: pct + "%", duration: 0.55, ease: "power3.out" });
       } else {
         railToken.style.left = pct + "%";
@@ -787,10 +893,10 @@
 
     if (!slide) return;
     forceSlideVisible(slide);
-    if (isPrint || motionPaused || typeof gsap === "undefined") return;
+    if (motionPaused || typeof gsap === "undefined") return;
 
     const eyebrows = slide.querySelectorAll(".eyebrow");
-    const headings = slide.querySelectorAll(".hero-title, .h2, .tagline, .lede, .quote-bar");
+    const headings = slide.querySelectorAll(".hero-title, .h2, .tagline, .lede, .quote-bar, .patient-flow-wrap");
     const cards = slide.querySelectorAll(
       ".chip, .card, .plat-card, .pill-mini, .story-stage, .ai-theatre, .art-frame, .gate-card, .intake-chip, .commercial"
     );
